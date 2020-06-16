@@ -1,0 +1,10 @@
+ACADEMIANET                   https://CTIS-prg:8443/svn/AcademiaNet/branches/sp021-06
+
+SIMNAC                      https://CTIS-prg:8443/svn/SIMNAC/branches/sp021-06
+
+PONTO4R1                      https://CTIS-prg:8443/svn/Ponto4r1/branches/sp021-06
+
+SITECTIS		      https://CTIS-prg:8443/svn/SiteCTIS/branches/sp021-06
+
+SITECTIS2015	      https://CTIS-prg:8443/svn/SiteCTIS2015/branches/sp021-06
+
