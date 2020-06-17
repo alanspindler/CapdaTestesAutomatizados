@@ -60,10 +60,25 @@ namespace Lampp.CAPDA.Teste.Automatizado.Credenciamento.PageObjects
         public By campoCidade = By.Id("cidadeUnidAcademica");
         public By comboUF = By.Id("estados-brasil");
 
+        //Mantenedor
+        public By abaUnidadeMantenedor = By.LinkText("1.3. Mantenedor");
+        public By campoCnpjMantenedor = By.Id("cnpjMantenedor");
+        public By campoNomeMantenedor = By.Id("nomeMantenedor");
+        public By campoTelefoneMantenedor = By.Id("telefoneMantenedor");
+        public By campoEmailMantenedor = By.Id("emailMantenedor");
+        public By campoSiteMantenedor = By.Id("siteMantenedor");
+        public By campoEnderecoMantenedor = By.Id("enderecoMantenedor");
+        public By campoCepMantenedor = By.Id("cepMantenedor");
+        public By campoBairroMantenedor = By.Id("bairroMantenedor");
+        public By campoCidadeMantenedor = By.Id("cidadeMantenedor");
+        public By comboUfMantenedor = By.Id("estados-brasil-Mantenedor");
+        public By botaoSalvarMantenedor = By.XPath("//div[@id='identificacao']/app-aba-identificacao/app-modal-mantenedor/div/div/div/div[2]/div[2]/div/div/button");
+
         public void PreencherCredenciamento()
         {
             PreencherIdentificacaoAbaInstituicao();
             PreencherIdentificacaoAbaUnidadeAcademica();
+            PreencherIdentificacaoAbaMantenedor();
         }
 
         public void PreencherIdentificacaoAbaInstituicao()
@@ -92,6 +107,27 @@ namespace Lampp.CAPDA.Teste.Automatizado.Credenciamento.PageObjects
             PreencherCampo(campoCidade, "Manaus");
             SelecionarItemCombo(comboUF, "AM");                
             ClicarElementoPagina(botaoSalvar);
+            AguardarProcessando();
+            ClicarElementoPagina(botaoFechar);
+        }
+
+        public void PreencherIdentificacaoAbaMantenedor()
+        {
+            AguardarProcessando();
+            ClicarElementoPagina(abaUnidadeMantenedor);
+            AguardarProcessando();
+            ClicarElementoPagina(botaoNovo);
+            PreencherCampo(campoCnpjMantenedor, geradorCNPJCPF.GerarCNPJ());
+            PreencherCampo(campoNomeMantenedor, geradorNome.GerarNome());
+            PreencherCampo(campoTelefoneMantenedor, "92986150323");
+            PreencherCampo(campoEmailMantenedor, "teste@teste.com");
+            PreencherCampo(campoSiteMantenedor, "www.teste.com");
+            PreencherCampo(campoEnderecoMantenedor, "Rua Teste 3");
+            PreencherCampo(campoCepMantenedor, "61030260");
+            PreencherCampo(campoBairroMantenedor, "Centro");
+            PreencherCampo(campoCidadeMantenedor, "Manaus");
+            SelecionarItemCombo(comboUfMantenedor, "AM");            
+            ClicarElementoPagina(botaoSalvarMantenedor);
             AguardarProcessando();
             ClicarElementoPagina(botaoFechar);
         }
