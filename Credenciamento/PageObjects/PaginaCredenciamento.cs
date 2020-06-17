@@ -35,6 +35,9 @@ namespace Lampp.CAPDA.Teste.Automatizado.Credenciamento.PageObjects
         public By botaoSalvar = By.ClassName("fa-save");
         public By botaoNovo = By.ClassName("fa-plus-square");
         public By botaoFechar = By.CssSelector("div.modal-footer > button.btn.btn-default.btn-sm");
+        public By botaoFecharMensagemConfirmacao = By.XPath("(//button[@type='button'])[5]");
+        public By botaoFecharMensagemConfirmacaoNenhumRegistroEncontrado = By.XPath("//dialog-wrapper[2]/div/app-modal/div/div/div[3]/button");
+
         //public By botaoFechar = By.ClassName("btn-default");
 
         //div[3]/button
@@ -82,6 +85,8 @@ namespace Lampp.CAPDA.Teste.Automatizado.Credenciamento.PageObjects
             PreencherIdentificacaoAbaRepresentacao();
             PreencherRegularizacao();
             PreencherOrcamentoFaturamento();
+            PreencherForcaTrabalho();
+            PreencherAreaAtuacao();
         }
 
         public void PreencherIdentificacaoAbaInstituicao()
@@ -185,12 +190,12 @@ namespace Lampp.CAPDA.Teste.Automatizado.Credenciamento.PageObjects
         {
             AguardarProcessando();
             ClicarElementoPagina(abaRegularizacao);
-            AguardarProcessando();
-            PreencherCampo(textAreaRegularizacao, "Teste Teste Teste Teste");
+            AguardarProcessando();            
             PreencherCampo(botaoEscolherArquivoRegularizacao, Constantes.CaminhoPDF);
             AguardarProcessando();
             ClicarElementoPagina(botaoFechar);
             AguardarProcessando();
+            PreencherCampo(textAreaRegularizacao, "Teste Teste Teste Teste");
             ClicarElementoPagina(botaoSalvarRegularizacao);
             AguardarProcessando();
             ClicarElementoPagina(botaoFechar);
@@ -253,9 +258,117 @@ namespace Lampp.CAPDA.Teste.Automatizado.Credenciamento.PageObjects
             ClicarElementoPagina(botaoFechar);
         }
 
-   
+        //Força de Trabalho
 
-        
+        public By campoQuadroEfetivoSuperiorAtividadePD = By.Id("quadro-efetivo-superio-atividade-pd");
+        public By campoQuadroEfetivoOutrosAtividadePD = By.Id("quadro-efetivo-outros-atividade-pd");
+        public By campoContratadosSuperiorAtividadePD = By.Id("contratados-nivel-superior-atividade-pd");
+        public By campoContratadosOutrosAtividadePD = By.Id("contratados-outros-atividade-pd");
+        public By campoQuadroEfetivoNivelSuperiorEnsino = By.Id("contratados-nivel-superior-atividade-ensino02");
+        public By campoQuadroEfetivoOutrosEnsino = By.Id("quadro-efetivo-outros-atividade-ensino");
+        public By campoContratadosSuperiorEnsino = By.Id("contratados-nivel-superior-atividade-ensino01");
+        public By campoContratadosOutrosEnsino = By.Id("contratados-outros-atividade-ensino");
+        public By campoEfetivoSuperiorOutros = By.Id("quadro-efetivo-nivel-superior-outras-atividades");
+        public By campoEfetivoOutrosOutros = By.Id("quadro-efetivo-outras-atividades");
+        public By campoContratadorSuperiorOutros = By.Id("contratados-nivel-superior-outras-atividades");
+        public By campoContratadorOutrosOutros = By.Id("contratados-outros-outras-atividades");
+
+        public By botaoSalvarForcaTrabalho = By.XPath("//div[@id='atividade-pd']/app-aba-atividade-pd/div[2]/div[4]/div/div/button");
+     
+        public void PreencherForcaTrabalho()
+        {
+            Random random = new Random();
+            int randomNumber;
+            string numero;
+            AguardarProcessando();            
+
+            randomNumber = random.Next(1, 10);
+            numero = randomNumber.ToString();
+            PreencherCampo(campoQuadroEfetivoSuperiorAtividadePD, numero);
+
+            randomNumber = random.Next(1, 10);
+            numero = randomNumber.ToString();
+            PreencherCampo(campoQuadroEfetivoOutrosAtividadePD, numero);
+
+            randomNumber = random.Next(1, 10);
+            numero = randomNumber.ToString();
+            PreencherCampo(campoContratadosSuperiorAtividadePD, numero);
+
+            randomNumber = random.Next(1, 10);
+            numero = randomNumber.ToString();
+            PreencherCampo(campoContratadosOutrosAtividadePD, numero);
+
+            randomNumber = random.Next(1, 10);
+            numero = randomNumber.ToString();
+            PreencherCampo(campoQuadroEfetivoNivelSuperiorEnsino, numero);
+
+            randomNumber = random.Next(1, 10);
+            numero = randomNumber.ToString();
+            PreencherCampo(campoQuadroEfetivoOutrosEnsino, numero);
+
+            randomNumber = random.Next(1, 10);
+            numero = randomNumber.ToString();
+            PreencherCampo(campoContratadosSuperiorEnsino, numero);
+
+            randomNumber = random.Next(1, 10);
+            numero = randomNumber.ToString();
+            PreencherCampo(campoEfetivoSuperiorOutros, numero);
+
+            randomNumber = random.Next(1, 10);
+            numero = randomNumber.ToString();
+            PreencherCampo(campoContratadosOutrosEnsino, numero);
+
+            randomNumber = random.Next(1, 10);
+            numero = randomNumber.ToString();
+            PreencherCampo(campoEfetivoOutrosOutros, numero);
+
+            randomNumber = random.Next(1, 10);
+            numero = randomNumber.ToString();
+            PreencherCampo(campoContratadorSuperiorOutros, numero);
+
+            randomNumber = random.Next(1, 10);
+            numero = randomNumber.ToString();
+            PreencherCampo(campoContratadorOutrosOutros, numero);
+
+            ClicarElementoPagina(botaoSalvarForcaTrabalho);
+
+            AguardarProcessando();
+            Thread.Sleep(1000);
+            //Aparecem 2 mensagens, uma de confirmacao que salvou e outra Nenhum registro encontrado. Tenta clicar nas duas uma por vez.
+            if (IsElementDisplayed(driver, botaoFecharMensagemConfirmacao) || IsElementDisplayed(driver, botaoFecharMensagemConfirmacaoNenhumRegistroEncontrado))
+            {
+                AguardarProcessando();
+                if (IsElementDisplayed(driver, botaoFecharMensagemConfirmacaoNenhumRegistroEncontrado))
+                {
+                    ClicarElementoPagina(botaoFecharMensagemConfirmacaoNenhumRegistroEncontrado);
+                    AguardarProcessando();
+                }
+                AguardarProcessando();
+
+                if (IsElementDisplayed(driver, botaoFecharMensagemConfirmacao))
+                {
+                    ClicarElementoPagina(botaoFecharMensagemConfirmacao);
+                    AguardarProcessando();
+                }                
+            }
+        }
+
+        //Area de Atuacao
+
+        public By botaoNovoAreaAtuacao = By.ClassName("fa-plus");
+        public By comboAreaPrincipal = By.Id("drop-list");
+        public By comboAreaAtuacao = By.Id("combo-area-atuacao");
+        public By botaoSalvarAreaAtuacao = By.XPath("(//button[@type='button'])[2]");
+        public void PreencherAreaAtuacao()
+        {
+            AguardarProcessando();
+            ClicarElementoPagina(botaoNovoAreaAtuacao);
+            SelecionarItemCombo(comboAreaPrincipal, "Engenharias");
+            SelecionarItemCombo(comboAreaAtuacao, "Estruturas");
+            ClicarElementoPagina(botaoSalvarAreaAtuacao);
+            AguardarProcessando();
+            ClicarElementoPagina(botaoFechar);
+        }
 
         #endregion
 

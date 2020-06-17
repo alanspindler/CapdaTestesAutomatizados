@@ -80,7 +80,7 @@ namespace Lampp.CAPDA.Teste.Automatizado.SharedObjects
         //Destaca o elemento em uma cor
         public static object DestacarElemento(IWebDriver driver, By elemento)
         {
-            var myLocator = driver.FindElement(elemento);
+            var myLocator = driver.FindElement(elemento);            
             var js = (IJavaScriptExecutor)driver;
             return js.ExecuteScript(WeHighlightedColour, myLocator);
         }
