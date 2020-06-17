@@ -79,6 +79,7 @@ namespace Lampp.CAPDA.Teste.Automatizado.Credenciamento.PageObjects
             PreencherIdentificacaoAbaInstituicao();
             PreencherIdentificacaoAbaUnidadeAcademica();
             PreencherIdentificacaoAbaMantenedor();
+            PreencherIdentificacaoAbaRepresentacao();
         }
 
         public void PreencherIdentificacaoAbaInstituicao()
@@ -134,7 +135,43 @@ namespace Lampp.CAPDA.Teste.Automatizado.Credenciamento.PageObjects
 
         #endregion
 
+        #region Representação
 
+        public By abaRepresentacao = By.LinkText("2.Representação");
+        public By comboTipoRepresentacao = By.Id("tipoRep");
+        public By campoCpfRepresentacao = By.Id("txtcpf");
+        public By campoNomeRepresentacao = By.Id("txtnome");
+        public By campoTelefoneRepresentacao = By.Id("telefone");
+        public By campoFaxRepresentacao = By.Id("fax");
+        public By campoEmailRepresentacao = By.Id("email");
+        public By campoCargoRepresentacao = By.Id("cargo");
+        public By campoIdentidadeRepresentacao = By.Id("identidade");
+        public By campoEmissorRepresentacao = By.Id("emissor");
+        public By botaoSalvarRepresentacao = By.CssSelector("div.pull-right > button.btn.btn-sm.btn-primary");
+
+        public void PreencherIdentificacaoAbaRepresentacao()
+        {
+            AguardarProcessando();
+            ClicarElementoPagina(abaRepresentacao);
+            AguardarProcessando();
+            ClicarElementoPagina(botaoNovo);
+            SelecionarItemCombo(comboTipoRepresentacao, "Dirigente da Instituição");
+            PreencherCampo(campoCpfRepresentacao, geradorCNPJCPF.CpfSemMascara(1));
+            PreencherCampo(campoNomeRepresentacao, geradorNome.GerarNome());
+            PreencherCampo(campoTelefoneRepresentacao, "92986150323");
+            PreencherCampo(campoFaxRepresentacao, "9236150323");
+            PreencherCampo(campoEmailRepresentacao, "teste@teste.com");
+            PreencherCampo(campoCargoRepresentacao, "Teste");
+            PreencherCampo(campoIdentidadeRepresentacao, "2363040411");
+            PreencherCampo(campoEmissorRepresentacao, "Teste");
+            ClicarElementoPagina(botaoSalvarRepresentacao);
+            AguardarProcessando();
+            ClicarElementoPagina(botaoFechar);
+        }
+
+
+
+        #endregion
 
         //label/i
 
