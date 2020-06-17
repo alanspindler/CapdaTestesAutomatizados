@@ -3,7 +3,7 @@ using System.Data.SqlClient;
 using System.IO;
 using System.Linq;
 
-namespace CTIS.SIMNAC.Teste.Automatizado.SharedObjects
+namespace Lampp.CAPDA.Teste.Automatizado.SharedObjects
 {
     public class BancodeDados
 

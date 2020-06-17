@@ -1,11 +1,11 @@
 ﻿using OpenQA.Selenium;
-using CTIS.SIMNAC.Teste.Automatizado.SharedObjects;
+using Lampp.CAPDA.Teste.Automatizado.SharedObjects;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using OpenQA.Selenium.Remote;
-using CTIS.SIMNAC.Teste.Automatizado.Login.PageObjects;
+using Lampp.CAPDA.Teste.Automatizado.Login.PageObjects;
 using System.Threading;
 
-namespace CTIS.SIMNAC.Teste.Automatizado.Cadastros.PageObjects
+namespace Lampp.CAPDA.Teste.Automatizado.Cadastros.PageObjects
 {
     [TestClass]
     public class PaginaManterVistoriador : PaginaBase

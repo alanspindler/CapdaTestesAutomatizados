@@ -5,11 +5,11 @@ using System.Runtime.InteropServices;
 // General Information about an assembly is controlled through the following 
 // set of attributes. Change these attribute values to modify the information
 // associated with an assembly.
-[assembly: AssemblyTitle("CTIS.SIMNAC.Teste.Automatizado")]
+[assembly: AssemblyTitle("Lampp.CAPDA.Teste.Automatizado")]
 [assembly: AssemblyDescription("")]
 [assembly: AssemblyConfiguration("")]
 [assembly: AssemblyCompany("")]
-[assembly: AssemblyProduct("CTIS.SIMNAC.Teste.Automatizado")]
+[assembly: AssemblyProduct("Lampp.CAPDA.Teste.Automatizado")]
 [assembly: AssemblyCopyright("Copyright ©  2015")]
 [assembly: AssemblyTrademark("")]
 [assembly: AssemblyCulture("")]

@@ -1,13 +1,13 @@
 ﻿using OpenQA.Selenium;
 using OpenQA.Selenium.Remote;
-using CTIS.SIMNAC.Teste.Automatizado.Cadastros.Tests;
-using CTIS.SIMNAC.Teste.Automatizado.Principal.PageObjects;
-using CTIS.SIMNAC.Teste.Automatizado.SharedObjects;
+using Lampp.CAPDA.Teste.Automatizado.Cadastros.Tests;
+using Lampp.CAPDA.Teste.Automatizado.Principal.PageObjects;
+using Lampp.CAPDA.Teste.Automatizado.SharedObjects;
 using System.IO;
 using System.Threading;
 using System;
 
-namespace CTIS.SIMNAC.Teste.Automatizado.Login.PageObjects
+namespace Lampp.CAPDA.Teste.Automatizado.Login.PageObjects
 {
        public class PaginaInicial : PaginaBase
     {

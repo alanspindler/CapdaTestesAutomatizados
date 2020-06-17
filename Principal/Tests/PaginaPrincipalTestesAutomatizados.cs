@@ -4,11 +4,11 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using CTIS.SIMNAC.Teste.Automatizado.Principal.PageObjects;
-using CTIS.SIMNAC.Teste.Automatizado.SharedObjects;
-using CTIS.SIMNAC.Teste.Automatizado.Login.PageObjects;
+using Lampp.CAPDA.Teste.Automatizado.Principal.PageObjects;
+using Lampp.CAPDA.Teste.Automatizado.SharedObjects;
+using Lampp.CAPDA.Teste.Automatizado.Login.PageObjects;
 
-namespace CTIS.SIMNAC.Teste.Automatizado.Principal.Tests
+namespace Lampp.CAPDA.Teste.Automatizado.Principal.Tests
 {
     [TestClass]
     public class PaginaPrincipalTestesAutomatizados

@@ -1,9 +1,9 @@
 ﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
-using CTIS.SIMNAC.Teste.Automatizado.Cadastros.PageObjects;
-using CTIS.SIMNAC.Teste.Automatizado.SharedObjects;
-using CTIS.SIMNAC.Teste.Automatizado.Login.PageObjects;
+using Lampp.CAPDA.Teste.Automatizado.Cadastros.PageObjects;
+using Lampp.CAPDA.Teste.Automatizado.SharedObjects;
+using Lampp.CAPDA.Teste.Automatizado.Login.PageObjects;
 
-namespace CTIS.SIMNAC.Teste.Automatizado.Cadastros.Tests
+namespace Lampp.CAPDA.Teste.Automatizado.Cadastros.Tests
 {
     [TestClass]
     public class ManterVistoriadorTestesAutomatizados

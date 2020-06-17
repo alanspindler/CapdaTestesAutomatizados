@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace CTIS.SIMNAC.Teste.Automatizado.SharedObjects
+namespace Lampp.CAPDA.Teste.Automatizado.SharedObjects
 {
    public static class Constantes
     {

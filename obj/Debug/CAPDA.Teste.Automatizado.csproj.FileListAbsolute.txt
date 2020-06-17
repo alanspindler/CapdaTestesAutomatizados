@@ -1,10 +1,4 @@
-C:\Users\alans\Dropbox\Lampp\Testes\Capda\Teste Automatizado\Teste Automatizado\bin\Debug\ArquivosTesteAutomatizado\AFD\AFDMuitosRegistros.TXT
-C:\Users\alans\Dropbox\Lampp\Testes\Capda\Teste Automatizado\Teste Automatizado\bin\Debug\ArquivosTesteAutomatizado\AFD\AFDPreassinalado.txt
-C:\Users\alans\Dropbox\Lampp\Testes\Capda\Teste Automatizado\Teste Automatizado\bin\Debug\ArquivosTesteAutomatizado\AFD\AFD_CRC.txt
-C:\Users\alans\Dropbox\Lampp\Testes\Capda\Teste Automatizado\Teste Automatizado\bin\Debug\ArquivosTesteAutomatizado\AFD\AFD_CRC_Incorreto.txt
-C:\Users\alans\Dropbox\Lampp\Testes\Capda\Teste Automatizado\Teste Automatizado\bin\Debug\ArquivosTesteAutomatizado\AFD\ArquivoInvalido.txt
 C:\Users\alans\Dropbox\Lampp\Testes\Capda\Teste Automatizado\Teste Automatizado\bin\Debug\ArquivosTesteAutomatizado\Imagens\LogoEmpresa.jpg
-C:\Users\alans\Dropbox\Lampp\Testes\Capda\Teste Automatizado\Teste Automatizado\bin\Debug\Cadastros\Tests\PrepararCadastroBasico.orderedtest
 C:\Users\alans\Dropbox\Lampp\Testes\Capda\Teste Automatizado\Teste Automatizado\bin\Debug\CTIS.SIMNAC.Teste.Automatizado.dll.config
 C:\Users\alans\Dropbox\Lampp\Testes\Capda\Teste Automatizado\Teste Automatizado\bin\Debug\CTIS.SIMNAC.Teste.Automatizado.dll
 C:\Users\alans\Dropbox\Lampp\Testes\Capda\Teste Automatizado\Teste Automatizado\bin\Debug\CTIS.SIMNAC.Teste.Automatizado.pdb
@@ -118,7 +112,6 @@ C:\Users\alans\Dropbox\Lampp\Testes\Capda\Teste Automatizado\Teste Automatizado\
 C:\Users\alans\Dropbox\Lampp\Testes\Capda\Teste Automatizado\Teste Automatizado\bin\Debug\EntityFramework.xml
 C:\Users\alans\Dropbox\Lampp\Testes\Capda\Teste Automatizado\Teste Automatizado\bin\Debug\EntityFramework.SqlServer.xml
 C:\Users\alans\Dropbox\Lampp\Testes\Capda\Teste Automatizado\Teste Automatizado\bin\Debug\Newtonsoft.Json.xml
-C:\Users\alans\Dropbox\Lampp\Testes\Capda\Teste Automatizado\Teste Automatizado\bin\Debug\Protractor.pdb
 C:\Users\alans\Dropbox\Lampp\Testes\Capda\Teste Automatizado\Teste Automatizado\bin\Debug\Protractor.xml
 C:\Users\alans\Dropbox\Lampp\Testes\Capda\Teste Automatizado\Teste Automatizado\bin\Debug\ThoughtWorks.Selenium.Core.xml
 C:\Users\alans\Dropbox\Lampp\Testes\Capda\Teste Automatizado\Teste Automatizado\bin\Debug\WebDriver.xml
@@ -128,3 +121,4 @@ C:\Users\alans\Dropbox\Lampp\Testes\Capda\Teste Automatizado\Teste Automatizado\
 C:\Users\alans\Dropbox\Lampp\Testes\Capda\Teste Automatizado\Teste Automatizado\obj\Debug\CAPDA.Teste.Automatizado.csproj.CopyComplete
 C:\Users\alans\Dropbox\Lampp\Testes\Capda\Teste Automatizado\Teste Automatizado\obj\Debug\CTIS.SIMNAC.Teste.Automatizado.dll
 C:\Users\alans\Dropbox\Lampp\Testes\Capda\Teste Automatizado\Teste Automatizado\obj\Debug\CTIS.SIMNAC.Teste.Automatizado.pdb
+C:\Users\alans\Dropbox\Lampp\Testes\Capda\Teste Automatizado\Teste Automatizado\bin\Debug\Exemplos\Tests\PrepararCadastroBasico.orderedtest

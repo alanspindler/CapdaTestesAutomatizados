@@ -1,10 +1,10 @@
 ﻿using OpenQA.Selenium;
 using OpenQA.Selenium.Remote;
-using CTIS.SIMNAC.Teste.Automatizado.Cadastros.PageObjects;
-using CTIS.SIMNAC.Teste.Automatizado.SharedObjects;
+using Lampp.CAPDA.Teste.Automatizado.Cadastros.PageObjects;
+using Lampp.CAPDA.Teste.Automatizado.SharedObjects;
 
 
-namespace CTIS.SIMNAC.Teste.Automatizado.Principal.PageObjects
+namespace Lampp.CAPDA.Teste.Automatizado.Principal.PageObjects
 {
     /// <summary>
     /// Página que contém funções de chamada de menu que contem em todas as páginas

@@ -8,7 +8,7 @@ using System.Linq;
 using System.Text.RegularExpressions;
 using System.Threading;
 
-namespace CTIS.SIMNAC.Teste.Automatizado.SharedObjects
+namespace Lampp.CAPDA.Teste.Automatizado.SharedObjects
 {
     /// <summary>
     /// Página que contém os elementos e métodos genéricos de todas as páginas
@@ -43,11 +43,7 @@ namespace CTIS.SIMNAC.Teste.Automatizado.SharedObjects
             CssSelector = 2,
             TagName = 3
         }
-        #endregion
-
-        #region Tela Cadastro de Foto dos Funcionários ------------------------------------------------------------------------------
-        public const string valorPadraoImagemEmBranco = "data:image/gif;base64,R0lGODlhAQABAAAAACH5BAEKAAEALAAAAAABAAEAAAICTAEAOw==";
-        #endregion
+        #endregion     
 
         #region Declaração de variáveis protected da classe -------------------------------------------------------------------------
         protected WebDriverWait wait;
@@ -1330,7 +1326,7 @@ namespace CTIS.SIMNAC.Teste.Automatizado.SharedObjects
             if (!imagemEmBranco)
             {
                 Assert.AreEqual(imagem, driver.FindElement(elemento).GetAttribute("src"));
-                Assert.AreNotEqual(valorPadraoImagemEmBranco, driver.FindElement(elemento).GetAttribute("src"));
+                //Assert.AreNotEqual(valorPadraoImagemEmBranco, driver.FindElement(elemento).GetAttribute("src"));
             }
             else
             {

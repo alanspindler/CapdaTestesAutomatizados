@@ -9,7 +9,7 @@ using OpenQA.Selenium.Edge;
 using System.IO;
 using System.Diagnostics;
 
-namespace CTIS.SIMNAC.Teste.Automatizado.SharedObjects
+namespace Lampp.CAPDA.Teste.Automatizado.SharedObjects
 {
     /// <summary>
     /// Classe para armazenar métodos utilizados pelo projeto inteiro o projeto.
