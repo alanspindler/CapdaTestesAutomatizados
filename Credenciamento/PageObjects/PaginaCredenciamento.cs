@@ -81,6 +81,7 @@ namespace Lampp.CAPDA.Teste.Automatizado.Credenciamento.PageObjects
             PreencherIdentificacaoAbaMantenedor();
             PreencherIdentificacaoAbaRepresentacao();
             PreencherRegularizacao();
+            PreencherOrcamentoFaturamento();
         }
 
         public void PreencherIdentificacaoAbaInstituicao()
@@ -156,6 +157,7 @@ namespace Lampp.CAPDA.Teste.Automatizado.Credenciamento.PageObjects
             ClicarElementoPagina(abaRepresentacao);
             AguardarProcessando();
             ClicarElementoPagina(botaoNovo);
+            AguardarProcessando();
             SelecionarItemCombo(comboTipoRepresentacao, "Dirigente da Instituição");
             PreencherCampo(campoCpfRepresentacao, geradorCNPJCPF.CpfSemMascara(1));
             PreencherCampo(campoNomeRepresentacao, geradorNome.GerarNome());
@@ -195,5 +197,67 @@ namespace Lampp.CAPDA.Teste.Automatizado.Credenciamento.PageObjects
         }
 
         #endregion
+
+        #region Atividade em P&D
+
+        public By abaAtividadePeD = By.LinkText("4.Atividade em P&D");
+
+        //Orçamento/Faturamento
+
+        public By abaOrcamentoFaturamento = By.LinkText("4.1. Orçamento/Faturamento");
+        public By campoPesquisaDesenvolvimentoAnoAnterior = By.Id("pesquisa-desenvolvimento-ano-anterior");
+        public By campoPesquisaDesenvolvimentoAnoAtual = By.Id("pesquisa-desenvolvimento-ano-atual");
+        public By campoPesquisaDesenvolvimentoAnoSeguinte = By.Id("pesquisa-desenvolvimento-ano-seguinte");
+        public By campoOutrasAtividadesAnoAnterior = By.Id("outras-atividades-ano-anterior");
+        public By campoOutrasAtividadesAnoAtual = By.Id("outras-atividades-ano-atual");
+        public By campoOutrasAtividadesAnoSeguinte = By.Id("outras-atividades-ano-seguinte");
+        public By botaoSalvarOrcamentoFaturamento = By.XPath("//div[@id='atividade-pd']/app-aba-atividade-pd/div[2]/div[3]/div/div/button");
+
+        public void PreencherOrcamentoFaturamento()
+        {
+            Random random = new Random();
+            int randomNumber;
+            string numero;
+            AguardarProcessando();
+            ClicarElementoPagina(abaAtividadePeD);
+            AguardarProcessando();
+            ClicarElementoPagina(abaOrcamentoFaturamento);
+            AguardarProcessando();
+
+            randomNumber = random.Next(1, 10);
+            numero = randomNumber.ToString();
+            PreencherCampo(campoPesquisaDesenvolvimentoAnoAnterior, numero);
+
+            randomNumber = random.Next(1, 10);
+            numero = randomNumber.ToString();
+            PreencherCampo(campoPesquisaDesenvolvimentoAnoAtual, numero);
+
+            randomNumber = random.Next(1, 10);
+            numero = randomNumber.ToString();
+            PreencherCampo(campoPesquisaDesenvolvimentoAnoSeguinte, numero);
+
+            randomNumber = random.Next(1, 10);
+            numero = randomNumber.ToString();
+            PreencherCampo(campoOutrasAtividadesAnoAnterior, numero);
+
+            randomNumber = random.Next(1, 10);
+            numero = randomNumber.ToString();
+            PreencherCampo(campoOutrasAtividadesAnoAtual, numero);
+
+            randomNumber = random.Next(1, 10);
+            numero = randomNumber.ToString();
+            PreencherCampo(campoOutrasAtividadesAnoSeguinte, numero);        
+            
+            ClicarElementoPagina(botaoSalvarOrcamentoFaturamento);
+            AguardarProcessando();
+            ClicarElementoPagina(botaoFechar);
+        }
+
+   
+
+        
+
+        #endregion
+
     }
 }
