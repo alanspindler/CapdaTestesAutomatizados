@@ -42,7 +42,7 @@ namespace Lampp.CAPDA.Teste.Automatizado.Cadastros.PageObjects
         {
             AguardarProcessando();            
             PreencherCampo(campoInstituicao, geradorNome.GerarNome());
-            string CNPJ = geradorCNPJCPF.CnpjSemMascara(1).ToString();
+            string CNPJ = geradorCNPJCPF.GerarCNPJ();
             PreencherCampo(campoCNPJ, CNPJ);
             PreencherCampo(campoCPF, geradorCNPJCPF.CpfSemMascara(1));
             AguardarProcessando();

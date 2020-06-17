@@ -2,18 +2,25 @@
 using Lampp.CAPDA.Teste.Automatizado.Cadastros.PageObjects;
 using Lampp.CAPDA.Teste.Automatizado.SharedObjects;
 using Lampp.CAPDA.Teste.Automatizado.Login.PageObjects;
+using Lampp.CAPDA.Teste.Automatizado.Principal.PageObjects;
+using Lampp.CAPDA.Teste.Automatizado.Credenciamento.PageObjects;
 using System.Threading;
 
-namespace Lampp.CAPDA.Teste.Automatizado.Cadastros.Tests
+
+namespace Lampp.CAPDA.Teste.Automatizado.Credenciamento.Tests
 {
     [TestClass]
-    public class InscricaoTestesAutomatizados
+    public class CredenciamentoTestesAutomatizados
     {
-        public Global Global { get; set; }
-        public PaginaBase PaginaBase { get; set; }
-        public PaginaInicial PaginaInicial { get; set; }
+        public Global global { get; set; }
+        public PaginaBase paginaBase { get; set; }
+        public PaginaInicial paginaInicial { get; set; }
+        public PaginaPrincipal paginaPrincipal { get; set; }
         public PaginaInscricao paginaInscricao { get; set; }
-        private string urlPaginaInicial = "http://localhost:4200/#/inscricao";
+        public PaginaCredenciamento paginaCredenciamento { get; set; }
+
+        private string urlPaginaInscricao = "http://localhost:4200/#/inscricao";
+        private string urlPaginaLogin = "http://localhost:4200/";
         public string CNPJ;
 
 
@@ -24,13 +31,21 @@ namespace Lampp.CAPDA.Teste.Automatizado.Cadastros.Tests
             var selenium = Global.obterInstancia();
             paginaInscricao = new PaginaInscricao(selenium.driver);
             //Abre a pagina inicial
-            PaginaBase = new PaginaBase(selenium.driver);
-            PaginaInicial = new PaginaInicial(selenium.driver);
-            PaginaInicial.AbrirPagina(urlPaginaInicial);
+            paginaBase = new PaginaBase(selenium.driver);
+            paginaInicial = new PaginaInicial(selenium.driver);
+            paginaPrincipal = new PaginaPrincipal(selenium.driver);
+            paginaCredenciamento = new PaginaCredenciamento(selenium.driver);
+            paginaInicial.AbrirPagina(urlPaginaInscricao);
             //Faz Login
-            CNPJ = paginaInscricao.InscreverEmpresa();            
+            CNPJ = paginaInscricao.InscreverEmpresa();
+            paginaInicial.AbrirPagina(urlPaginaLogin);
+            paginaInicial.FazerLogin(CNPJ, "123456");
+            paginaPrincipal.ExpandireAbrirMenuCredenciamento(true, paginaPrincipal.MenuAcompanharCredenciamento);
+            paginaCredenciamento.SolicitarCredenciamento();
+            paginaCredenciamento.PreencherCredenciamento();
+                
             ////// Fecha o navegador            
-            selenium.EncerrarTeste();            
+            //selenium.EncerrarTeste();            
         }
 
         //[TestMethod]

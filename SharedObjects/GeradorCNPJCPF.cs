@@ -1,8 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Lampp.CAPDA.Teste.Automatizado.SharedObjects
 {
@@ -23,7 +21,7 @@ namespace Lampp.CAPDA.Teste.Automatizado.SharedObjects
                     do
                     {
                         if (erro > 1)
-                        {                            
+                        {
                             erro = 1;
                         }
                         numero[i] = (rand.Next()) % 9;
@@ -147,144 +145,46 @@ namespace Lampp.CAPDA.Teste.Automatizado.SharedObjects
             return result;
         }
 
-        public String CnpjComMascara(Int64 quant)
+        public string GerarCNPJ()
         {
-            String result = "";
-            for (cnpj = 1; cnpj <= quant; cnpj++)
+            int Mod(int dividendo, int divisor)
             {
-                for (i = 1; i <= 8; i++)
-                {
-                    numero[i] = (rand.Next()) % 9;
-                }
-                numero[9] = 0;
-                numero[10] = 0;
-                numero[11] = 0;
-                numero[12] = (rand.Next()) % 9;
-                //*==========================================*
-                //|       Primeiro digito verificador        |
-                //*==========================================*
-                soma1 = ((numero[1] * 5) +
-                      (numero[2] * 4) +
-                      (numero[3] * 3) +
-                      (numero[4] * 2) +
-                      (numero[5] * 9) +
-                      (numero[6] * 8) +
-                      (numero[7] * 7) +
-                      (numero[8] * 6) +
-                      (numero[9] * 5) +
-                      (numero[10] * 4) +
-                      (numero[11] * 3) +
-                      (numero[12] * 2));
-                parte1 = (soma1 / 11);
-                parte2 = (parte1 * 11);
-                parte3 = (soma1 - parte2);
-                dig1 = (11 - parte3);
-                if (dig1 > 9) dig1 = 0;
-                //*==========================================*
-                //|        Segundo digito verificador        |
-                //*==========================================*
-                soma2 = ((numero[1] * 6) +
-                      (numero[2] * 5) +
-                      (numero[3] * 4) +
-                      (numero[4] * 3) +
-                      (numero[5] * 2) +
-                      (numero[6] * 9) +
-                      (numero[7] * 8) +
-                      (numero[8] * 7) +
-                      (numero[9] * 6) +
-                      (numero[10] * 5) +
-                      (numero[11] * 4) +
-                      (numero[12] * 3) +
-                      (dig1 * 2));
-                parte5 = (soma2 / 11);
-                parte6 = (parte5 * 11);
-                parte7 = (soma2 - parte6);
-                dig2 = (11 - parte7);
-                if (dig2 > 9) dig2 = 0;
-                //*==========================================*
-                //|       Impressao do numero completo       | 
-                //*==========================================*
-                //ostrm.SetLength(0);
-                for (i = 1; i <= 12; i++)
-                {
-                    //numeros do CNPJ
-                    result += Convert.ToString(numero[i]);
-                    if (i == 2) result += ".";//imprime um ponto depois da 2ª casa
-                    if (i == 5) result += ".";//imprime um ponto depois da 5ª casa
-                    if (i == 8) result += "/";//imprime uma barra depois da 8ª casa
-                }
-                result += "-" + dig1 + "" + dig2; // dois últimos digitos
+                return (dividendo - (dividendo / divisor) * divisor);
             }
-            return result;
-        }
 
-        public String CnpjSemMascara(Int64 quant)
-        {
-            String result = "";
-            for (cnpj = 1; cnpj <= quant; cnpj++)
-            {
-                for (i = 1; i <= 8; i++)
-                {
-                    numero[i] = (rand.Next()) % 9;
-                }
-                numero[9] = 0;
-                numero[10] = 0;
-                numero[11] = 0;
-                numero[12] = (rand.Next()) % 9;
-                //*==========================================*
-                //|       Primeiro digito verificador        |
-                //*==========================================*
-                soma1 = ((numero[1] * 5) +
-                      (numero[2] * 4) +
-                      (numero[3] * 3) +
-                      (numero[4] * 2) +
-                      (numero[5] * 9) +
-                      (numero[6] * 8) +
-                      (numero[7] * 7) +
-                      (numero[8] * 6) +
-                      (numero[9] * 5) +
-                      (numero[10] * 4) +
-                      (numero[11] * 3) +
-                      (numero[12] * 2));
-                parte1 = (soma1 / 11);
-                parte2 = (parte1 * 11);
-                parte3 = (soma1 - parte2);
-                dig1 = (11 - parte3);
-                if (dig1 > 9) dig1 = 0;
-                //*==========================================*
-                //|        Segundo digito verificador        |
-                //*==========================================*
-                soma2 = ((numero[1] * 6) +
-                      (numero[2] * 5) +
-                      (numero[3] * 4) +
-                      (numero[4] * 3) +
-                      (numero[5] * 2) +
-                      (numero[6] * 9) +
-                      (numero[7] * 8) +
-                      (numero[8] * 7) +
-                      (numero[9] * 6) +
-                      (numero[10] * 5) +
-                      (numero[11] * 4) +
-                      (numero[12] * 3) +
-                      (dig1 * 2));
-                parte5 = (soma2 / 11);
-                parte6 = (parte5 * 11);
-                parte7 = (soma2 - parte6);
-                dig2 = (11 - parte7);
-                if (dig2 > 9) dig2 = 0;
-                //*==========================================*
-                //|       Impressao do numero completo       | 
-                //*==========================================*
-                //ostrm.SetLength(0);
-                for (i = 1; i <= 12; i++)
-                {
-                    //numeros do CNPJ
-                    result += Convert.ToString(numero[i]);
-                }
-                // dois últimos digitos
-                result += dig1 + "" + dig2;
-            }
-            return result;
+            Random rnd = new Random();
+
+            int n1 = rnd.Next(10);
+            int n2 = rnd.Next(10);
+            int n3 = rnd.Next(10);
+            int n4 = rnd.Next(10);
+            int n5 = rnd.Next(10);
+            int n6 = rnd.Next(10);
+            int n7 = rnd.Next(10);
+            int n8 = rnd.Next(10);
+            int n9 = 0;
+            int n11 = 0;
+            int n10 = 0;
+            int n12 = 1;
+            int d1 = n12 * 2 + n11 * 3 + n10 * 4 + n9 * 5 + n8 * 6 + n7 * 7 + n6 * 8 + n5 * 9 + n4 * 2 + n3 * 3 + n2 * 4 + n1 * 5;
+            d1 = 11 - (Mod(d1, 11));
+
+            if (d1 >= 10) d1 = 0;
+            int d2 = d1 * 2 + n12 * 3 + n11 * 4 + n10 * 5 + n9 * 6 + n8 * 7 + n7 * 8 + n6 * 9 + n5 * 2 + n4 * 3 + n3 * 4 + n2 * 5 + n1 * 6;
+            d2 = 11 - (Mod(d2, 11));
+            if (d2 >= 10) d2 = 0;
+
+
+            string cnpj = string.Concat(n1, n2, n3, n4, n5, n6, n7, n8, n9, n10, n11, n12, d1, d2);
+            return cnpj;
         }
-    }
+            
+        }
 }
+
+
+
+
+
+
+     

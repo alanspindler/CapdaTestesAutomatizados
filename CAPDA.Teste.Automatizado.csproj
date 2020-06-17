@@ -113,6 +113,7 @@
     </Otherwise>
   </Choose>
   <ItemGroup>
+    <Compile Include="Credenciamento\PageObjects\PaginaCredenciamento.cs" />
     <Compile Include="Exemplos\PageObjects\PaginaCapacidadePerfil.cs" />
     <Compile Include="Exemplos\PageObjects\PaginaManterVistoriador.cs" />
     <Compile Include="Exemplos\PageObjects\PaginaMunicipioTipoVistoria.cs" />
@@ -124,7 +125,7 @@
     <Compile Include="Exemplos\Tests\PaginaTesteTestesAutomatizados.cs" />
     <Compile Include="Inicial\PageObjects\PaginaInicial.cs" />
     <Compile Include="Inscricao\PageObjects\PaginaInscricao.cs" />
-    <Compile Include="Inscricao\Tests\MunicipioTipoVistoriaTestesAutomatizados.cs" />
+    <Compile Include="Credenciamento\Tests\CredenciamentoTestesAutomatizados.cs" />
     <Compile Include="Principal\PageObjects\PaginaPrincipal.cs" />
     <Compile Include="Principal\Tests\PaginaPrincipalTestesAutomatizados.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -279,6 +280,7 @@
     <Folder Include="Cadastros\PageObjects\" />
     <Folder Include="Cadastros\Tests\" />
     <Folder Include="Inicial\Tests\" />
+    <Folder Include="Inscricao\Tests\" />
     <Folder Include="System\" />
   </ItemGroup>
   <ItemGroup>

@@ -21,8 +21,9 @@ namespace Lampp.CAPDA.Teste.Automatizado.Principal.PageObjects
         #region Declaração de variáveis públicas da classe        
 
         public By MenuCadastros = By.LinkText("Cadastros");
-        public By MenuCapacidadePerfil = By.LinkText("Capacidade por Perfil");
-        
+        public By MenuCredenciamento = By.LinkText("Credenciamento");
+        public By MenuAcompanharCredenciamento = By.LinkText("Acompanhar Credenciamento");
+
         public By MenuRelatorios = By.LinkText("Relatórios");        
         #endregion
 
@@ -45,13 +46,23 @@ namespace Lampp.CAPDA.Teste.Automatizado.Principal.PageObjects
             ExpandireAbrirMenu(expandirMenu, MenuCadastros, itemSubMenu);
         }
 
+
+        /// <summary>
+        /// Clica em um item do menu e expandi o submenu
+        /// </summary>
+        /// <remarks>Escrita por Alan Spindler em 30/03/2016</remarks>
+        public void ExpandireAbrirMenuCredenciamento(bool expandirMenu, By itemSubMenu)
+        {
+            ExpandireAbrirMenu(expandirMenu, MenuCredenciamento, itemSubMenu);
+        }
+
         /// <summary>
         /// Clica em um item do menu e expandi o submenu
         /// </summary>
         /// <remarks>Escrita por Alan Spindler em 30/03/2016</remarks>
         public void ExpandireAbrirMenu(bool expandirMenu, By menu, By itemSubMenu)
         {
-            AguardarElemento("logout", TipoDadoElemento.Id);
+            //AguardarElemento("logout", TipoDadoElemento.Id);
 
             if (expandirMenu)
             {
