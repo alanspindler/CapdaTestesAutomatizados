@@ -16,7 +16,8 @@ namespace Lampp.CAPDA.Teste.Automatizado.Credenciamento.Tests
         public PaginaBase paginaBase { get; set; }
         public PaginaInicial paginaInicial { get; set; }
         public PaginaPrincipal paginaPrincipal { get; set; }
-        public PaginaInscricao paginaInscricao { get; set; }
+        public PaginaInscricao paginaInscricao { get; set; }        
+
         public PaginaCredenciamento paginaCredenciamento { get; set; }
 
         private string urlPaginaInscricao = "http://localhost:4200/#/inscricao";
@@ -42,7 +43,7 @@ namespace Lampp.CAPDA.Teste.Automatizado.Credenciamento.Tests
             paginaInicial.FazerLogin(CNPJ, "123456");
             paginaPrincipal.ExpandireAbrirMenuCredenciamento(true, paginaPrincipal.MenuAcompanharCredenciamento);
             paginaCredenciamento.SolicitarCredenciamento();
-            paginaCredenciamento.PreencherCredenciamento();
+            paginaCredenciamento.PreencherCredenciamento();            
                 
             ////// Fecha o navegador            
             //selenium.EncerrarTeste();            

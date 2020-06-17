@@ -80,12 +80,13 @@ namespace Lampp.CAPDA.Teste.Automatizado.Credenciamento.PageObjects
             PreencherIdentificacaoAbaUnidadeAcademica();
             PreencherIdentificacaoAbaMantenedor();
             PreencherIdentificacaoAbaRepresentacao();
+            PreencherRegularizacao();
         }
 
         public void PreencherIdentificacaoAbaInstituicao()
         {
             AguardarProcessando();
-            ClicarElementoPagina(optionPrivado);            
+            ClicarElementoPagina(optionPrivado);
             ClicarElementoPagina(botaoSalvar);
             AguardarProcessando();
             ClicarElementoPagina(botaoFechar);
@@ -106,7 +107,7 @@ namespace Lampp.CAPDA.Teste.Automatizado.Credenciamento.PageObjects
             PreencherCampo(campoCep, "68030260");
             PreencherCampo(campoBairro, "Centro");
             PreencherCampo(campoCidade, "Manaus");
-            SelecionarItemCombo(comboUF, "AM");                
+            SelecionarItemCombo(comboUF, "AM");
             ClicarElementoPagina(botaoSalvar);
             AguardarProcessando();
             ClicarElementoPagina(botaoFechar);
@@ -127,7 +128,7 @@ namespace Lampp.CAPDA.Teste.Automatizado.Credenciamento.PageObjects
             PreencherCampo(campoCepMantenedor, "61030260");
             PreencherCampo(campoBairroMantenedor, "Centro");
             PreencherCampo(campoCidadeMantenedor, "Manaus");
-            SelecionarItemCombo(comboUfMantenedor, "AM");            
+            SelecionarItemCombo(comboUfMantenedor, "AM");
             ClicarElementoPagina(botaoSalvarMantenedor);
             AguardarProcessando();
             ClicarElementoPagina(botaoFechar);
@@ -169,13 +170,30 @@ namespace Lampp.CAPDA.Teste.Automatizado.Credenciamento.PageObjects
             ClicarElementoPagina(botaoFechar);
         }
 
-
-
         #endregion
 
-        //label/i
+        #region Regularização
 
-        //div[@id='identificacao']/app-aba-identificacao/div[2]/div/div/div/div/label[3]/i
+        public By abaRegularizacao = By.LinkText("3.Regularização");
+        public By textAreaRegularizacao = By.XPath("//textarea");
+        public By botaoEscolherArquivoRegularizacao = By.Id("arquivo");
+        public By botaoSalvarRegularizacao = By.XPath("//div[@id='regularizacao']/app-aba-regulamentarizacao/div/div[3]/div/div/button");
 
+        public void PreencherRegularizacao()
+        {
+            AguardarProcessando();
+            ClicarElementoPagina(abaRegularizacao);
+            AguardarProcessando();
+            PreencherCampo(textAreaRegularizacao, "Teste Teste Teste Teste");
+            PreencherCampo(botaoEscolherArquivoRegularizacao, Constantes.CaminhoPDF);
+            AguardarProcessando();
+            ClicarElementoPagina(botaoFechar);
+            AguardarProcessando();
+            ClicarElementoPagina(botaoSalvarRegularizacao);
+            AguardarProcessando();
+            ClicarElementoPagina(botaoFechar);
+        }
+
+        #endregion
     }
 }
