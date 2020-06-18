@@ -6,6 +6,7 @@ using System.Threading;
 using System.Security.Cryptography;
 using System;
 using System.Security.Policy;
+using System.Windows.Forms;
 
 namespace Lampp.CAPDA.Teste.Automatizado.Credenciamento.PageObjects
 {
@@ -38,7 +39,8 @@ namespace Lampp.CAPDA.Teste.Automatizado.Credenciamento.PageObjects
         public By botaoFecharMensagemConfirmacao = By.XPath("(//button[@type='button'])[5]");
         public By botaoFecharMensagemConfirmacaoNenhumRegistroEncontrado = By.XPath("//dialog-wrapper[2]/div/app-modal/div/div/div[3]/button");
         public By mensagemRetorno = By.CssSelector("p");
-
+        private By botaoVoltar = By.ClassName("fa-long-arrow-left");
+        
         //public By botaoFechar = By.ClassName("btn-default");
 
         //div[3]/button
@@ -96,6 +98,9 @@ namespace Lampp.CAPDA.Teste.Automatizado.Credenciamento.PageObjects
             PreencherRecursosHumanos();
             PreencherResultados();
             PreencherOrcamento();
+            PreencherProjetoPD();
+            ClicarElementoPagina(botaoVoltar);
+            AguardarProcessando();
         }
 
         public void PreencherIdentificacaoAbaInstituicao()
@@ -495,7 +500,10 @@ namespace Lampp.CAPDA.Teste.Automatizado.Credenciamento.PageObjects
         {
             AguardarProcessando();
             ClicarElementoPagina(abaAnexo);
-            AguardarProcessando();            
+            //Tem 3 processando aqui por algum motivo
+            AguardarProcessando();
+            AguardarProcessando();
+            AguardarProcessando();
             ClicarElementoPagina(abaDadosPlano);
             AguardarProcessando();
             PreencherCampo(campoTituloPlano, "Teste Teste Teste");
@@ -1031,8 +1039,44 @@ namespace Lampp.CAPDA.Teste.Automatizado.Credenciamento.PageObjects
             AguardarProcessando();
             ClicarElementoPagina(botaoFechar);
         }
+        #endregion
 
+        #region 8.2
+
+        private By abaProjetoPD = By.LinkText("8.2. Projeto de P&D");
+        public By botaoNovoProjetoPD = By.ClassName("fa-plus");
+        public By comboTipoProjeto = By.Id("tipo");
+        public By campoTituloProjeto = By.Id("titulo");
+        public By campoDescricaoProjeto = By.Id("descricaoProjeto");
+        public By campoEquipeCoordenadorProjeto = By.Id("coordenador-es");        
+        public By campoValorProjeto = By.Id("executor-es");
+        public By checkboxPesquisa = By.XPath("//div[@id='projeto-pd']/div[2]/app-aba-projeto-pd/app-modal-anexo-pd/div/div/div/div[2]/div/div[5]/div/div/label/i");
+        public By campoRelacaoEquipamentos = By.Id("prazo-de-execucao");
+        
+        private void PreencherProjetoPD()
+        {
+            AguardarProcessando();
+            ClicarElementoPagina(abaProjetoPD);
+            AguardarProcessando();
+            ClicarElementoPagina(botaoFechar);
+            AguardarProcessando();
+            ClicarElementoPagina(botaoNovoProjetoPD);
+            SelecionarItemCombo(comboTipoProjeto, "Projeto");
+            PreencherCampo(campoTituloProjeto, "Teste Teste");
+            PreencherCampo(campoDescricaoProjeto, "Teste Teste Teste");
+            PreencherCampo(campoEquipeCoordenadorProjeto, "Teste Teste Teste");
+            PreencherCampo(campoValorProjeto, "Teste Teste Teste");
+            ClicarElementoPagina(checkboxPesquisa);
+            PreencherCampo(campoRelacaoEquipamentos, "Teste Teste Teste");
+            ClicarElementoPagina(botaoSalvar);
+            AguardarProcessando();
+            ClicarElementoPagina(botaoFechar);
+            AguardarProcessando();
+        }
+        
 
         #endregion
+
+
     }
 }
