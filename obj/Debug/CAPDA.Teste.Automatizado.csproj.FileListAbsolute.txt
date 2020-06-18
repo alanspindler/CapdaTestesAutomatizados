@@ -112,7 +112,6 @@ C:\Users\alans\Dropbox\Lampp\Testes\Capda\Teste Automatizado\Teste Automatizado\
 C:\Users\alans\Dropbox\Lampp\Testes\Capda\Teste Automatizado\Teste Automatizado\bin\Debug\ThoughtWorks.Selenium.Core.xml
 C:\Users\alans\Dropbox\Lampp\Testes\Capda\Teste Automatizado\Teste Automatizado\bin\Debug\WebDriver.xml
 C:\Users\alans\Dropbox\Lampp\Testes\Capda\Teste Automatizado\Teste Automatizado\bin\Debug\WebDriver.Support.xml
-C:\Users\alans\Dropbox\Lampp\Testes\Capda\Teste Automatizado\Teste Automatizado\obj\Debug\CAPDA.Teste.Automatizado.csprojAssemblyReference.cache
 C:\Users\alans\Dropbox\Lampp\Testes\Capda\Teste Automatizado\Teste Automatizado\obj\Debug\CAPDA.Teste.Automatizado.csproj.CoreCompileInputs.cache
 C:\Users\alans\Dropbox\Lampp\Testes\Capda\Teste Automatizado\Teste Automatizado\obj\Debug\CAPDA.Teste.Automatizado.csproj.CopyComplete
 C:\Users\alans\Dropbox\Lampp\Testes\Capda\Teste Automatizado\Teste Automatizado\obj\Debug\LAMPP.CAPDA.Teste.Automatizado.dll
