@@ -40,11 +40,12 @@ namespace Lampp.CAPDA.Teste.Automatizado.Cadastros.PageObjects
         //Exclui o item da linha selecionado. Confirma a exclusão de acotdo com o parametro confirmar
         public string InscreverEmpresa()
         {
+            //geradorCNPJCPF.isCNPJ("78667350200178");
             AguardarProcessando();            
             PreencherCampo(campoInstituicao, geradorNome.GerarNome());
-            string CNPJ = geradorCNPJCPF.GerarCNPJ();
+            string CNPJ = geradorCNPJCPF.cnpj(false);
             PreencherCampo(campoCNPJ, CNPJ);
-            PreencherCampo(campoCPF, geradorCNPJCPF.CpfSemMascara(1));
+            PreencherCampo(campoCPF, geradorCNPJCPF.cpf(false));
             AguardarProcessando();
             PreencherCampo(campoEmail, "alanspindler@live.com");
             PreencherCampo(campoResponsavel, geradorNome.GerarNome());

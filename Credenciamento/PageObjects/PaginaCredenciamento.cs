@@ -5,7 +5,7 @@ using OpenQA.Selenium.Remote;
 using System.Threading;
 using System.Security.Cryptography;
 using System;
-
+using System.Security.Policy;
 
 namespace Lampp.CAPDA.Teste.Automatizado.Credenciamento.PageObjects
 {
@@ -37,6 +37,7 @@ namespace Lampp.CAPDA.Teste.Automatizado.Credenciamento.PageObjects
         public By botaoFechar = By.CssSelector("div.modal-footer > button.btn.btn-default.btn-sm");
         public By botaoFecharMensagemConfirmacao = By.XPath("(//button[@type='button'])[5]");
         public By botaoFecharMensagemConfirmacaoNenhumRegistroEncontrado = By.XPath("//dialog-wrapper[2]/div/app-modal/div/div/div[3]/button");
+        public By mensagemRetorno = By.CssSelector("p");
 
         //public By botaoFechar = By.ClassName("btn-default");
 
@@ -92,7 +93,7 @@ namespace Lampp.CAPDA.Teste.Automatizado.Credenciamento.PageObjects
         }
 
         public void PreencherIdentificacaoAbaInstituicao()
-        {
+        {            
             AguardarProcessando();
             ClicarElementoPagina(optionPrivado);
             ClicarElementoPagina(botaoSalvar);
@@ -127,7 +128,8 @@ namespace Lampp.CAPDA.Teste.Automatizado.Credenciamento.PageObjects
             ClicarElementoPagina(abaUnidadeMantenedor);
             AguardarProcessando();
             ClicarElementoPagina(botaoNovo);
-            PreencherCampo(campoCnpjMantenedor, geradorCNPJCPF.GerarCNPJ());
+            string a = geradorCNPJCPF.cnpj(true);
+            PreencherCampo(campoCnpjMantenedor, a);
             PreencherCampo(campoNomeMantenedor, geradorNome.GerarNome());
             PreencherCampo(campoTelefoneMantenedor, "92986150323");
             PreencherCampo(campoEmailMantenedor, "teste@teste.com");
@@ -137,9 +139,9 @@ namespace Lampp.CAPDA.Teste.Automatizado.Credenciamento.PageObjects
             PreencherCampo(campoBairroMantenedor, "Centro");
             PreencherCampo(campoCidadeMantenedor, "Manaus");
             SelecionarItemCombo(comboUfMantenedor, "AM");
-            ClicarElementoPagina(botaoSalvarMantenedor);
-            AguardarProcessando();
-            ClicarElementoPagina(botaoFechar);
+            ClicarElementoPagina(botaoSalvarMantenedor);            
+            AguardarProcessando();            
+            ClicarElementoPagina(botaoFechar);            
         }
 
         #endregion
@@ -166,7 +168,8 @@ namespace Lampp.CAPDA.Teste.Automatizado.Credenciamento.PageObjects
             ClicarElementoPagina(botaoNovo);
             AguardarProcessando();
             SelecionarItemCombo(comboTipoRepresentacao, "Dirigente da Instituição");
-            PreencherCampo(campoCpfRepresentacao, geradorCNPJCPF.CpfSemMascara(1));
+            string a = geradorCNPJCPF.cpf(true);            
+            PreencherCampo(campoCpfRepresentacao, a);
             PreencherCampo(campoNomeRepresentacao, geradorNome.GerarNome());
             PreencherCampo(campoTelefoneRepresentacao, "92986150323");
             PreencherCampo(campoFaxRepresentacao, "9236150323");
@@ -174,8 +177,9 @@ namespace Lampp.CAPDA.Teste.Automatizado.Credenciamento.PageObjects
             PreencherCampo(campoCargoRepresentacao, "Teste");
             PreencherCampo(campoIdentidadeRepresentacao, "2363040411");
             PreencherCampo(campoEmissorRepresentacao, "Teste");
-            ClicarElementoPagina(botaoSalvarRepresentacao);
+            ClicarElementoPagina(botaoSalvarRepresentacao);            
             AguardarProcessando();
+            VerificarMensagemRetorno(mensagemRetorno);
             ClicarElementoPagina(botaoFechar);
         }
 

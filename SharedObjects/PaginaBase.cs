@@ -103,6 +103,20 @@ namespace Lampp.CAPDA.Teste.Automatizado.SharedObjects
             }
         }
 
+        public bool VerificarMensagemRetorno(By elemento)
+        {
+            var texto = driver.FindElement(elemento).GetAttribute("textContent");
+            if (texto == "Operação realizada com sucesso!")
+            {
+                return true;
+            }
+            else
+            {
+                return false;
+            }
+        }
+        
+
         /// <summary>
         /// Aguarda a div "Processando" ser exibida e desaparecer antes de efetuar passos do teste
         /// </summary>
