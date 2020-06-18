@@ -25,7 +25,8 @@ namespace Lampp.CAPDA.Teste.Automatizado.Cadastros.PageObjects
         public By campoSenha = By.Name("txtSenha");
         public By campoConfirmarSenha = By.Name("txtConfirmarSenha");
         public By botaoSalvar = By.ClassName("fa-save");
-
+        public By MensagemErro = By.XPath("//p");
+        public By botaoFechar = By.CssSelector("div.modal-footer > button.btn.btn-default.btn-sm");
         #endregion
 
         #region Métodos públicos
@@ -36,17 +37,33 @@ namespace Lampp.CAPDA.Teste.Automatizado.Cadastros.PageObjects
            geradorNome = new GeradorNome();
            geradorCNPJCPF = new GeradorCNPJCPF();
         }
-
-        //Exclui o item da linha selecionado. Confirma a exclusão de acotdo com o parametro confirmar
+                
         public string InscreverEmpresa()
-        {
-            //geradorCNPJCPF.isCNPJ("78667350200178");
+        {            
             AguardarProcessando();            
             PreencherCampo(campoInstituicao, geradorNome.GerarNome());
             string CNPJ = geradorCNPJCPF.cnpj(false);
-            PreencherCampo(campoCNPJ, CNPJ);
-            PreencherCampo(campoCPF, geradorCNPJCPF.cpf(false));
+            PreencherCampo(campoCNPJ, CNPJ);            
+            string textoCNPJ = driver.FindElement(campoCNPJ).GetAttribute("value");
+            bool cnpjValido = geradorCNPJCPF.isCNPJ(textoCNPJ);
+            while (cnpjValido == false)
+            {
+                CNPJ = geradorCNPJCPF.cnpj(false);
+                PreencherCampo(campoCNPJ, CNPJ);
+                textoCNPJ = driver.FindElement(campoCNPJ).GetAttribute("value");
+                cnpjValido = geradorCNPJCPF.isCNPJ(textoCNPJ);
+            }
             AguardarProcessando();
+            PreencherCampo(campoCPF, geradorCNPJCPF.cpf(false));            
+            string textoCpf = driver.FindElement(campoCPF).GetAttribute("value");
+            bool cpfValido = geradorCNPJCPF.isCPF(textoCpf);
+            while (cpfValido == false)
+            {
+                string CPF = geradorCNPJCPF.cpf(false);
+                PreencherCampo(campoCPF, CPF);
+                textoCpf = driver.FindElement(campoCPF).GetAttribute("value");
+                cpfValido = geradorCNPJCPF.isCPF(textoCpf);
+            }
             PreencherCampo(campoEmail, "alanspindler@live.com");
             PreencherCampo(campoResponsavel, geradorNome.GerarNome());
             PreencherCampo(campoSenha, "123456");
