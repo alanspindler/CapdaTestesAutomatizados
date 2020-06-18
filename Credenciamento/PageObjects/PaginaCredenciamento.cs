@@ -87,6 +87,7 @@ namespace Lampp.CAPDA.Teste.Automatizado.Credenciamento.PageObjects
             PreencherOrcamentoFaturamento();
             PreencherForcaTrabalho();
             PreencherAreaAtuacao();
+            PreencherPesquisador();
         }
 
         public void PreencherIdentificacaoAbaInstituicao()
@@ -366,6 +367,41 @@ namespace Lampp.CAPDA.Teste.Automatizado.Credenciamento.PageObjects
             SelecionarItemCombo(comboAreaPrincipal, "Engenharias");
             SelecionarItemCombo(comboAreaAtuacao, "Estruturas");
             ClicarElementoPagina(botaoSalvarAreaAtuacao);
+            AguardarProcessando();
+            ClicarElementoPagina(botaoFechar);
+        }
+
+        #endregion
+
+        #region Pesquisadores
+
+        public By abaPesquisadores = By.LinkText("5.Pesquisadores");
+        public By comboTipoPesquisador = By.Name("tipo");
+        public By comboUnidadeAcademica = By.Id("drop-list");
+        public By campoNomePesquisador = By.Id("nomePesquisador");
+        public By campoFormacaoAcademicaPesquisador = By.Id("Formacao");
+        public By comboTitulacaoPesquisador = By.Id("Titulacao");
+        public By campoLinhaPesquisaPesquisador = By.Id("LinhaPesquisa");
+        public By campoVinculoInstitucionalPesquisador = By.Id("vinculoInstitucional");
+        public By anexarArquivoPesquisador = By.Id("arquivo");
+
+        public void PreencherPesquisador()
+        {
+            AguardarProcessando();
+            ClicarElementoPagina(abaPesquisadores);
+            AguardarProcessando();
+            ClicarElementoPagina(botaoNovo);
+            AguardarProcessando();
+            SelecionarItemCombo(comboTipoPesquisador, "Pesquisador");
+            SelecionarItemCombo(comboUnidadeAcademica, "Unidade Teste Automatizado");
+            PreencherCampo(campoNomePesquisador, geradorNome.GerarNome());
+            PreencherCampo(campoFormacaoAcademicaPesquisador, "Formacao em Pesquisa");
+            SelecionarItemCombo(comboTitulacaoPesquisador, "Mestrado");
+            PreencherCampo(campoLinhaPesquisaPesquisador, "Pesquisa Tecnológica");
+            PreencherCampo(campoVinculoInstitucionalPesquisador, "Pesquisador Chefe");
+            PreencherCampo(anexarArquivoPesquisador, Constantes.CaminhoPDF);
+            AguardarProcessando();
+            ClicarElementoPagina(botaoSalvar);
             AguardarProcessando();
             ClicarElementoPagina(botaoFechar);
         }
