@@ -91,6 +91,11 @@ namespace Lampp.CAPDA.Teste.Automatizado.Credenciamento.PageObjects
             PreencherPesquisador();
             PreencherLaboratorio();
             PreencherDocumentacao();
+            PreencherPlanoExecucao();
+            PreencherObjetivosMetas();
+            PreencherRecursosHumanos();
+            PreencherResultados();
+            PreencherOrcamento();
         }
 
         public void PreencherIdentificacaoAbaInstituicao()
@@ -468,7 +473,565 @@ namespace Lampp.CAPDA.Teste.Automatizado.Credenciamento.PageObjects
             ClicarElementoPagina(botaoSalvar);
             AguardarProcessando();
             ClicarElementoPagina(botaoFechar);
-        } 
+        }
+
+        #endregion
+
+        #region Anexo
+
+        public By abaAnexo = By.LinkText("8.Anexo");
+
+        //Aba 8.1.1
+
+        private By abaDadosPlano = By.LinkText("8.1.1 Dados do Plano");
+        private By campoTituloPlano = By.Id("titulo");
+        private By campoCoordenadorPlano = By.Id("coordenador-es");
+        private By campoExecutorPlano = By.Id("executor-es");
+        private By checkboxPesquisaPlano = By.XPath("//form[@id='formulario']/div[4]/div/div/label/i");
+        private By campoPrazoExecucaoPlano = By.Id("prazo-de-execucao");
+        private By anexarArquivoPlano = By.Id("arquivo");
+        
+        private void PreencherPlanoExecucao()
+        {
+            AguardarProcessando();
+            ClicarElementoPagina(abaAnexo);
+            AguardarProcessando();            
+            ClicarElementoPagina(abaDadosPlano);
+            AguardarProcessando();
+            PreencherCampo(campoTituloPlano, "Teste Teste Teste");
+            PreencherCampo(campoCoordenadorPlano, "Teste Teste Teste");
+            PreencherCampo(campoExecutorPlano, "Teste Teste Teste");
+            ClicarElementoPagina(checkboxPesquisaPlano);
+            PreencherCampo(campoPrazoExecucaoPlano, "Teste Teste Teste");
+            PreencherCampo(anexarArquivoPlano, Constantes.CaminhoPDF);
+            AguardarProcessando();
+            ClicarElementoPagina(botaoSalvar);
+            AguardarProcessando();
+            ClicarElementoPagina(botaoFechar);
+        }
+
+        //Aba 8.1.2
+
+        private By abaObjetivosMetas = By.LinkText("8.1.2 Objetivos e Metas");
+        private By campoObjetivosMetas = By.Id("objetivos-e-metas-text");
+
+        private void PreencherObjetivosMetas()
+        {
+            AguardarProcessando();
+            ClicarElementoPagina(abaObjetivosMetas);
+            AguardarProcessando();
+            PreencherCampo(campoObjetivosMetas, "Teste Teste Teste");
+            ClicarElementoPagina(botaoSalvar);
+            AguardarProcessando();
+            ClicarElementoPagina(botaoFechar);
+        }
+
+
+        //Aba 8.1.3
+
+        private By abaRecursosHumanos = By.LinkText("8.1.3 Recursos Humanos");
+        private By campoRecursosHumanos = By.Id("rh-text");        
+        
+        private void PreencherRecursosHumanos()
+        {
+            AguardarProcessando();
+            ClicarElementoPagina(abaRecursosHumanos);
+            AguardarProcessando();
+            PreencherCampo(campoRecursosHumanos, "Teste Teste Teste");
+            ClicarElementoPagina(botaoSalvar);
+            AguardarProcessando();
+            ClicarElementoPagina(botaoFechar);
+        }
+
+        //Aba 8.1.4
+
+        private By abaResultados = By.LinkText("8.1.4 Resultados");
+        private By campoResultados = By.Id("resultados-serem-alcancados");
+        
+        private void PreencherResultados()
+        {
+            AguardarProcessando();
+            ClicarElementoPagina(abaResultados);
+            AguardarProcessando();
+            PreencherCampo(campoResultados, "Teste Teste Teste");
+            ClicarElementoPagina(botaoSalvar);
+            AguardarProcessando();
+            ClicarElementoPagina(botaoFechar);
+        }
+
+        #endregion
+
+        #region Aba 8.1.5
+
+        //Aba 8.1.5
+
+        private By abaOrcamento = By.LinkText("8.1.5 Orçamento");
+
+        private By campo0_0 = By.Id("0-0");
+        private By campo0_1 = By.Id("0-1");
+        private By campo0_2 = By.Id("0-2");
+        private By campo0_3 = By.Id("0-3");
+        private By campo0_4 = By.Id("0-4");
+        private By campo0_5 = By.Id("0-5");
+        private By campo0_6 = By.Id("0-6");
+        private By campo0_7 = By.Id("0-7");
+
+        private By campo1_0 = By.Id("1-0");
+        private By campo1_1 = By.Id("1-1");
+        private By campo1_2 = By.Id("1-2");
+        private By campo1_3 = By.Id("1-3");
+        private By campo1_4 = By.Id("1-4");
+        private By campo1_5 = By.Id("1-5");
+        private By campo1_6 = By.Id("1-6");
+        private By campo1_7 = By.Id("1-7");
+
+        private By campo2_0 = By.Id("2-0");
+        private By campo2_1 = By.Id("2-1");
+        private By campo2_2 = By.Id("2-2");
+        private By campo2_3 = By.Id("2-3");
+        private By campo2_4 = By.Id("2-4");
+        private By campo2_5 = By.Id("2-5");
+        private By campo2_6 = By.Id("2-6");
+        private By campo2_7 = By.Id("2-7");
+
+        private By campo3_0 = By.Id("3-0");
+        private By campo3_1 = By.Id("3-1");
+        private By campo3_2 = By.Id("3-2");
+        private By campo3_3 = By.Id("3-3");
+        private By campo3_4 = By.Id("3-4");
+        private By campo3_5 = By.Id("3-5");
+        private By campo3_6 = By.Id("3-6");
+        private By campo3_7 = By.Id("3-7");
+
+        private By campo4_0 = By.Id("4-0");
+        private By campo4_1 = By.Id("4-1");
+        private By campo4_2 = By.Id("4-2");
+        private By campo4_3 = By.Id("4-3");
+        private By campo4_4 = By.Id("4-4");
+        private By campo4_5 = By.Id("4-5");
+        private By campo4_6 = By.Id("4-6");
+        private By campo4_7 = By.Id("4-7");
+
+        private By campo5_0 = By.Id("5-0");
+        private By campo5_1 = By.Id("5-1");
+        private By campo5_2 = By.Id("5-2");
+        private By campo5_3 = By.Id("5-3");
+        private By campo5_4 = By.Id("5-4");
+        private By campo5_5 = By.Id("5-5");
+        private By campo5_6 = By.Id("5-6");
+        private By campo5_7 = By.Id("5-7");
+
+        private By campo6_0 = By.Id("6-0");
+        private By campo6_1 = By.Id("6-1");
+        private By campo6_2 = By.Id("6-2");
+        private By campo6_3 = By.Id("6-3");
+        private By campo6_4 = By.Id("6-4");
+        private By campo6_5 = By.Id("6-5");
+        private By campo6_6 = By.Id("6-6");
+        private By campo6_7 = By.Id("6-7");
+
+        private By campo7_0 = By.Id("7-0");
+        private By campo7_1 = By.Id("7-1");
+        private By campo7_2 = By.Id("7-2");
+        private By campo7_3 = By.Id("7-3");
+        private By campo7_4 = By.Id("7-4");
+        private By campo7_5 = By.Id("7-5");
+        private By campo7_6 = By.Id("7-6");
+        private By campo7_7 = By.Id("7-7");
+
+        private By campo8_0 = By.Id("8-0");
+        private By campo8_1 = By.Id("8-1");
+        private By campo8_2 = By.Id("8-2");
+        private By campo8_3 = By.Id("8-3");
+        private By campo8_4 = By.Id("8-4");
+        private By campo8_5 = By.Id("8-5");
+        private By campo8_6 = By.Id("8-6");
+        private By campo8_7 = By.Id("8-7");
+
+        private By campo9_0 = By.Id("9-0");
+        private By campo9_1 = By.Id("9-1");
+        private By campo9_2 = By.Id("9-2");
+        private By campo9_3 = By.Id("9-3");
+        private By campo9_4 = By.Id("9-4");
+        private By campo9_5 = By.Id("9-5");
+        private By campo9_6 = By.Id("9-6");
+        private By campo9_7 = By.Id("9-7");
+
+        private By campo10_0 = By.Id("10-0");
+        private By campo10_1 = By.Id("10-1");
+        private By campo10_2 = By.Id("10-2");
+        private By campo10_3 = By.Id("10-3");
+        private By campo10_4 = By.Id("10-4");
+        private By campo10_5 = By.Id("10-5");
+        private By campo10_6 = By.Id("10-6");
+        private By campo10_7 = By.Id("10-7");
+
+        private void PreencherOrcamento()
+        {
+            Random random = new Random();
+            int randomNumber;
+            string numero;
+
+            AguardarProcessando();
+            ClicarElementoPagina(abaOrcamento);
+            AguardarProcessando();
+            randomNumber = random.Next(1, 10);
+            numero = randomNumber.ToString();
+            PreencherCampo(campo0_0, numero);
+
+            randomNumber = random.Next(1, 10);
+            numero = randomNumber.ToString();
+            PreencherCampo(campo0_1, numero);
+
+            randomNumber = random.Next(1, 10);
+            numero = randomNumber.ToString();
+            PreencherCampo(campo0_2, numero);
+
+            randomNumber = random.Next(1, 10);
+            numero = randomNumber.ToString();
+            PreencherCampo(campo0_3, numero);
+
+            randomNumber = random.Next(1, 10);
+            numero = randomNumber.ToString();
+            PreencherCampo(campo0_4, numero);
+
+            randomNumber = random.Next(1, 10);
+            numero = randomNumber.ToString();
+            PreencherCampo(campo0_5, numero);
+
+            randomNumber = random.Next(1, 10);
+            numero = randomNumber.ToString();
+            PreencherCampo(campo0_6, numero);
+
+            randomNumber = random.Next(1, 10);
+            numero = randomNumber.ToString();
+            PreencherCampo(campo0_7, numero);
+
+            randomNumber = random.Next(1, 10);
+            numero = randomNumber.ToString();
+            PreencherCampo(campo1_0, numero);
+
+            randomNumber = random.Next(1, 10);
+            numero = randomNumber.ToString();
+            PreencherCampo(campo1_1, numero);
+
+            randomNumber = random.Next(1, 10);
+            numero = randomNumber.ToString();
+            PreencherCampo(campo1_2, numero);
+
+            randomNumber = random.Next(1, 10);
+            numero = randomNumber.ToString();
+            PreencherCampo(campo1_3, numero);
+
+            randomNumber = random.Next(1, 10);
+            numero = randomNumber.ToString();
+            PreencherCampo(campo1_4, numero);
+
+            randomNumber = random.Next(1, 10);
+            numero = randomNumber.ToString();
+            PreencherCampo(campo1_5, numero);
+
+            randomNumber = random.Next(1, 10);
+            numero = randomNumber.ToString();
+            PreencherCampo(campo1_6, numero);
+
+            randomNumber = random.Next(1, 10);
+            numero = randomNumber.ToString();
+            PreencherCampo(campo1_7, numero);
+
+            randomNumber = random.Next(1, 10);
+            numero = randomNumber.ToString();
+            PreencherCampo(campo2_0, numero);
+
+            randomNumber = random.Next(1, 10);
+            numero = randomNumber.ToString();
+            PreencherCampo(campo2_1, numero);
+
+            randomNumber = random.Next(1, 10);
+            numero = randomNumber.ToString();
+            PreencherCampo(campo2_2, numero);
+
+            randomNumber = random.Next(1, 10);
+            numero = randomNumber.ToString();
+            PreencherCampo(campo2_3, numero);
+
+            randomNumber = random.Next(1, 10);
+            numero = randomNumber.ToString();
+            PreencherCampo(campo2_4, numero);
+
+            randomNumber = random.Next(1, 10);
+            numero = randomNumber.ToString();
+            PreencherCampo(campo2_5, numero);
+
+            randomNumber = random.Next(1, 10);
+            numero = randomNumber.ToString();
+            PreencherCampo(campo2_6, numero);
+
+            randomNumber = random.Next(1, 10);
+            numero = randomNumber.ToString();
+            PreencherCampo(campo2_7, numero);
+
+            randomNumber = random.Next(1, 10);
+            numero = randomNumber.ToString();
+            PreencherCampo(campo3_0, numero);
+
+            randomNumber = random.Next(1, 10);
+            numero = randomNumber.ToString();
+            PreencherCampo(campo3_1, numero);
+
+            randomNumber = random.Next(1, 10);
+            numero = randomNumber.ToString();
+            PreencherCampo(campo3_2, numero);
+
+            randomNumber = random.Next(1, 10);
+            numero = randomNumber.ToString();
+            PreencherCampo(campo3_3, numero);
+
+            randomNumber = random.Next(1, 10);
+            numero = randomNumber.ToString();
+            PreencherCampo(campo3_4, numero);
+
+            randomNumber = random.Next(1, 10);
+            numero = randomNumber.ToString();
+            PreencherCampo(campo3_5, numero);
+
+            randomNumber = random.Next(1, 10);
+            numero = randomNumber.ToString();
+            PreencherCampo(campo3_6, numero);
+
+            randomNumber = random.Next(1, 10);
+            numero = randomNumber.ToString();
+            PreencherCampo(campo3_7, numero);
+
+            randomNumber = random.Next(1, 10);
+            numero = randomNumber.ToString();
+            PreencherCampo(campo4_0, numero);
+
+            randomNumber = random.Next(1, 10);
+            numero = randomNumber.ToString();
+            PreencherCampo(campo4_1, numero);
+
+            randomNumber = random.Next(1, 10);
+            numero = randomNumber.ToString();
+            PreencherCampo(campo4_2, numero);
+
+            randomNumber = random.Next(1, 10);
+            numero = randomNumber.ToString();
+            PreencherCampo(campo4_3, numero);
+
+            randomNumber = random.Next(1, 10);
+            numero = randomNumber.ToString();
+            PreencherCampo(campo4_4, numero);
+
+            randomNumber = random.Next(1, 10);
+            numero = randomNumber.ToString();
+            PreencherCampo(campo4_5, numero);
+
+            randomNumber = random.Next(1, 10);
+            numero = randomNumber.ToString();
+            PreencherCampo(campo4_6, numero);
+
+            randomNumber = random.Next(1, 10);
+            numero = randomNumber.ToString();
+            PreencherCampo(campo4_7, numero);
+
+            randomNumber = random.Next(1, 10);
+            numero = randomNumber.ToString();
+            PreencherCampo(campo5_0, numero);
+
+            randomNumber = random.Next(1, 10);
+            numero = randomNumber.ToString();
+            PreencherCampo(campo5_1, numero);
+
+            randomNumber = random.Next(1, 10);
+            numero = randomNumber.ToString();
+            PreencherCampo(campo5_2, numero);
+
+            randomNumber = random.Next(1, 10);
+            numero = randomNumber.ToString();
+            PreencherCampo(campo5_3, numero);
+
+            randomNumber = random.Next(1, 10);
+            numero = randomNumber.ToString();
+            PreencherCampo(campo5_4, numero);
+
+            randomNumber = random.Next(1, 10);
+            numero = randomNumber.ToString();
+            PreencherCampo(campo5_5, numero);
+
+            randomNumber = random.Next(1, 10);
+            numero = randomNumber.ToString();
+            PreencherCampo(campo5_6, numero);
+
+            randomNumber = random.Next(1, 10);
+            numero = randomNumber.ToString();
+            PreencherCampo(campo5_7, numero);            
+
+            randomNumber = random.Next(1, 10);
+            numero = randomNumber.ToString();
+            PreencherCampo(campo6_0, numero);
+
+            randomNumber = random.Next(1, 10);
+            numero = randomNumber.ToString();
+            PreencherCampo(campo6_1, numero);
+
+            randomNumber = random.Next(1, 10);
+            numero = randomNumber.ToString();
+            PreencherCampo(campo6_2, numero);
+
+            randomNumber = random.Next(1, 10);
+            numero = randomNumber.ToString();
+            PreencherCampo(campo6_3, numero);
+
+            randomNumber = random.Next(1, 10);
+            numero = randomNumber.ToString();
+            PreencherCampo(campo6_4, numero);
+
+            randomNumber = random.Next(1, 10);
+            numero = randomNumber.ToString();
+            PreencherCampo(campo6_5, numero);
+
+            randomNumber = random.Next(1, 10);
+            numero = randomNumber.ToString();
+            PreencherCampo(campo6_6, numero);
+
+            randomNumber = random.Next(1, 10);
+            numero = randomNumber.ToString();
+            PreencherCampo(campo6_7, numero);
+
+            randomNumber = random.Next(1, 10);
+            numero = randomNumber.ToString();
+            PreencherCampo(campo7_0, numero);
+
+            randomNumber = random.Next(1, 10);
+            numero = randomNumber.ToString();
+            PreencherCampo(campo7_1, numero);
+
+            randomNumber = random.Next(1, 10);
+            numero = randomNumber.ToString();
+            PreencherCampo(campo7_2, numero);
+
+            randomNumber = random.Next(1, 10);
+            numero = randomNumber.ToString();
+            PreencherCampo(campo7_3, numero);
+
+            randomNumber = random.Next(1, 10);
+            numero = randomNumber.ToString();
+            PreencherCampo(campo7_4, numero);
+
+            randomNumber = random.Next(1, 10);
+            numero = randomNumber.ToString();
+            PreencherCampo(campo7_5, numero);
+
+            randomNumber = random.Next(1, 10);
+            numero = randomNumber.ToString();
+            PreencherCampo(campo7_6, numero);
+
+            randomNumber = random.Next(1, 10);
+            numero = randomNumber.ToString();
+            PreencherCampo(campo7_7, numero);
+
+            randomNumber = random.Next(1, 10);
+            numero = randomNumber.ToString();
+            PreencherCampo(campo8_0, numero);
+
+            randomNumber = random.Next(1, 10);
+            numero = randomNumber.ToString();
+            PreencherCampo(campo8_1, numero);
+
+            randomNumber = random.Next(1, 10);
+            numero = randomNumber.ToString();
+            PreencherCampo(campo8_2, numero);
+
+            randomNumber = random.Next(1, 10);
+            numero = randomNumber.ToString();
+            PreencherCampo(campo8_3, numero);
+
+            randomNumber = random.Next(1, 10);
+            numero = randomNumber.ToString();
+            PreencherCampo(campo8_4, numero);
+
+            randomNumber = random.Next(1, 10);
+            numero = randomNumber.ToString();
+            PreencherCampo(campo8_5, numero);
+
+            randomNumber = random.Next(1, 10);
+            numero = randomNumber.ToString();
+            PreencherCampo(campo8_6, numero);
+
+            randomNumber = random.Next(1, 10);
+            numero = randomNumber.ToString();
+            PreencherCampo(campo8_7, numero);
+
+            randomNumber = random.Next(1, 10);
+            numero = randomNumber.ToString();
+            PreencherCampo(campo9_0, numero);
+
+            randomNumber = random.Next(1, 10);
+            numero = randomNumber.ToString();
+            PreencherCampo(campo9_1, numero);
+
+            randomNumber = random.Next(1, 10);
+            numero = randomNumber.ToString();
+            PreencherCampo(campo9_2, numero);
+
+            randomNumber = random.Next(1, 10);
+            numero = randomNumber.ToString();
+            PreencherCampo(campo9_3, numero);
+
+            randomNumber = random.Next(1, 10);
+            numero = randomNumber.ToString();
+            PreencherCampo(campo9_4, numero);
+
+            randomNumber = random.Next(1, 10);
+            numero = randomNumber.ToString();
+            PreencherCampo(campo9_5, numero);
+
+            randomNumber = random.Next(1, 10);
+            numero = randomNumber.ToString();
+            PreencherCampo(campo9_6, numero);
+
+            randomNumber = random.Next(1, 10);
+            numero = randomNumber.ToString();
+            PreencherCampo(campo9_7, numero);
+
+            randomNumber = random.Next(1, 10);
+            numero = randomNumber.ToString();
+            PreencherCampo(campo10_0, numero);
+
+            randomNumber = random.Next(1, 10);
+            numero = randomNumber.ToString();
+            PreencherCampo(campo10_1, numero);
+
+            randomNumber = random.Next(1, 10);
+            numero = randomNumber.ToString();
+            PreencherCampo(campo10_2, numero);
+
+            randomNumber = random.Next(1, 10);
+            numero = randomNumber.ToString();
+            PreencherCampo(campo10_3, numero);
+
+            randomNumber = random.Next(1, 10);
+            numero = randomNumber.ToString();
+            PreencherCampo(campo10_4, numero);
+
+            randomNumber = random.Next(1, 10);
+            numero = randomNumber.ToString();
+            PreencherCampo(campo10_5, numero);
+
+            randomNumber = random.Next(1, 10);
+            numero = randomNumber.ToString();
+            PreencherCampo(campo10_6, numero);
+
+            randomNumber = random.Next(1, 10);
+            numero = randomNumber.ToString();
+            PreencherCampo(campo10_7, numero);
+
+            ClicarElementoPagina(botaoSalvar);
+            AguardarProcessando();
+            ClicarElementoPagina(botaoFechar);
+        }
+
 
         #endregion
     }
