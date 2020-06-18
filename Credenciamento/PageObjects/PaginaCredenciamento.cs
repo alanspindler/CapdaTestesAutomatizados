@@ -88,6 +88,7 @@ namespace Lampp.CAPDA.Teste.Automatizado.Credenciamento.PageObjects
             PreencherForcaTrabalho();
             PreencherAreaAtuacao();
             PreencherPesquisador();
+            PreencherLaboratorio();
         }
 
         public void PreencherIdentificacaoAbaInstituicao()
@@ -407,6 +408,40 @@ namespace Lampp.CAPDA.Teste.Automatizado.Credenciamento.PageObjects
         }
 
         #endregion
+
+        #region Laboratorio
+
+        public By abaLaboratorio = By.LinkText("6.Laboratório");
+        public By comboTipoLaboratorio = By.Name("tipo");
+        public By campoResponsavelLaboratorio = By.Id("responsavel");
+        public By comboLocalLaboratorio = By.XPath("(//select[@name='tipo'])[2]");
+        public By campoObjetivoLaboratorio = By.Id("objetivo");
+        public By campoAtividadesLaboratorio = By.Id("atividadeDesenvolvida");
+        public By campoAreaFisicaLaboratorio = By.Id("areaFisica");
+        public By campoRelacaoEquipamentosLaboratorio = By.Id("relacao");
+        public By anexarArquivoLaboratorio = By.Id("arquivo");
+
+        public void PreencherLaboratorio()
+        {
+            AguardarProcessando();
+            ClicarElementoPagina(abaLaboratorio);
+            AguardarProcessando();
+            ClicarElementoPagina(botaoNovo);
+            AguardarProcessando();
+            SelecionarItemCombo(comboTipoLaboratorio, "Montado");
+            PreencherCampo(campoResponsavelLaboratorio, geradorNome.GerarNome());
+            SelecionarItemCombo(comboLocalLaboratorio, "Instituição");
+            PreencherCampo(campoObjetivoLaboratorio, "Teste Teste");
+            PreencherCampo(campoAtividadesLaboratorio, "Teste Teste");
+            PreencherCampo(campoAreaFisicaLaboratorio, "Teste Teste");
+            PreencherCampo(campoRelacaoEquipamentosLaboratorio, "Teste Teste");            
+            ClicarElementoPagina(botaoSalvar);
+            AguardarProcessando();
+            ClicarElementoPagina(botaoFechar);
+        }
+
+        #endregion
+
 
     }
 }
