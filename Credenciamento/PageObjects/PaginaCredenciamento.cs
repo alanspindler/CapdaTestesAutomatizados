@@ -90,6 +90,7 @@ namespace Lampp.CAPDA.Teste.Automatizado.Credenciamento.PageObjects
             PreencherAreaAtuacao();
             PreencherPesquisador();
             PreencherLaboratorio();
+            PreencherDocumentacao();
         }
 
         public void PreencherIdentificacaoAbaInstituicao()
@@ -446,6 +447,29 @@ namespace Lampp.CAPDA.Teste.Automatizado.Credenciamento.PageObjects
 
         #endregion
 
+        #region Documentação
 
+        public By abaDocumentacao = By.LinkText("7.Documentação");        
+        public By comboTipoDcoumento = By.Name("tipo");
+        public By campoDiscriminacao = By.Id("discriminacao");
+        public By anexarArquivoDocumentacao = By.Id("arquivo");
+
+        public void PreencherDocumentacao()
+        {
+            AguardarProcessando();
+            ClicarElementoPagina(abaDocumentacao);
+            AguardarProcessando();
+            ClicarElementoPagina(botaoNovo);
+            AguardarProcessando();
+            SelecionarItemCombo(comboTipoDcoumento, "Outros");
+            PreencherCampo(campoDiscriminacao, "Teste");
+            PreencherCampo(anexarArquivoDocumentacao, Constantes.CaminhoPDF);
+            AguardarProcessando();
+            ClicarElementoPagina(botaoSalvar);
+            AguardarProcessando();
+            ClicarElementoPagina(botaoFechar);
+        } 
+
+        #endregion
     }
 }
