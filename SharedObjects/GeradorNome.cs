@@ -2,6 +2,7 @@
 
 namespace Lampp.CAPDA.Teste.Automatizado.SharedObjects
 {
+    //Gerador de nomes random para cadastros
     public class GeradorNome
     {
         public string GerarNome()

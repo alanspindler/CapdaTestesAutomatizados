@@ -1,6 +1,5 @@
 ﻿using OpenQA.Selenium;
 using OpenQA.Selenium.Remote;
-using Lampp.CAPDA.Teste.Automatizado.Cadastros.Tests;
 using Lampp.CAPDA.Teste.Automatizado.Principal.PageObjects;
 using Lampp.CAPDA.Teste.Automatizado.SharedObjects;
 using System.IO;
@@ -26,7 +25,6 @@ namespace Lampp.CAPDA.Teste.Automatizado.Login.PageObjects
 
         private By btnEntrar = By.ClassName("btn-success");        
         private By btnSair = By.ClassName("i-logout");
-        private By m_btnCriarConta = By.Id("conta");         
 
         #endregion
 
@@ -61,15 +59,6 @@ namespace Lampp.CAPDA.Teste.Automatizado.Login.PageObjects
         }
 
         /// <summary>
-        /// retorna a página de criar conta
-        /// </summary>
-        /// <remarks>Escrita por Alan Spindler em 27/10/2015</remarks>
-        public void ClicarBotaoCriarConta()
-        {
-            ClicarElementoPagina(m_btnCriarConta);
-        }
-
-        /// <summary>
         /// Abre a página de Login
         /// </summary>
         /// <remarks>Escrita por Alan Spindler em 23/11/2015</remarks>
@@ -98,20 +87,6 @@ namespace Lampp.CAPDA.Teste.Automatizado.Login.PageObjects
             AguardarElemento(btnSair);
         }
 
-        /// <summary>
-        /// Faz login com dados de arquivo .ini na pasta do sistema, com parâmetro indicando se a página aberta é a página inicial
-        /// </summary>
-        /// <remarks>Escrita por Alan Spindler em 23/11/2015</remarks>
-        public void FazerLogin()
-        {
-            AguardarElemento(btnEntrar);
-
-            string usuario, senha;
-
-            carregarDadosLoginArquivoTexto(out usuario, out senha);
-
-            FazerLogin(usuario, senha);
-        }
         #endregion
     }
 }

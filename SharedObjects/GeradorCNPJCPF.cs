@@ -6,7 +6,7 @@ namespace Lampp.CAPDA.Teste.Automatizado.SharedObjects
 {
     public class GeradorCNPJCPF
     {
-        Int64 soma1, soma2, i, erro, cnpj, cpf, parte1, parte2, parte3, dig1, parte5, parte6, parte7, dig2;
+        Int64 soma1, soma2, i, erro, cpf, parte1, parte2, parte3, dig1, parte5, parte6, parte7, dig2;
         Int64[] numero = new Int64[13];
         Random rand = new Random();
 

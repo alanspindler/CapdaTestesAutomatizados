@@ -12,19 +12,15 @@ namespace Lampp.CAPDA.Teste.Automatizado.Principal.PageObjects
     /// <remarks>Escrita por Alan Spindler em 26/11/2015</remarks>
     public class PaginaPrincipal : PaginaBase
     {
-        #region Declaração de variáveis privadas da classe
-
-        private By m_nomePresente = By.CssSelector("#info-usuario-dados p");
+        #region Declaração de variáveis privadas da classe        
 
         #endregion
 
         #region Declaração de variáveis públicas da classe        
 
-        public By MenuCadastros = By.LinkText("Cadastros");
+
         public By MenuCredenciamento = By.LinkText("Credenciamento");
         public By MenuAcompanharCredenciamento = By.LinkText("Acompanhar Credenciamento");
-
-        public By MenuRelatorios = By.LinkText("Relatórios");        
         #endregion
 
         #region Métodos públicos
@@ -36,16 +32,6 @@ namespace Lampp.CAPDA.Teste.Automatizado.Principal.PageObjects
         public PaginaPrincipal(RemoteWebDriver driver) : base(driver)
         {
         }
-
-        /// <summary>
-        /// Clica em um item do menu e expandi o submenu
-        /// </summary>
-        /// <remarks>Escrita por Alan Spindler em 30/03/2016</remarks>
-        public void ExpandireAbrirMenuCadastros(bool expandirMenu, By itemSubMenu)
-        {
-            ExpandireAbrirMenu(expandirMenu, MenuCadastros, itemSubMenu);
-        }
-
 
         /// <summary>
         /// Clica em um item do menu e expandi o submenu
@@ -83,16 +69,6 @@ namespace Lampp.CAPDA.Teste.Automatizado.Principal.PageObjects
             ClicarElementoPagina(itemSubMenu);
         }
 
-
-        /// <summary>
-        /// Valida o texto da tabela de status
-        /// </summary>
-        /// <remarks>Escrita por Alan Spindler em 05/12/2016</remarks>
-        public void ValidarTabelaStatus(string texto, int linha, int coluna)
-        {
-            ValidarTexto(texto, ObterCelula(linha, coluna));
-        }
-
         /// <summary>
         /// Clicar no item do submenu
         /// </summary>
@@ -102,8 +78,6 @@ namespace Lampp.CAPDA.Teste.Automatizado.Principal.PageObjects
             AguardarProcessando();
             driver.FindElement(itemSubMenu).Click();                        
         }
-
-
 
         #endregion
     }
