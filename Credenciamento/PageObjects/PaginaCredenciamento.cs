@@ -286,27 +286,33 @@ namespace Lampp.CAPDA.Teste.Automatizado.Credenciamento.PageObjects
 
             randomNumber = random.Next(1, 10);
             numero = randomNumber.ToString();
-            PreencherCampo(campoPesquisaDesenvolvimentoAnoAnterior, numero);
+            PreencherCampoSemLimpar(campoPesquisaDesenvolvimentoAnoAnterior, numero);
+            Thread.Sleep(300);
 
             randomNumber = random.Next(1, 10);
             numero = randomNumber.ToString();
-            PreencherCampo(campoPesquisaDesenvolvimentoAnoAtual, numero);
+            PreencherCampoSemLimpar(campoPesquisaDesenvolvimentoAnoAtual, numero);
+            Thread.Sleep(300);
 
             randomNumber = random.Next(1, 10);
             numero = randomNumber.ToString();
-            PreencherCampo(campoPesquisaDesenvolvimentoAnoSeguinte, numero);
+            PreencherCampoSemLimpar(campoPesquisaDesenvolvimentoAnoSeguinte, numero);
+            Thread.Sleep(300);
 
             randomNumber = random.Next(1, 10);
             numero = randomNumber.ToString();
-            PreencherCampo(campoOutrasAtividadesAnoAnterior, numero);
+            PreencherCampoSemLimpar(campoOutrasAtividadesAnoAnterior, numero);
+            Thread.Sleep(300);
 
             randomNumber = random.Next(1, 10);
             numero = randomNumber.ToString();
-            PreencherCampo(campoOutrasAtividadesAnoAtual, numero);
+            PreencherCampoSemLimpar(campoOutrasAtividadesAnoAtual, numero);
+            Thread.Sleep(300);
 
             randomNumber = random.Next(1, 10);
             numero = randomNumber.ToString();
-            PreencherCampo(campoOutrasAtividadesAnoSeguinte, numero);
+            PreencherCampoSemLimpar(campoOutrasAtividadesAnoSeguinte, numero);
+            Thread.Sleep(300);
 
             AguardarProcessando();
             ClicarElementoPagina(botaoSalvarOrcamentoFaturamento);
@@ -459,7 +465,7 @@ namespace Lampp.CAPDA.Teste.Automatizado.Credenciamento.PageObjects
             PreencherCampo(anexarArquivoPesquisador, Constantes.CaminhoPDF);
             AguardarProcessando();
             ClicarElementoPagina(botaoSalvar);
-            AguardarProcessando();
+            AguardarProcessando();            
             ClicarElementoPagina(botaoFechar);
         }
 

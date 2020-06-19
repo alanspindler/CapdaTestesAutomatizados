@@ -34,8 +34,6 @@ namespace Lampp.CAPDA.Teste.Automatizado.SharedObjects
         public By LinhasTabela = By.XPath("//tr");
         public By Relatorio = By.Id("plugin");
 
-
-
         public enum TipoDadoElemento
         {
             Id = 0,
@@ -51,9 +49,8 @@ namespace Lampp.CAPDA.Teste.Automatizado.SharedObjects
 
         #region Declaração de variáveis privadas da classe --------------------------------------------------------------------------
         private readonly By m_botaoLogout = By.Id("logout");
-        private By botaoCalendarioAberto = By.CssSelector("i.fa.fa-calendar-o");
-        //public static string WeHighlightedColour = "arguments[0].style.border='5px solid green'";
-        public static string WeHighlightedColour = "arguments[0].style.border='5px solid green'";
+        private By botaoCalendarioAberto = By.CssSelector("i.fa.fa-calendar-o");        
+        public static string WeHighlightedColour = "arguments[0].style.border='5px solid red'";
 
         #endregion
 
@@ -403,6 +400,16 @@ namespace Lampp.CAPDA.Teste.Automatizado.SharedObjects
             }
 
             return true;
+        }
+
+        /// <summary>
+        /// Preenche campo texto. Caso esteja vazio, apaga o conteúdo atual.
+        /// </summary>
+        /// <remarks>Escrita por Alan Spindler em 23/11/2015</remarks>
+        public void PreencherCampoSemLimpar(By elemento, string TextoCampo)
+        {
+            DestacarElemento(driver, elemento);                
+            InserirTexto(elemento, TextoCampo);
         }
 
         /// <summary>

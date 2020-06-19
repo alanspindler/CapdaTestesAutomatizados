@@ -18,9 +18,11 @@ namespace Lampp.CAPDA.Teste.Automatizado.Principal.PageObjects
 
         #region Declaração de variáveis públicas da classe        
 
+        public By MenuCredenciamentoLocal = By.LinkText("CAPDA");
+        public By MenuAcompanharCredenciamentoLocal = By.XPath("//ul[@id='2']/li/a/span");
 
-        public By MenuCredenciamento = By.LinkText("Credenciamento");
-        public By MenuAcompanharCredenciamento = By.LinkText("Acompanhar Credenciamento");
+        public By MenuCredenciamentoServidorDes = By.XPath("//aside[@id='nav']/section/section/app-menu/div/nav/div[4]/li/a");
+        public By MenuAcompanharCredenciamentoServidorDes = By.XPath("//ul[@id='760']/li/a/span");
         #endregion
 
         #region Métodos públicos
@@ -37,10 +39,17 @@ namespace Lampp.CAPDA.Teste.Automatizado.Principal.PageObjects
         /// Clica em um item do menu e expandi o submenu
         /// </summary>
         /// <remarks>Escrita por Alan Spindler em 30/03/2016</remarks>
-        public void ExpandireAbrirMenuCredenciamento(bool expandirMenu, By itemSubMenu)
+        public void ExpandireAbrirMenuCredenciamento(bool expandirMenu)
         {
-            ExpandireAbrirMenu(expandirMenu, MenuCredenciamento, itemSubMenu);
-        }
+            if (Constantes.TesteSistemalocal)
+            {
+                ExpandireAbrirMenu(expandirMenu, MenuCredenciamentoLocal, MenuAcompanharCredenciamentoLocal);
+            }
+            else
+            {
+                ExpandireAbrirMenu(expandirMenu, MenuCredenciamentoServidorDes, MenuAcompanharCredenciamentoServidorDes);
+            }
+        }       
 
         /// <summary>
         /// Clica em um item do menu e expandi o submenu

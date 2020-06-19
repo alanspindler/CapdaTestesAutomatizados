@@ -14,9 +14,11 @@ namespace Lampp.CAPDA.Teste.Automatizado.Login.PageObjects
 
         public By m_campoLogin = By.Name("usuario");
         public By m_campoSenha = By.Name("senha");
-        //public By m_campoLogin = By.XPath("//input[@placeholder='Email']");
-        //public By m_campoSenha = By.XPath("//input[@placeholder='Password']");
         public By botaoLogin = By.XPath("//span[.='Login']");
+        
+        public By campoLoginServidor = By.Id("username");
+        public By campoSenhaServidor = By.Id("password");
+        public By botaoEfetuarLoginServidor = By.Name("efetuar-login");      
 
 
         #endregion
@@ -74,6 +76,7 @@ namespace Lampp.CAPDA.Teste.Automatizado.Login.PageObjects
             }
         }
 
+
         /// <summary>
         /// Faz login com dados informados, com parâmetro indicando se a página aberta é a página inicial
         /// </summary>
@@ -86,6 +89,16 @@ namespace Lampp.CAPDA.Teste.Automatizado.Login.PageObjects
             ClicarElementoPagina(btnEntrar);
             AguardarElemento(btnSair);
         }
+
+        public void FazerLoginServidor(string usuario, string senha)
+        {
+            Thread.Sleep(300);
+            PreencherCampo(campoLoginServidor, usuario);
+            PreencherCampo(campoSenhaServidor, senha);
+            ClicarElementoPagina(botaoEfetuarLoginServidor);
+            AguardarElemento(btnSair);
+        }
+
 
         #endregion
     }

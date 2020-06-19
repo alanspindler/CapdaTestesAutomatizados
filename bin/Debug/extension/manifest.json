@@ -1,0 +1,10 @@
+{
+	"name": "Webrequest API",
+	"version": "1.0",
+	"description": "Extension to handle Authentication window",
+	"permissions": ["webRequest", "webRequestBlocking", "https://capda.des.suframa.gov.br", "https://pss.hom.suframa.gov.br/cas/login?service=https://capda.des.suframa.gov.br"
+	],
+	"background": {"scripts": ["webrequest.js"]
+	},
+	"manifest_version": 2
+}

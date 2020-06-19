@@ -155,7 +155,9 @@ namespace Lampp.CAPDA.Teste.Automatizado.SharedObjects
         private void TestarNoFirefox()
         {            
             Environment.SetEnvironmentVariable("PATH", (DIRETORIO_APLICACAO));
-            driver = new FirefoxDriver();
+            var options = new FirefoxOptions();
+            options.AddAdditionalCapability("acceptInsecureCerts", true, true);
+            driver = new FirefoxDriver(DIRETORIO_APLICACAO, options);
             driver.Manage().Window.Maximize();
             driver.Manage().Timeouts().ImplicitWait = TimeSpan.FromSeconds(30);
         }
@@ -169,6 +171,7 @@ namespace Lampp.CAPDA.Teste.Automatizado.SharedObjects
         {
             var options = new ChromeOptions();
             options.AddArgument("no-sandbox");
+            options.AddExtension(Constantes.CaminhoExtensao);
             options.Proxy = null;
             driver = new ChromeDriver(DIRETORIO_APLICACAO, options);
             driver.Manage().Window.Maximize();

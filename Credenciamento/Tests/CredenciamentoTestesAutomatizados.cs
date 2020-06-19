@@ -16,14 +16,16 @@ namespace Lampp.CAPDA.Teste.Automatizado.Credenciamento.Tests
         public PaginaBase paginaBase { get; set; }
         public PaginaInicial paginaInicial { get; set; }
         public PaginaPrincipal paginaPrincipal { get; set; }
-        public PaginaInscricao paginaInscricao { get; set; }        
+        public PaginaInscricao paginaInscricao { get; set; }
 
         public PaginaCredenciamento paginaCredenciamento { get; set; }
 
         private string urlPaginaInscricao = "http://localhost:4200/#/inscricao";
         private string urlPaginaLogin = "http://localhost:4200/";
+        
+        private string urlPaginaLoginServidorDes = "http://1:1@capda.des.suframa.gov.br/";        
+        private string urlPaginaInscricaoServidorDes = "https://capda.des.suframa.gov.br/#/inscricao";
         public string CNPJ;
-
 
         [TestMethod]
         public void FazerCredenciamento()
@@ -36,12 +38,28 @@ namespace Lampp.CAPDA.Teste.Automatizado.Credenciamento.Tests
             paginaInicial = new PaginaInicial(selenium.driver);
             paginaPrincipal = new PaginaPrincipal(selenium.driver);
             paginaCredenciamento = new PaginaCredenciamento(selenium.driver);
-            paginaInicial.AbrirPagina(urlPaginaInscricao);
+            if (Constantes.TesteSistemalocal)
+            {
+                paginaInicial.AbrirPagina(urlPaginaInscricao);
+            }
+            else
+            {
+                paginaInicial.AbrirPagina(urlPaginaInscricaoServidorDes);
+            }
             //Faz Login
             CNPJ = paginaInscricao.InscreverEmpresa();
-            paginaInicial.AbrirPagina(urlPaginaLogin);
-            paginaInicial.FazerLogin(CNPJ, "123456");
-            paginaPrincipal.ExpandireAbrirMenuCredenciamento(true, paginaPrincipal.MenuAcompanharCredenciamento);
+            if (Constantes.TesteSistemalocal)
+            {
+                paginaInicial.AbrirPagina(urlPaginaLogin);               
+                paginaInicial.FazerLogin(CNPJ, "123456");
+            }
+            else
+            {
+                paginaInicial.AbrirPagina(urlPaginaLoginServidorDes);
+                paginaInicial.FazerLoginServidor(CNPJ, "123456");
+            }
+          
+            paginaPrincipal.ExpandireAbrirMenuCredenciamento(true);
             paginaCredenciamento.SolicitarCredenciamento();
             paginaCredenciamento.PreencherCredenciamento();                
             ////// Fecha o navegador            
