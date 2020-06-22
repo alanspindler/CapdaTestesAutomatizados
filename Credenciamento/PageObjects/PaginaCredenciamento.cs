@@ -317,6 +317,7 @@ namespace Lampp.CAPDA.Teste.Automatizado.Credenciamento.PageObjects
             AguardarProcessando();
             ClicarElementoPagina(botaoSalvarOrcamentoFaturamento);
             AguardarProcessando();
+            AguardarProcessando();
             ClicarElementoPagina(botaoFechar);
         }
 

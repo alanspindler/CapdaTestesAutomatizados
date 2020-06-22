@@ -63,7 +63,7 @@ namespace Lampp.CAPDA.Teste.Automatizado.Credenciamento.Tests
             paginaCredenciamento.SolicitarCredenciamento();
             paginaCredenciamento.PreencherCredenciamento();                
             ////// Fecha o navegador            
-            //selenium.EncerrarTeste();            
+            selenium.EncerrarTeste();            
         }
 
         
