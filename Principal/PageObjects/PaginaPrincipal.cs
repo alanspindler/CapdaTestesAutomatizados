@@ -1,6 +1,5 @@
 ﻿using OpenQA.Selenium;
 using OpenQA.Selenium.Remote;
-using Lampp.CAPDA.Teste.Automatizado.Cadastros.PageObjects;
 using Lampp.CAPDA.Teste.Automatizado.SharedObjects;
 
 

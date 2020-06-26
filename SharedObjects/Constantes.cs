@@ -1,10 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace Lampp.CAPDA.Teste.Automatizado.SharedObjects
+﻿namespace Lampp.CAPDA.Teste.Automatizado.SharedObjects
 {
    public static class Constantes
     {

@@ -3,10 +3,8 @@ using Lampp.CAPDA.Teste.Automatizado.SharedObjects;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using OpenQA.Selenium.Remote;
 using System.Threading;
-using System.Security.Cryptography;
 using System;
-using System.Security.Policy;
-using System.Windows.Forms;
+
 
 namespace Lampp.CAPDA.Teste.Automatizado.Credenciamento.PageObjects
 {

@@ -4,8 +4,6 @@ using Lampp.CAPDA.Teste.Automatizado.SharedObjects;
 using Lampp.CAPDA.Teste.Automatizado.Login.PageObjects;
 using Lampp.CAPDA.Teste.Automatizado.Principal.PageObjects;
 using Lampp.CAPDA.Teste.Automatizado.Credenciamento.PageObjects;
-using System.Threading;
-
 
 namespace Lampp.CAPDA.Teste.Automatizado.Credenciamento.Tests
 {

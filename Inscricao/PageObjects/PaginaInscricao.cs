@@ -2,9 +2,6 @@
 using Lampp.CAPDA.Teste.Automatizado.SharedObjects;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using OpenQA.Selenium.Remote;
-using System.Threading;
-using System.Security.Cryptography;
-using System;
 
 namespace Lampp.CAPDA.Teste.Automatizado.Cadastros.PageObjects
 {
