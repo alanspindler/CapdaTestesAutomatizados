@@ -28,6 +28,8 @@ namespace Lampp.CAPDA.Teste.Automatizado.Credenciamento.Tests
         [TestMethod]
         public void FazerCredenciamento()
         {
+            for (int i = 1; i <= Constantes.QuantidadeCredenciamentos; i++)
+            {
             //Inicializa instância do driver do Selenium
             var selenium = Global.obterInstancia();
             paginaInscricao = new PaginaInscricao(selenium.driver);
@@ -36,32 +38,36 @@ namespace Lampp.CAPDA.Teste.Automatizado.Credenciamento.Tests
             paginaInicial = new PaginaInicial(selenium.driver);
             paginaPrincipal = new PaginaPrincipal(selenium.driver);
             paginaCredenciamento = new PaginaCredenciamento(selenium.driver);
-            if (Constantes.TesteSistemalocal)
-            {
-                paginaInicial.AbrirPagina(urlPaginaInscricao);
-            }
-            else
-            {
-                paginaInicial.AbrirPagina(urlPaginaInscricaoServidorDes);
-            }
-            //Faz Login
-            CNPJ = paginaInscricao.InscreverEmpresa();
-            if (Constantes.TesteSistemalocal)
-            {
-                paginaInicial.AbrirPagina(urlPaginaLogin);               
-                paginaInicial.FazerLogin(CNPJ, "123456");
-            }
-            else
-            {
-                paginaInicial.AbrirPagina(urlPaginaLoginServidorDes);
-                paginaInicial.FazerLoginServidor(CNPJ, "123456");
-            }
           
-            paginaPrincipal.ExpandireAbrirMenuCredenciamento(true);
-            paginaCredenciamento.SolicitarCredenciamento();
-            paginaCredenciamento.PreencherCredenciamento();                
-            ////// Fecha o navegador            
-            selenium.EncerrarTeste();            
+                if (Constantes.TesteSistemalocal)
+                {
+                    paginaInicial.AbrirPagina(urlPaginaInscricao);
+                }
+                else
+                {
+                    paginaInicial.AbrirPagina(urlPaginaInscricaoServidorDes);
+                }
+                //Faz Login
+                CNPJ = paginaInscricao.InscreverEmpresa();
+                if (Constantes.TesteSistemalocal)
+                {
+                    paginaInicial.AbrirPagina(urlPaginaLogin);
+                    paginaInicial.FazerLogin(CNPJ, "123456");
+                }
+                else
+                {
+                    paginaInicial.AbrirPagina(urlPaginaLoginServidorDes);
+                    paginaInicial.FazerLoginServidor(CNPJ, "123456");
+                }
+
+                paginaPrincipal.ExpandireAbrirMenuCredenciamento(true);
+                paginaCredenciamento.SolicitarCredenciamento();
+                paginaCredenciamento.PreencherCredenciamento();
+                ////// Fecha o navegador
+                //System.Console.WriteLine(CNPJ);
+                selenium.EncerrarTeste();
+            }
+            
         }
 
         

@@ -47,7 +47,8 @@ namespace Lampp.CAPDA.Teste.Automatizado.Credenciamento.PageObjects
 
         public By botaoSalvar = By.ClassName("fa-save");
         public By botaoNovo = By.ClassName("fa-plus-square");
-        public By botaoFechar = By.CssSelector("div.modal-footer > button.btn.btn-default.btn-sm");
+        //public By botaoFechar = By.ClassName("fa-times");
+        public By botaoFechar = By.XPath("/html/body/app-root/dialog-holder/dialog-wrapper/div/app-modal/div[1]/div/div[3]/button");        
         public By botaoFecharMensagemConfirmacao = By.XPath("(//button[@type='button'])[5]");
         public By botaoFecharMensagemConfirmacaoNenhumRegistroEncontrado = By.XPath("//dialog-wrapper[2]/div/app-modal/div/div/div[3]/button");
         public By mensagemRetorno = By.CssSelector("p");
@@ -96,7 +97,7 @@ namespace Lampp.CAPDA.Teste.Automatizado.Credenciamento.PageObjects
         {
             PreencherIdentificacaoAbaInstituicao();
             PreencherIdentificacaoAbaUnidadeAcademica();
-            PreencherIdentificacaoAbaMantenedor();
+            //PreencherIdentificacaoAbaMantenedor();
             PreencherIdentificacaoAbaRepresentacao();
             PreencherRegularizacao();
             PreencherOrcamentoFaturamento();
@@ -122,6 +123,8 @@ namespace Lampp.CAPDA.Teste.Automatizado.Credenciamento.PageObjects
             ClicarElementoPagina(optionPrivado);
             ClicarElementoPagina(botaoSalvar);
             AguardarProcessando();
+            AguardarProcessando();
+            //Thread.Sleep(2000);
             ClicarElementoPagina(botaoFechar);
         }
 
@@ -163,7 +166,9 @@ namespace Lampp.CAPDA.Teste.Automatizado.Credenciamento.PageObjects
             PreencherCampo(campoBairroMantenedor, "Centro");
             PreencherCampo(campoCidadeMantenedor, "Manaus");
             SelecionarItemCombo(comboUfMantenedor, "AM");
-            ClicarElementoPagina(botaoSalvarMantenedor);            
+            AguardarProcessando();
+            ClicarElementoPagina(botaoSalvar);
+            //ClicarElementoPagina(botaoSalvarMantenedor);            
             AguardarProcessando();
             bool validouRetorno = VerificarMensagemRetorno(mensagemRetorno);
             while (!validouRetorno)
@@ -173,10 +178,12 @@ namespace Lampp.CAPDA.Teste.Automatizado.Credenciamento.PageObjects
                 a = geradorCNPJCPF.cnpj(true);
                 PreencherCampo(campoCnpjMantenedor, a);
                 AguardarProcessando();
-                ClicarElementoPagina(botaoSalvarMantenedor);
+                //ClicarElementoPagina(botaoSalvarMantenedor);
+                ClicarElementoPagina(botaoSalvar);
                 AguardarProcessando();
                 validouRetorno = VerificarMensagemRetorno(mensagemRetorno);
             }
+            AguardarProcessando();
             ClicarElementoPagina(botaoFechar);            
         }
 
@@ -249,7 +256,8 @@ namespace Lampp.CAPDA.Teste.Automatizado.Credenciamento.PageObjects
             ClicarElementoPagina(botaoFechar);
             AguardarProcessando();
             PreencherCampo(textAreaRegularizacao, "Teste Teste Teste Teste");
-            ClicarElementoPagina(botaoSalvarRegularizacao);
+            //ClicarElementoPagina(botaoSalvarRegularizacao);
+            ClicarElementoPagina(botaoSalvar);
             AguardarProcessando();
             ClicarElementoPagina(botaoFechar);
         }
@@ -313,7 +321,8 @@ namespace Lampp.CAPDA.Teste.Automatizado.Credenciamento.PageObjects
             Thread.Sleep(300);
 
             AguardarProcessando();
-            ClicarElementoPagina(botaoSalvarOrcamentoFaturamento);
+            //ClicarElementoPagina(botaoSalvarOrcamentoFaturamento);
+            ClicarElementoPagina(botaoSalvar);
             AguardarProcessando();
             AguardarProcessando();
             ClicarElementoPagina(botaoFechar);
@@ -391,7 +400,8 @@ namespace Lampp.CAPDA.Teste.Automatizado.Credenciamento.PageObjects
             numero = randomNumber.ToString();
             PreencherCampo(campoContratadorOutrosOutros, numero);
 
-            ClicarElementoPagina(botaoSalvarForcaTrabalho);
+            //ClicarElementoPagina(botaoSalvarForcaTrabalho);
+            ClicarElementoPagina(botaoSalvar);
 
             AguardarProcessando();
             Thread.Sleep(1000);
@@ -428,7 +438,8 @@ namespace Lampp.CAPDA.Teste.Automatizado.Credenciamento.PageObjects
             AguardarProcessando();
             SelecionarItemCombo(comboAreaAtuacao, "Estruturas");
             AguardarProcessando();
-            ClicarElementoPagina(botaoSalvarAreaAtuacao);
+            //ClicarElementoPagina(botaoSalvarAreaAtuacao);
+            ClicarElementoPagina(botaoSalvar);
             AguardarProcessando();
             ClicarElementoPagina(botaoFechar);
         }
@@ -1107,12 +1118,13 @@ namespace Lampp.CAPDA.Teste.Automatizado.Credenciamento.PageObjects
             ClicarElementoPagina(botaoFechar);
             AguardarProcessando();
             ClicarElementoPagina(botaoNovoProjetoPD);
+            AguardarProcessando();
             SelecionarItemCombo(comboTipoProjeto, "Projeto");
             PreencherCampo(campoTituloProjeto, "Teste Teste");
             PreencherCampo(campoDescricaoProjeto, "Teste Teste Teste");
             PreencherCampo(campoEquipeCoordenadorProjeto, "Teste Teste Teste");
             PreencherCampo(campoValorProjeto, "Teste Teste Teste");
-            ClicarElementoPagina(checkboxPesquisa);
+            //ClicarElementoPagina(checkboxPesquisa);
             PreencherCampo(campoRelacaoEquipamentos, "Teste Teste Teste");
             ClicarElementoPagina(botaoSalvar);
             AguardarProcessando();

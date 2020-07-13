@@ -66,8 +66,8 @@ namespace Lampp.CAPDA.Teste.Automatizado.SharedObjects
         private Global()
         {
             //encerrarOutrasInstanciasDriver();
-            TestarNoChrome();            
-            //TestarNoFirefox();
+            //TestarNoChrome();            
+            TestarNoFirefox();
             //AguardarTeste();
         }
 
@@ -175,6 +175,7 @@ namespace Lampp.CAPDA.Teste.Automatizado.SharedObjects
             driver = new ChromeDriver(DIRETORIO_APLICACAO, options);
             driver.Manage().Window.Maximize();
             driver.Manage().Timeouts().ImplicitWait = TimeSpan.FromSeconds(30);
+            //DiminuirZoomParaResolucoesPequenas();
             //driver.Manage().Timeouts().ImplicitWait(TimeSpan.FromSeconds(50));
         }
 
@@ -202,6 +203,10 @@ namespace Lampp.CAPDA.Teste.Automatizado.SharedObjects
             driver.Manage().Window.Maximize();
         }
 
+
+
+
         #endregion
     }
+
 }

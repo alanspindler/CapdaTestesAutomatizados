@@ -185,6 +185,19 @@ namespace Lampp.CAPDA.Teste.Automatizado.SharedObjects
             js.ExecuteScript("document.body.style.zoom='90%'");
         }
 
+        public void DiminuirZoomParaResolucoesPequenas()
+        {
+            var ScreenWidth = System.Windows.Forms.Screen.PrimaryScreen.Bounds.Width;
+            var ScreenHeight = System.Windows.Forms.Screen.PrimaryScreen.Bounds.Height;
+            if (ScreenHeight < 900)
+            {
+                IJavaScriptExecutor js = (IJavaScriptExecutor)driver;
+                //js.ExecuteScript("document.body.style.zoom='90%'");                
+                js.ExecuteScript("document.body.style.zoom = '0.8'");
+
+            }
+        }
+
 
         //// Aguarda carregar a página totalmente
         public void AguardarCarregarPagina()

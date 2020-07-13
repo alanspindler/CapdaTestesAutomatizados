@@ -92,9 +92,10 @@ namespace Lampp.CAPDA.Teste.Automatizado.Login.PageObjects
 
         public void FazerLoginServidor(string usuario, string senha)
         {
-            Thread.Sleep(300);
+            Thread.Sleep(300);            
             PreencherCampo(campoLoginServidor, usuario);
-            PreencherCampo(campoSenhaServidor, senha);
+            DiminuirZoomParaResolucoesPequenas();
+            PreencherCampo(campoSenhaServidor, senha);            
             ClicarElementoPagina(botaoEfetuarLoginServidor);
             AguardarElemento(btnSair);
         }

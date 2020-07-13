@@ -17,7 +17,8 @@ namespace Lampp.CAPDA.Teste.Automatizado.Principal.PageObjects
 
         #region Declaração de variáveis públicas da classe        
 
-        public By MenuCredenciamentoLocal = By.LinkText("CAPDA");
+        //public By MenuCredenciamentoLocal = By.LinkText("CAPDA");
+        public By MenuCredenciamentoLocal = By.XPath("/html/body/app-root/app-layout/section/section/section/aside/section/section/app-menu/div/nav/div[3]/li/a");        
         public By MenuAcompanharCredenciamentoLocal = By.XPath("//ul[@id='2']/li/a/span");
 
         public By MenuCredenciamentoServidorDes = By.XPath("//aside[@id='nav']/section/section/app-menu/div/nav/div[4]/li/a");
