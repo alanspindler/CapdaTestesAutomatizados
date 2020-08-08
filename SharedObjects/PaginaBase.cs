@@ -421,7 +421,8 @@ namespace Lampp.CAPDA.Teste.Automatizado.SharedObjects
         /// <remarks>Escrita por Alan Spindler em 23/11/2015</remarks>
         public void PreencherCampoSemLimpar(By elemento, string TextoCampo)
         {
-            DestacarElemento(driver, elemento);                
+            DestacarElemento(driver, elemento);
+            ClicarElementoPagina(elemento);
             InserirTexto(elemento, TextoCampo);
         }
 
@@ -753,9 +754,9 @@ namespace Lampp.CAPDA.Teste.Automatizado.SharedObjects
         /// Verifica de o elemento é clicável
         /// </summary>
         /// <remarks>Escrita por Alan Spindler em 03/03/2016</remarks>
-        public void ValidarElementoClicavel(By elemento)
+        public bool ValidarElementoClicavel(By elemento)
         {
-            Assert.AreEqual(true, isElementClickable(driver, elemento));
+            return (isElementClickable(driver, elemento));
         }
 
         /// <summary>

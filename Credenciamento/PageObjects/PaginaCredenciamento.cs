@@ -24,7 +24,7 @@ namespace Lampp.CAPDA.Teste.Automatizado.Credenciamento.PageObjects
         public By botaoSolicitarCredenciamento = By.ClassName("fa-plus");
         public By botaoBuscar = By.Id("btnBuscar");
         public By botaoSubemeter = By.ClassName("fa-paper-plane-o");
-        
+
         public void SolicitarCredenciamento()
         {
             ClicarElementoPagina(botaoSolicitarCredenciamento);
@@ -45,15 +45,16 @@ namespace Lampp.CAPDA.Teste.Automatizado.Credenciamento.PageObjects
 
         #region Geral
 
-        public By botaoSalvar = By.ClassName("fa-save");
+        //public By botaoSalvar = By.ClassName("fa-save");
+        public By botaoSalvar = By.XPath("//button[contains(.,'Salvar')]");
         public By botaoNovo = By.ClassName("fa-plus-square");
         //public By botaoFechar = By.ClassName("fa-times");
-        public By botaoFechar = By.XPath("/html/body/app-root/dialog-holder/dialog-wrapper/div/app-modal/div[1]/div/div[3]/button");        
-        public By botaoFecharMensagemConfirmacao = By.XPath("(//button[@type='button'])[5]");
-        public By botaoFecharMensagemConfirmacaoNenhumRegistroEncontrado = By.XPath("//dialog-wrapper[2]/div/app-modal/div/div/div[3]/button");
+        public By botaoFechar = By.XPath("/html/body/app-root/dialog-holder/dialog-wrapper/div/app-modal/div[1]/div/div[3]/button");
+        //public By botaoFecharMensagemConfirmacao = By.XPath("(//button[@type='button'])[5]");
+        public By botaoFecharMensagemConfirmacaoNenhumRegistroEncontrado = By.CssSelector("body>app-root:nth-child(1)>dialog-holder:nth-child(4)>dialog-wrapper:nth-child(2)>div:nth-child(1)>app-modal:nth-child(1)>div:nth-child(1)>div:nth-child(1)>div:nth-child(3)>button:nth-child(1)");
         public By mensagemRetorno = By.CssSelector("p");
         private By botaoVoltar = By.ClassName("fa-long-arrow-left");
-        
+
         //public By botaoFechar = By.ClassName("btn-default");
 
         //div[3]/button
@@ -97,7 +98,7 @@ namespace Lampp.CAPDA.Teste.Automatizado.Credenciamento.PageObjects
         {
             PreencherIdentificacaoAbaInstituicao();
             PreencherIdentificacaoAbaUnidadeAcademica();
-            //PreencherIdentificacaoAbaMantenedor();
+            PreencherIdentificacaoAbaMantenedor();
             PreencherIdentificacaoAbaRepresentacao();
             PreencherRegularizacao();
             PreencherOrcamentoFaturamento();
@@ -118,7 +119,7 @@ namespace Lampp.CAPDA.Teste.Automatizado.Credenciamento.PageObjects
         }
 
         public void PreencherIdentificacaoAbaInstituicao()
-        {            
+        {
             AguardarProcessando();
             ClicarElementoPagina(optionPrivado);
             ClicarElementoPagina(botaoSalvar);
@@ -167,6 +168,7 @@ namespace Lampp.CAPDA.Teste.Automatizado.Credenciamento.PageObjects
             PreencherCampo(campoCidadeMantenedor, "Manaus");
             SelecionarItemCombo(comboUfMantenedor, "AM");
             AguardarProcessando();
+            driver.SwitchTo().ActiveElement();
             ClicarElementoPagina(botaoSalvar);
             //ClicarElementoPagina(botaoSalvarMantenedor);            
             AguardarProcessando();
@@ -179,12 +181,13 @@ namespace Lampp.CAPDA.Teste.Automatizado.Credenciamento.PageObjects
                 PreencherCampo(campoCnpjMantenedor, a);
                 AguardarProcessando();
                 //ClicarElementoPagina(botaoSalvarMantenedor);
+                //driver.SwitchTo().ActiveElement();
                 ClicarElementoPagina(botaoSalvar);
                 AguardarProcessando();
                 validouRetorno = VerificarMensagemRetorno(mensagemRetorno);
             }
             AguardarProcessando();
-            ClicarElementoPagina(botaoFechar);            
+            ClicarElementoPagina(botaoFechar);
         }
 
         #endregion
@@ -211,8 +214,8 @@ namespace Lampp.CAPDA.Teste.Automatizado.Credenciamento.PageObjects
             ClicarElementoPagina(botaoNovo);
             AguardarProcessando();
             SelecionarItemCombo(comboTipoRepresentacao, "Dirigente da Instituição");
-            string a = geradorCNPJCPF.cpf(true);            
-            PreencherCampo(campoCpfRepresentacao, a);            
+            string a = geradorCNPJCPF.cpf(true);
+            PreencherCampo(campoCpfRepresentacao, a);
             PreencherCampo(campoNomeRepresentacao, geradorNome.GerarNome());
             PreencherCampo(campoTelefoneRepresentacao, "92986150323");
             PreencherCampo(campoFaxRepresentacao, "9236150323");
@@ -220,7 +223,7 @@ namespace Lampp.CAPDA.Teste.Automatizado.Credenciamento.PageObjects
             PreencherCampo(campoCargoRepresentacao, "Teste");
             PreencherCampo(campoIdentidadeRepresentacao, "2363040411");
             PreencherCampo(campoEmissorRepresentacao, "Teste");
-            ClicarElementoPagina(botaoSalvarRepresentacao);            
+            ClicarElementoPagina(botaoSalvarRepresentacao);
             AguardarProcessando();
             bool validouRetorno = VerificarMensagemRetorno(mensagemRetorno);
             while (!validouRetorno)
@@ -250,7 +253,7 @@ namespace Lampp.CAPDA.Teste.Automatizado.Credenciamento.PageObjects
         {
             AguardarProcessando();
             ClicarElementoPagina(abaRegularizacao);
-            AguardarProcessando();            
+            AguardarProcessando();
             PreencherCampo(botaoEscolherArquivoRegularizacao, Constantes.CaminhoPDF);
             AguardarProcessando();
             ClicarElementoPagina(botaoFechar);
@@ -289,6 +292,7 @@ namespace Lampp.CAPDA.Teste.Automatizado.Credenciamento.PageObjects
             AguardarProcessando();
             ClicarElementoPagina(abaOrcamentoFaturamento);
             AguardarProcessando();
+            Thread.Sleep(6000);
 
             randomNumber = random.Next(1, 10);
             numero = randomNumber.ToString();
@@ -318,10 +322,10 @@ namespace Lampp.CAPDA.Teste.Automatizado.Credenciamento.PageObjects
             randomNumber = random.Next(1, 10);
             numero = randomNumber.ToString();
             PreencherCampoSemLimpar(campoOutrasAtividadesAnoSeguinte, numero);
-            Thread.Sleep(300);
-
-            AguardarProcessando();
-            //ClicarElementoPagina(botaoSalvarOrcamentoFaturamento);
+            //InserirTeclaTab(campoContratadosOutrosAtividadePD);
+            Thread.Sleep(300);            
+            
+            ////ClicarElementoPagina(botaoSalvarOrcamentoFaturamento);
             ClicarElementoPagina(botaoSalvar);
             AguardarProcessando();
             AguardarProcessando();
@@ -344,13 +348,14 @@ namespace Lampp.CAPDA.Teste.Automatizado.Credenciamento.PageObjects
         public By campoContratadorOutrosOutros = By.Id("contratados-outros-outras-atividades");
 
         public By botaoSalvarForcaTrabalho = By.XPath("//div[@id='atividade-pd']/app-aba-atividade-pd/div[2]/div[4]/div/div/button");
-     
+
         public void PreencherForcaTrabalho()
         {
             Random random = new Random();
             int randomNumber;
             string numero;
-            AguardarProcessando();            
+            AguardarProcessando();
+            Thread.Sleep(5000);
 
             randomNumber = random.Next(1, 10);
             numero = randomNumber.ToString();
@@ -399,28 +404,29 @@ namespace Lampp.CAPDA.Teste.Automatizado.Credenciamento.PageObjects
             randomNumber = random.Next(1, 10);
             numero = randomNumber.ToString();
             PreencherCampo(campoContratadorOutrosOutros, numero);
-
+            
             //ClicarElementoPagina(botaoSalvarForcaTrabalho);
             ClicarElementoPagina(botaoSalvar);
 
             AguardarProcessando();
             Thread.Sleep(1000);
             //Aparecem 2 mensagens, uma de confirmacao que salvou e outra Nenhum registro encontrado. Tenta clicar nas duas uma por vez.
-            if (IsElementDisplayed(driver, botaoFecharMensagemConfirmacao) || IsElementDisplayed(driver, botaoFecharMensagemConfirmacaoNenhumRegistroEncontrado))
+            if (IsElementDisplayed(driver, botaoFechar) || IsElementDisplayed(driver, botaoFecharMensagemConfirmacaoNenhumRegistroEncontrado))
             {
+                AguardarProcessando();
                 AguardarProcessando();
                 if (IsElementDisplayed(driver, botaoFecharMensagemConfirmacaoNenhumRegistroEncontrado))
                 {
                     ClicarElementoPagina(botaoFecharMensagemConfirmacaoNenhumRegistroEncontrado);
-                    AguardarProcessando();
                 }
+
                 AguardarProcessando();
 
-                if (IsElementDisplayed(driver, botaoFecharMensagemConfirmacao))
+                if (IsElementDisplayed(driver, botaoFechar))
                 {
-                    ClicarElementoPagina(botaoFecharMensagemConfirmacao);
-                    AguardarProcessando();
-                }                
+                    ClicarElementoPagina(botaoFechar);
+                }
+                AguardarProcessando();
             }
         }
 

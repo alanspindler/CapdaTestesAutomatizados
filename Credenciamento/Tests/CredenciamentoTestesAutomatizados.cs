@@ -63,9 +63,9 @@ namespace Lampp.CAPDA.Teste.Automatizado.Credenciamento.Tests
                 paginaPrincipal.ExpandireAbrirMenuCredenciamento(true);
                 paginaCredenciamento.SolicitarCredenciamento();
                 paginaCredenciamento.PreencherCredenciamento();
-                ////// Fecha o navegador
-                //System.Console.WriteLine(CNPJ);
-                selenium.EncerrarTeste();
+                //////// Fecha o navegador
+                ////System.Console.WriteLine(CNPJ);
+                //selenium.EncerrarTeste();
             }
             
         }

@@ -66,8 +66,8 @@ namespace Lampp.CAPDA.Teste.Automatizado.SharedObjects
         private Global()
         {
             //encerrarOutrasInstanciasDriver();
-            //TestarNoChrome();            
-            TestarNoFirefox();
+            TestarNoChrome();            
+            //TestarNoFirefox();
             //AguardarTeste();
         }
 
