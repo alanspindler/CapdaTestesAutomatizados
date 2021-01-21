@@ -5,7 +5,7 @@ using OpenQA.Selenium.Remote;
 
 namespace Lampp.CAPDA.Teste.Automatizado.Cadastros.PageObjects
 {
-    [TestClass]
+    
     public class PaginaInscricao : PaginaBase
     {
 

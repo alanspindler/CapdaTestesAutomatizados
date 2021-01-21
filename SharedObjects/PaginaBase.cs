@@ -388,20 +388,11 @@ namespace Lampp.CAPDA.Teste.Automatizado.SharedObjects
         /// Preenche campo texto. Caso esteja vazio, apaga o conteúdo atual.
         /// </summary>
         /// <remarks>Escrita por Alan Spindler em 23/11/2015</remarks>
-        public bool PreencherCampo(By elemento, string TextoCampo)
+        public void PreencherCampo(By elemento, string TextoCampo)
         {
             DestacarElemento(driver, elemento);
             if (TextoCampo != "")
-            {
-                /*
-                    Aguarda o elemento da página, 
-                    caso não encontre o método retorna false 
-                    com base na exception do AguardarElemento() 
-                 */
-                if (!AguardarElemento(elemento))
-                {
-                    return false;
-                }
+            {                             
                 driver.FindElement(elemento).Clear();
                 InserirTexto(elemento, TextoCampo);
             }
@@ -410,9 +401,7 @@ namespace Lampp.CAPDA.Teste.Automatizado.SharedObjects
                 InserirTexto(elemento, Keys.Control + "a");
                 InserirTexto(elemento, Keys.Delete);
                 InserirTexto(elemento, Keys.Tab);
-            }
-
-            return true;
+            }            
         }
 
         /// <summary>

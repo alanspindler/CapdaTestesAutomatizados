@@ -46,7 +46,7 @@ namespace Lampp.CAPDA.Teste.Automatizado.Credenciamento.PageObjects
         #region Geral
 
         //public By botaoSalvar = By.ClassName("fa-save");
-        public By botaoSalvar = By.XPath("//button[contains(.,'Salvar')]");
+        public By botaoSalvar = By.XPath("//button[contains(.,'Salvar')]");        
         public By botaoNovo = By.ClassName("fa-plus-square");
         //public By botaoFechar = By.ClassName("fa-times");
         public By botaoFechar = By.XPath("/html/body/app-root/dialog-holder/dialog-wrapper/div/app-modal/div[1]/div/div[3]/button");
@@ -169,7 +169,7 @@ namespace Lampp.CAPDA.Teste.Automatizado.Credenciamento.PageObjects
             SelecionarItemCombo(comboUfMantenedor, "AM");
             AguardarProcessando();
             driver.SwitchTo().ActiveElement();
-            ClicarElementoPagina(botaoSalvar);
+            ClicarElementoPagina(botaoSalvarMantenedor);
             //ClicarElementoPagina(botaoSalvarMantenedor);            
             AguardarProcessando();
             bool validouRetorno = VerificarMensagemRetorno(mensagemRetorno);
@@ -182,7 +182,7 @@ namespace Lampp.CAPDA.Teste.Automatizado.Credenciamento.PageObjects
                 AguardarProcessando();
                 //ClicarElementoPagina(botaoSalvarMantenedor);
                 //driver.SwitchTo().ActiveElement();
-                ClicarElementoPagina(botaoSalvar);
+                ClicarElementoPagina(botaoSalvarMantenedor);
                 AguardarProcessando();
                 validouRetorno = VerificarMensagemRetorno(mensagemRetorno);
             }
