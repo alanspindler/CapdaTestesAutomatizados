@@ -106,7 +106,11 @@
     </Otherwise>
   </Choose>
   <ItemGroup>
+    <Compile Include="AnalisarProcesso\PaginaAnalisarProcesso.cs" />
     <Compile Include="Credenciamento\PageObjects\PaginaCredenciamento.cs" />
+    <Compile Include="DeliberarProcesso\PageObjects\PaginaDeliberarProcesso.cs" />
+    <Compile Include="GerenciarProcesso\PageObjects\PaginaGerenciarProcesso.cs" />
+    <Compile Include="GerenciarProcesso\Tests\GerenciarProcessoTestesAutomatizados.cs" />
     <Compile Include="Inicial\PageObjects\PaginaInicial.cs" />
     <Compile Include="Inscricao\PageObjects\PaginaInscricao.cs" />
     <Compile Include="Credenciamento\Tests\CredenciamentoTestesAutomatizados.cs" />
@@ -132,6 +136,7 @@
     </Content>
   </ItemGroup>
   <ItemGroup>
+    <Folder Include="DeliberarProcesso\Tests\" />
     <Folder Include="Inicial\Tests\" />
     <Folder Include="Inscricao\Tests\" />
     <Folder Include="System\" />

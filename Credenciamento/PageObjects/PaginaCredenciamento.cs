@@ -41,12 +41,21 @@ namespace Lampp.CAPDA.Teste.Automatizado.Credenciamento.PageObjects
             AguardarProcessando();
         }
 
+        public string RetornarCodigoCredenciamento()
+        {
+            AguardarProcessando();
+            ClicarElementoPagina(botaoBuscar);
+            AguardarProcessando();
+            string valorCodigoCredenciamento = RetornaTextoElemento(codigoCredenciamento);
+            return valorCodigoCredenciamento;
+        }
+
         #endregion
 
         #region Geral
 
         //public By botaoSalvar = By.ClassName("fa-save");
-        public By botaoSalvar = By.XPath("//button[contains(.,'Salvar')]");        
+        public By botaoSalvar = By.XPath("//button[contains(.,'Salvar')]");
         public By botaoNovo = By.ClassName("fa-plus-square");
         //public By botaoFechar = By.ClassName("fa-times");
         public By botaoFechar = By.XPath("/html/body/app-root/dialog-holder/dialog-wrapper/div/app-modal/div[1]/div/div[3]/button");
@@ -54,6 +63,7 @@ namespace Lampp.CAPDA.Teste.Automatizado.Credenciamento.PageObjects
         public By botaoFecharMensagemConfirmacaoNenhumRegistroEncontrado = By.CssSelector("body>app-root:nth-child(1)>dialog-holder:nth-child(4)>dialog-wrapper:nth-child(2)>div:nth-child(1)>app-modal:nth-child(1)>div:nth-child(1)>div:nth-child(1)>div:nth-child(3)>button:nth-child(1)");
         public By mensagemRetorno = By.CssSelector("p");
         private By botaoVoltar = By.ClassName("fa-long-arrow-left");
+        private By codigoCredenciamento = By.XPath("//section[@id='timeLine']/app-acompanhar-credenciamento-grid/app-grid/section/div[2]/table/tbody/tr/td[2]");
 
         //public By botaoFechar = By.ClassName("btn-default");
 
@@ -63,9 +73,9 @@ namespace Lampp.CAPDA.Teste.Automatizado.Credenciamento.PageObjects
         #region Identificacao
 
         //Instituicao
-        public By optionPrivado = By.XPath("//label/i");
-        public By optionEnsino = By.XPath("//label[2]");
-        public By optionPesquisa = By.XPath("//label[3]/i");
+        public By optionPrivado = By.XPath("//label[2]/i");
+        //public By optionEnsino = By.XPath("//label[3]/i");
+        public By optionPesquisa = By.XPath("//div[2]/div/div/label/i");
 
         //Unidade Academica
         public By abaUnidadeAcademica = By.LinkText("1.2. Unidade Acadêmica");
@@ -94,7 +104,7 @@ namespace Lampp.CAPDA.Teste.Automatizado.Credenciamento.PageObjects
         public By comboUfMantenedor = By.Id("estados-brasil-Mantenedor");
         public By botaoSalvarMantenedor = By.XPath("//div[@id='identificacao']/app-aba-identificacao/app-modal-mantenedor/div/div/div/div[2]/div[2]/div/div/button");
 
-        public void PreencherCredenciamento()
+        public string PreencherCredenciamento()
         {
             PreencherIdentificacaoAbaInstituicao();
             PreencherIdentificacaoAbaUnidadeAcademica();
@@ -116,12 +126,15 @@ namespace Lampp.CAPDA.Teste.Automatizado.Credenciamento.PageObjects
             ClicarElementoPagina(botaoVoltar);
             AguardarProcessando();
             SubmeterCredenciamento();
+            string valorCodigoCredenciamento = RetornarCodigoCredenciamento();
+            return valorCodigoCredenciamento;
         }
 
         public void PreencherIdentificacaoAbaInstituicao()
         {
             AguardarProcessando();
             ClicarElementoPagina(optionPrivado);
+            ClicarElementoPagina(optionPesquisa);
             ClicarElementoPagina(botaoSalvar);
             AguardarProcessando();
             AguardarProcessando();
@@ -256,6 +269,7 @@ namespace Lampp.CAPDA.Teste.Automatizado.Credenciamento.PageObjects
             AguardarProcessando();
             PreencherCampo(botaoEscolherArquivoRegularizacao, Constantes.CaminhoPDF);
             AguardarProcessando();
+            Thread.Sleep(2000);
             ClicarElementoPagina(botaoFechar);
             AguardarProcessando();
             PreencherCampo(textAreaRegularizacao, "Teste Teste Teste Teste");
@@ -292,8 +306,14 @@ namespace Lampp.CAPDA.Teste.Automatizado.Credenciamento.PageObjects
             AguardarProcessando();
             ClicarElementoPagina(abaOrcamentoFaturamento);
             AguardarProcessando();
-            Thread.Sleep(6000);
-
+            if (Constantes.TesteSistemalocal)
+            {
+                Thread.Sleep(6000);
+            }
+            else
+            {
+                Thread.Sleep(1500);
+            }
             randomNumber = random.Next(1, 10);
             numero = randomNumber.ToString();
             PreencherCampoSemLimpar(campoPesquisaDesenvolvimentoAnoAnterior, numero);
@@ -323,8 +343,8 @@ namespace Lampp.CAPDA.Teste.Automatizado.Credenciamento.PageObjects
             numero = randomNumber.ToString();
             PreencherCampoSemLimpar(campoOutrasAtividadesAnoSeguinte, numero);
             //InserirTeclaTab(campoContratadosOutrosAtividadePD);
-            Thread.Sleep(300);            
-            
+            Thread.Sleep(300);
+
             ////ClicarElementoPagina(botaoSalvarOrcamentoFaturamento);
             ClicarElementoPagina(botaoSalvar);
             AguardarProcessando();
@@ -355,8 +375,14 @@ namespace Lampp.CAPDA.Teste.Automatizado.Credenciamento.PageObjects
             int randomNumber;
             string numero;
             AguardarProcessando();
-            Thread.Sleep(5000);
-
+            if (Constantes.TesteSistemalocal)
+            {
+                Thread.Sleep(5000);
+            }
+            else
+            {
+                Thread.Sleep(1500);
+            }
             randomNumber = random.Next(1, 10);
             numero = randomNumber.ToString();
             PreencherCampo(campoQuadroEfetivoSuperiorAtividadePD, numero);
@@ -404,7 +430,7 @@ namespace Lampp.CAPDA.Teste.Automatizado.Credenciamento.PageObjects
             randomNumber = random.Next(1, 10);
             numero = randomNumber.ToString();
             PreencherCampo(campoContratadorOutrosOutros, numero);
-            
+
             //ClicarElementoPagina(botaoSalvarForcaTrabalho);
             ClicarElementoPagina(botaoSalvar);
 
@@ -481,7 +507,7 @@ namespace Lampp.CAPDA.Teste.Automatizado.Credenciamento.PageObjects
             PreencherCampo(anexarArquivoPesquisador, Constantes.CaminhoPDF);
             AguardarProcessando();
             ClicarElementoPagina(botaoSalvar);
-            AguardarProcessando();            
+            AguardarProcessando();
             ClicarElementoPagina(botaoFechar);
         }
 
@@ -512,7 +538,7 @@ namespace Lampp.CAPDA.Teste.Automatizado.Credenciamento.PageObjects
             PreencherCampo(campoObjetivoLaboratorio, "Teste Teste");
             PreencherCampo(campoAtividadesLaboratorio, "Teste Teste");
             PreencherCampo(campoAreaFisicaLaboratorio, "Teste Teste");
-            PreencherCampo(campoRelacaoEquipamentosLaboratorio, "Teste Teste");            
+            PreencherCampo(campoRelacaoEquipamentosLaboratorio, "Teste Teste");
             ClicarElementoPagina(botaoSalvar);
             AguardarProcessando();
             ClicarElementoPagina(botaoFechar);
@@ -522,7 +548,7 @@ namespace Lampp.CAPDA.Teste.Automatizado.Credenciamento.PageObjects
 
         #region Documentação
 
-        public By abaDocumentacao = By.LinkText("7.Documentação");        
+        public By abaDocumentacao = By.LinkText("7.Documentação");
         public By comboTipoDcoumento = By.Name("tipo");
         public By campoDiscriminacao = By.Id("discriminacao");
         public By anexarArquivoDocumentacao = By.Id("arquivo");
@@ -558,7 +584,7 @@ namespace Lampp.CAPDA.Teste.Automatizado.Credenciamento.PageObjects
         private By checkboxPesquisaPlano = By.XPath("//form[@id='formulario']/div[4]/div/div/label/i");
         private By campoPrazoExecucaoPlano = By.Id("prazo-de-execucao");
         private By anexarArquivoPlano = By.Id("arquivo");
-        
+
         private void PreencherPlanoExecucao()
         {
             AguardarProcessando();
@@ -601,8 +627,8 @@ namespace Lampp.CAPDA.Teste.Automatizado.Credenciamento.PageObjects
         //Aba 8.1.3
 
         private By abaRecursosHumanos = By.LinkText("8.1.3 Recursos Humanos");
-        private By campoRecursosHumanos = By.Id("rh-text");        
-        
+        private By campoRecursosHumanos = By.Id("rh-text");
+
         private void PreencherRecursosHumanos()
         {
             AguardarProcessando();
@@ -618,7 +644,7 @@ namespace Lampp.CAPDA.Teste.Automatizado.Credenciamento.PageObjects
 
         private By abaResultados = By.LinkText("8.1.4 Resultados");
         private By campoResultados = By.Id("resultados-serem-alcancados");
-        
+
         private void PreencherResultados()
         {
             AguardarProcessando();
@@ -936,7 +962,7 @@ namespace Lampp.CAPDA.Teste.Automatizado.Credenciamento.PageObjects
 
             randomNumber = random.Next(1, 10);
             numero = randomNumber.ToString();
-            PreencherCampo(campo5_7, numero);            
+            PreencherCampo(campo5_7, numero);
 
             randomNumber = random.Next(1, 10);
             numero = randomNumber.ToString();
@@ -1111,11 +1137,11 @@ namespace Lampp.CAPDA.Teste.Automatizado.Credenciamento.PageObjects
         public By comboTipoProjeto = By.Id("tipo");
         public By campoTituloProjeto = By.Id("titulo");
         public By campoDescricaoProjeto = By.Id("descricaoProjeto");
-        public By campoEquipeCoordenadorProjeto = By.Id("coordenador-es");        
+        public By campoEquipeCoordenadorProjeto = By.Id("coordenador-es");
         public By campoValorProjeto = By.Id("executor-es");
         public By checkboxPesquisa = By.XPath("//div[@id='projeto-pd']/div[2]/app-aba-projeto-pd/app-modal-anexo-pd/div/div/div/div[2]/div/div[5]/div/div/label/i");
         public By campoRelacaoEquipamentos = By.Id("prazo-de-execucao");
-        
+
         private void PreencherProjetoPD()
         {
             AguardarProcessando();
@@ -1137,7 +1163,7 @@ namespace Lampp.CAPDA.Teste.Automatizado.Credenciamento.PageObjects
             ClicarElementoPagina(botaoFechar);
             AguardarProcessando();
         }
-        
+
 
         #endregion
 

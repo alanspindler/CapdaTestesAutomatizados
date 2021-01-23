@@ -4,6 +4,7 @@ using OpenQA.Selenium.Interactions;
 using OpenQA.Selenium.Remote;
 using OpenQA.Selenium.Support.UI;
 using System;
+using System.IO;
 using System.Linq;
 using System.Text.RegularExpressions;
 using System.Threading;
@@ -48,8 +49,7 @@ namespace Lampp.CAPDA.Teste.Automatizado.SharedObjects
         #endregion
 
         #region Declaração de variáveis privadas da classe --------------------------------------------------------------------------
-        private readonly By m_botaoLogout = By.Id("logout");
-        private By botaoCalendarioAberto = By.CssSelector("i.fa.fa-calendar-o");        
+        private readonly By m_botaoLogout = By.XPath("//span");        
         public static string WeHighlightedColour = "arguments[0].style.border='5px solid red'";
 
         #endregion
@@ -71,7 +71,9 @@ namespace Lampp.CAPDA.Teste.Automatizado.SharedObjects
         /// <remarks>Escrita por Alan Spindler em 23/11/2015</remarks>
         public void FazerLogout()
         {
+            AguardarProcessando();
             ClicarElementoPagina(m_botaoLogout);
+            AguardarProcessando();
         }
 
         //Destaca o elemento em uma cor
@@ -90,7 +92,7 @@ namespace Lampp.CAPDA.Teste.Automatizado.SharedObjects
         {
             try
             {
-                wait = new WebDriverWait(driver, TimeSpan.FromSeconds(12));
+                wait = new WebDriverWait(driver, TimeSpan.FromSeconds(35));
                 wait.Until(SeleniumExtras.WaitHelpers.ExpectedConditions.ElementExists(elemento));
                 return true;
             }
@@ -147,6 +149,13 @@ namespace Lampp.CAPDA.Teste.Automatizado.SharedObjects
                 }
             }
             Thread.Sleep(500);
+        }
+
+        public string RetornaTextoElemento(By elemento)
+        {
+            DestacarElemento(driver, elemento);
+            var textoElemento = driver.FindElement(elemento).Text;
+            return textoElemento;
         }
 
         public void arrastarElementoparaElemento(By elementoMovido, By elementoDestino)
@@ -926,6 +935,17 @@ namespace Lampp.CAPDA.Teste.Automatizado.SharedObjects
             {
                 return false;
             }
+        }
+
+        public void GravarArquivoTexto(string texto)
+        {
+            // Create a file to write to.            
+            var caminhoArquivo = Path.Combine(Global.DIRETORIO_APLICACAO, "Credenciamentos.txt");
+            using (StreamWriter sw = File.AppendText(caminhoArquivo))
+            {
+                sw.WriteLine(texto);
+            }
+
         }
 
 
