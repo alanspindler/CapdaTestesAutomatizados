@@ -9,7 +9,7 @@ using System.Threading;
 namespace Lampp.CAPDA.Teste.Automatizado.Credenciamento.Tests
 {
     [TestClass]
-    public class GerenciarProcessosTestesAutomatizados
+    public class CredenciamentoTestesAutomatizados
     {
         public Global global { get; set; }
         public PaginaBase paginaBase { get; set; }

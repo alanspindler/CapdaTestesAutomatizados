@@ -9,7 +9,7 @@ using System.Threading;
 namespace Lampp.CAPDA.Teste.Automatizado.Credenciamento.Tests
 {
     [TestClass]
-    public class CredenciamentoTestesAutomatizados
+    public class GerenciarProcessosTestesAutomatizados
     {
         public Global global { get; set; }
         public PaginaBase paginaBase { get; set; }
@@ -26,11 +26,11 @@ namespace Lampp.CAPDA.Teste.Automatizado.Credenciamento.Tests
         private string urlPaginaInscricaoServidorDes = "https://capda.des.suframa.gov.br/#/inscricao";
         public string CNPJ;
 
-        [TestMethod]
-        public void Gerenciar()
-        {
+        //[TestMethod]
+        //public void Gerenciar()
+        //{
 
-        }
+        //}
 
     }
 
