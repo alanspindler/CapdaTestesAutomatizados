@@ -5,6 +5,7 @@ using Lampp.CAPDA.Teste.Automatizado.Login.PageObjects;
 using Lampp.CAPDA.Teste.Automatizado.Principal.PageObjects;
 using Lampp.CAPDA.Teste.Automatizado.Credenciamento.PageObjects;
 using System.Threading;
+using System;
 
 namespace Lampp.CAPDA.Teste.Automatizado.Credenciamento.Tests
 {
@@ -78,63 +79,68 @@ namespace Lampp.CAPDA.Teste.Automatizado.Credenciamento.Tests
         public void EfetuarCredenciamento()
         {
             var selenium = Global.obterInstancia();
-            string codigoCredenciamento = FazerCredenciamento();
-            paginaInicial = new PaginaInicial(selenium.driver);
-            if (Constantes.TesteSistemalocal)
-            {
-                paginaInicial.AbrirPagina(urlPaginaGerenciarLocal);
-            }
-            else
-            {
-                paginaInicial.AbrirPagina(urlPaginaGerenciarServidorDes);
-            }
-            paginaGerenciarProcesso = new PaginaGerenciarProcesso(selenium.driver);
-            paginaGerenciarProcesso.DesignarAnalista(codigoCredenciamento);
+            for (int i = 1; i < Constantes.QuantidadeCredenciamentos; i++)
+            {                
+                string codigoCredenciamento = FazerCredenciamento();
+                paginaInicial = new PaginaInicial(selenium.driver);
+                if (Constantes.TesteSistemalocal)
+                {
+                    paginaInicial.AbrirPagina(urlPaginaGerenciarLocal);
+                }
+                else
+                {
+                    paginaInicial.AbrirPagina(urlPaginaGerenciarServidorDes);
+                }
+                paginaGerenciarProcesso = new PaginaGerenciarProcesso(selenium.driver);
+                paginaGerenciarProcesso.DesignarAnalista(codigoCredenciamento);
 
-            if (Constantes.TesteSistemalocal)
-            {
-                paginaInicial.FazerLogout();
-                paginaInicial.AbrirPagina(urlPaginaLogin);
-                paginaInicial.FazerLogin("00092385060", "lamppit@2020");
-                paginaInicial.AbrirPagina(urlPaginaAnalisarLocal);
-            }
-            else
-            {
-                paginaInicial.FazerLogout();
-                paginaInicial.AbrirPagina(urlPaginaLoginServidorDes);
-                paginaInicial.FazerLoginServidor("00092385060", "lamppit@2020");
-                paginaInicial.AbrirPagina(urlPaginaAnalisarServidorDes);
-            }
+                if (Constantes.TesteSistemalocal)
+                {
+                    paginaInicial.FazerLogout();
+                    paginaInicial.AbrirPagina(urlPaginaLogin);
+                    paginaInicial.FazerLogin("00092385060", "lamppit@2020");
+                    paginaInicial.AbrirPagina(urlPaginaAnalisarLocal);
+                }
+                else
+                {
+                    paginaInicial.FazerLogout();
+                    paginaInicial.AbrirPagina(urlPaginaLoginServidorDes);
+                    paginaInicial.FazerLoginServidor("00092385060", "lamppit@2020");
+                    paginaInicial.AbrirPagina(urlPaginaAnalisarServidorDes);
+                }
 
-            paginaAnalisarCredenciamento = new PaginaAnalisarCredenciamento(selenium.driver);
-            paginaAnalisarCredenciamento.Analisar(codigoCredenciamento);
-            //paginaAnalisarCredenciamento.Analisar("CRE0252021");
+                paginaAnalisarCredenciamento = new PaginaAnalisarCredenciamento(selenium.driver);
+                paginaAnalisarCredenciamento.Analisar(codigoCredenciamento);
+                //paginaAnalisarCredenciamento.Analisar("CRE0252021");
 
-            if (Constantes.TesteSistemalocal)
-            {
-                paginaInicial.AbrirPagina(urlPaginaGerenciarLocal);
-            }
-            else
-            {
-                paginaInicial.AbrirPagina(urlPaginaGerenciarServidorDes);
-            }
+                if (Constantes.TesteSistemalocal)
+                {
+                    paginaInicial.AbrirPagina(urlPaginaGerenciarLocal);
+                }
+                else
+                {
+                    paginaInicial.AbrirPagina(urlPaginaGerenciarServidorDes);
+                }
 
-            paginaGerenciarProcesso.DespacharImediato(codigoCredenciamento);
-            Thread.Sleep(2000);
-            paginaGerenciarProcesso.DespacharCoordenadorGeral(codigoCredenciamento);
+                paginaGerenciarProcesso.DespacharImediato(codigoCredenciamento);
+                Thread.Sleep(2000);
+                paginaGerenciarProcesso.DespacharCoordenadorGeral(codigoCredenciamento);
 
-            Thread.Sleep(2000);
-            if (Constantes.TesteSistemalocal)
-            {
-                paginaInicial.AbrirPagina(urlPaginaDeliberarLocal);
+                Thread.Sleep(2000);
+                if (Constantes.TesteSistemalocal)
+                {
+                    paginaInicial.AbrirPagina(urlPaginaDeliberarLocal);
+                }
+                else
+                {
+                    paginaInicial.AbrirPagina(urlPaginaDeliberarServidorDes);
+                }
+                paginaDeliberarProcesso = new PaginaDeliberarProcesso(selenium.driver);
+                string cnpj = paginaDeliberarProcesso.Deliberar(codigoCredenciamento);
+                paginaBase.GravarArquivoTexto(cnpj + " " + DateTime.Now.ToString());
+                paginaBase.FazerLogout();
+                //selenium.EncerrarTeste();
             }
-            else
-            {
-                paginaInicial.AbrirPagina(urlPaginaDeliberarServidorDes);
-            }
-            paginaDeliberarProcesso = new PaginaDeliberarProcesso(selenium.driver);
-            string cnpj = paginaDeliberarProcesso.Deliberar(codigoCredenciamento);
-            paginaBase.GravarArquivoTexto(cnpj);
         }
     }
 }
