@@ -26,11 +26,13 @@ namespace Lampp.CAPDA.Teste.Automatizado.Credenciamento.PageObjects
         public By botaoEnviarCapda = By.XPath("(//button[@type='button'])[4]");
         public By botaoFechar = By.XPath("(//button[@type='button'])[8]");
         public By botaoDeliberar = By.XPath("//span/button");
-        public By campoDataPublicacao = By.Id("dataPublicao");
+        public By campoDataPublicacao = By.Id("dataPublicacao");
         public By botaoArquivo = By.Id("arquivo");
         public By botaoSalvar = By.XPath("(//button[@type='button'])[6]");
         public By botaoNenhumRegistroEncontrado = By.XPath("(//button[@type='button'])[9]");
         public By cnpjEmpresa = By.XPath("//td[3]");
+        public By campoNumeroResolucao = By.Id("numeroResolucao");
+        public By campoAvaliacaoApartir = By.Id("dataAvaliacao");
 
      
         public string Deliberar(string codigoProcesso)
@@ -48,7 +50,9 @@ namespace Lampp.CAPDA.Teste.Automatizado.Credenciamento.PageObjects
             Thread.Sleep(2000);
             ClicarElementoPagina(botaoDeliberar);            
             AguardarProcessando();
-            PreencherCampo(campoDataPublicacao, "2020-01-23");
+            PreencherCampo(campoDataPublicacao, "2021-01-23");
+            PreencherCampo(campoNumeroResolucao, "12345");
+            PreencherCampo(campoAvaliacaoApartir, "2021-01-23");
             PreencherCampo(botaoArquivo, Constantes.CaminhoPDF);
             ClicarElementoPagina(botaoSalvar);
             Thread.Sleep(2000);

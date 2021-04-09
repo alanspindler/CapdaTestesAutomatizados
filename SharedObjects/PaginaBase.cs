@@ -34,6 +34,7 @@ namespace Lampp.CAPDA.Teste.Automatizado.SharedObjects
         //public By LinhasTabela = By.XPath("tr");
         public By LinhasTabela = By.XPath("//tr");
         public By Relatorio = By.Id("plugin");
+        public By ConfirmacaoLogout = By.XPath("//div[@id='msg']/h2");
 
         public enum TipoDadoElemento
         {
@@ -49,7 +50,7 @@ namespace Lampp.CAPDA.Teste.Automatizado.SharedObjects
         #endregion
 
         #region Declaração de variáveis privadas da classe --------------------------------------------------------------------------
-        private readonly By m_botaoLogout = By.XPath("//span");        
+        private readonly By m_botaoLogout = By.XPath("//span");
         public static string WeHighlightedColour = "arguments[0].style.border='5px solid red'";
 
         #endregion
@@ -73,13 +74,14 @@ namespace Lampp.CAPDA.Teste.Automatizado.SharedObjects
         {
             AguardarProcessando();
             ClicarElementoPagina(m_botaoLogout);
-            AguardarProcessando();
+            AguardarElemento(ConfirmacaoLogout);
+            
         }
 
         //Destaca o elemento em uma cor
         public static object DestacarElemento(IWebDriver driver, By elemento)
         {
-            var myLocator = driver.FindElement(elemento);            
+            var myLocator = driver.FindElement(elemento);
             var js = (IJavaScriptExecutor)driver;
             return js.ExecuteScript(WeHighlightedColour, myLocator);
         }
@@ -114,7 +116,7 @@ namespace Lampp.CAPDA.Teste.Automatizado.SharedObjects
                 return false;
             }
         }
-        
+
 
         /// <summary>
         /// Aguarda a div "Processando" ser exibida e desaparecer antes de efetuar passos do teste
@@ -401,7 +403,7 @@ namespace Lampp.CAPDA.Teste.Automatizado.SharedObjects
         {
             DestacarElemento(driver, elemento);
             if (TextoCampo != "")
-            {                             
+            {
                 driver.FindElement(elemento).Clear();
                 InserirTexto(elemento, TextoCampo);
             }
@@ -410,7 +412,7 @@ namespace Lampp.CAPDA.Teste.Automatizado.SharedObjects
                 InserirTexto(elemento, Keys.Control + "a");
                 InserirTexto(elemento, Keys.Delete);
                 InserirTexto(elemento, Keys.Tab);
-            }            
+            }
         }
 
         /// <summary>
@@ -720,7 +722,7 @@ namespace Lampp.CAPDA.Teste.Automatizado.SharedObjects
             AguardarValorCombobox(elemento, texto);
             DestacarElemento(driver, elemento);
             var elementoSelecionado = driver.FindElement(elemento);
-            var selectElement = new SelectElement(elementoSelecionado);            
+            var selectElement = new SelectElement(elementoSelecionado);
             selectElement.SelectByText(texto);
         }
 
@@ -755,6 +757,23 @@ namespace Lampp.CAPDA.Teste.Automatizado.SharedObjects
         public bool ValidarElementoClicavel(By elemento)
         {
             return (isElementClickable(driver, elemento));
+        }
+
+        public void AguardarElementoClicavel(By elemento)
+        {
+            bool pronto = ValidarElementoClicavel(elemento);
+            if (pronto)
+            {
+                return;
+            }
+            else
+            {
+                while (!pronto)
+                {
+                    Thread.Sleep(200);
+                    pronto = ValidarElementoClicavel(elemento);
+                }
+            }
         }
 
         /// <summary>

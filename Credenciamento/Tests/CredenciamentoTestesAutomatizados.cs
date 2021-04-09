@@ -28,11 +28,16 @@ namespace Lampp.CAPDA.Teste.Automatizado.Credenciamento.Tests
         private string urlPaginaAnalisarLocal = "http://localhost:4200/#/analisar-credenciamento";
         private string urlPaginaDeliberarLocal = "http://localhost:4200/#/deliberar-processo";
 
-        private string urlPaginaLoginServidorDes = "http://1:1@capda.des.suframa.gov.br/";
-        private string urlPaginaInscricaoServidorDes = "https://capda.des.suframa.gov.br/#/inscricao";
-        private string urlPaginaGerenciarServidorDes = "https://capda.des.suframa.gov.br/#/gerenciar-processo";
-        private string urlPaginaAnalisarServidorDes = "https://capda.des.suframa.gov.br/#/analisar-credenciamento";
-        private string urlPaginaDeliberarServidorDes = "https://capda.des.suframa.gov.br/#/deliberar-processo";
+        //private string urlPaginaLoginServidorDes = "http://1:1@capda.des.suframa.gov.br/";
+        //private string urlPaginaInscricaoServidorDes = "https://capda.des.suframa.gov.br/#/inscricao";
+        //private string urlPaginaGerenciarServidorDes = "https://capda.des.suframa.gov.br/#/gerenciar-processo";
+        //private string urlPaginaAnalisarServidorDes = "https://capda.des.suframa.gov.br/#/analisar-credenciamento";
+        //private string urlPaginaDeliberarServidorDes = "https://capda.des.suframa.gov.br/#/deliberar-processo";
+        private string urlPaginaLoginServidorDes = "http://1:1@capda.hom.suframa.gov.br/";
+        private string urlPaginaInscricaoServidorDes = "https://capda.hom.suframa.gov.br/#/inscricao";
+        private string urlPaginaGerenciarServidorDes = "https://capda.hom.suframa.gov.br/#/gerenciar-processo";
+        private string urlPaginaAnalisarServidorDes = "https://capda.hom.suframa.gov.br/#/analisar-credenciamento";
+        private string urlPaginaDeliberarServidorDes = "https://capda.hom.suframa.gov.br/#/deliberar-processo";
         public string CNPJ;
 
 
@@ -79,7 +84,7 @@ namespace Lampp.CAPDA.Teste.Automatizado.Credenciamento.Tests
         public void EfetuarCredenciamento()
         {
             var selenium = Global.obterInstancia();
-            for (int i = 1; i < Constantes.QuantidadeCredenciamentos; i++)
+            for (int i = 1; i <= Constantes.QuantidadeCredenciamentos; i++)
             {                
                 string codigoCredenciamento = FazerCredenciamento();
                 paginaInicial = new PaginaInicial(selenium.driver);
@@ -110,8 +115,7 @@ namespace Lampp.CAPDA.Teste.Automatizado.Credenciamento.Tests
                 }
 
                 paginaAnalisarCredenciamento = new PaginaAnalisarCredenciamento(selenium.driver);
-                paginaAnalisarCredenciamento.Analisar(codigoCredenciamento);
-                //paginaAnalisarCredenciamento.Analisar("CRE0252021");
+                paginaAnalisarCredenciamento.Analisar(codigoCredenciamento);                
 
                 if (Constantes.TesteSistemalocal)
                 {
@@ -139,8 +143,9 @@ namespace Lampp.CAPDA.Teste.Automatizado.Credenciamento.Tests
                 string cnpj = paginaDeliberarProcesso.Deliberar(codigoCredenciamento);
                 paginaBase.GravarArquivoTexto(cnpj + " " + DateTime.Now.ToString());
                 paginaBase.FazerLogout();
-                //selenium.EncerrarTeste();
+                
             }
+            selenium.EncerrarTeste();
         }
     }
 }

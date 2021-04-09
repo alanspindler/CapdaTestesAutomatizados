@@ -33,7 +33,7 @@ namespace Lampp.CAPDA.Teste.Automatizado.Credenciamento.PageObjects
         public By optionDeAcordoSimImediato = By.Id("opcaoImediatoSim");
         public By optionDeAcordoSimGeral = By.Id("opcaoGeralSim");
         public By optionSubmeterCapadaSIm = By.Id("opcaoGeralSubmeterSim");
-        public By botaoSalvar = By.XPath("(//button[@type='button'])[8]");
+        public By botaoSalvar = By.XPath("(//button[@type='button'])[9]");
 
         public void DesignarAnalista(string codigoProcesso)
         {
@@ -58,7 +58,8 @@ namespace Lampp.CAPDA.Teste.Automatizado.Credenciamento.PageObjects
             ClicarElementoPagina(botaoBuscar);
             AguardarProcessando();
             ClicarElementoPagina(botaoDespachar);
-            AguardarProcessando();            
+            AguardarProcessando();
+            AguardarElementoClicavel(botaoDespacho);
             ClicarElementoPagina(botaoDespacho);
             AguardarProcessando();
             ClicarElementoPagina(abaDespachoImediato);

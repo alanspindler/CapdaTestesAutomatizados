@@ -26,8 +26,8 @@ namespace Lampp.CAPDA.Teste.Automatizado.Credenciamento.PageObjects
         public By botaoLimpar = By.XPath("(//button[@type='button'])[2]");
         public By botaoParecer = By.XPath("//button");
         public By optionPeloCredenciamento = By.Name("radio[analista]");
-        public By botaoConcluirAnalise = By.XPath("(//button[@type='button'])[10]");
-        public By botaoNaoContinuarAnalise = By.XPath("(//button[@type='button'])[14]");
+        public By botaoConcluirAnalise = By.XPath("(//button[@type='button'])[11]");
+        public By botaoNaoContinuarAnalise = By.XPath("(//button[@type='button'])[13]");
 
         public void Analisar(string codigoProcesso)
         {
@@ -40,6 +40,8 @@ namespace Lampp.CAPDA.Teste.Automatizado.Credenciamento.PageObjects
             AguardarProcessando();
             Thread.Sleep(3000);
             ClicarElementoPagina(botaoAnalisar);
+            AguardarProcessando();                        
+            AguardarElementoClicavel(botaoParecer);
             AguardarProcessando();
             ClicarElementoPagina(botaoParecer);
             AguardarProcessando();
