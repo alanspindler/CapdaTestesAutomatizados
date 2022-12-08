@@ -13,7 +13,7 @@ namespace Lampp.CAPDA.Teste.Automatizado.Credenciamento.PageObjects
     {
         public GeradorNome geradorNome { get; set; }
         public GeradorCNPJCPF geradorCNPJCPF { get; set; }
-        public PaginaCredenciamento(RemoteWebDriver driver) : base(driver)
+        public PaginaCredenciamento()
         {
             geradorNome = new GeradorNome();
             geradorCNPJCPF = new GeradorCNPJCPF();
@@ -27,26 +27,26 @@ namespace Lampp.CAPDA.Teste.Automatizado.Credenciamento.PageObjects
 
         public void SolicitarCredenciamento()
         {
-            ClicarElementoPagina(botaoSolicitarCredenciamento);
+            ClicarElementoPagina(driver, botaoSolicitarCredenciamento);
         }
 
-        public void SubmeterCredenciamento()
+        public void SubmeterCredenciamento(WebDriver driver)
         {
-            AguardarProcessando();
-            ClicarElementoPagina(botaoBuscar);
-            AguardarProcessando();
-            ClicarElementoPagina(botaoSubemeter);
-            AguardarProcessando();
-            AguardarProcessando();
-            AguardarProcessando();
+            AguardarProcessando(driver);
+            ClicarElementoPagina(driver, botaoBuscar);
+            AguardarProcessando(driver);
+            ClicarElementoPagina(driver, botaoSubemeter);
+            AguardarProcessando(driver);
+            AguardarProcessando(driver);
+            AguardarProcessando(driver);
         }
 
         public string RetornarCodigoCredenciamento()
         {
-            AguardarProcessando();
-            ClicarElementoPagina(botaoBuscar);
-            AguardarProcessando();
-            string valorCodigoCredenciamento = RetornaTextoElemento(codigoCredenciamento);
+            AguardarProcessando(driver);
+            ClicarElementoPagina(driver, botaoBuscar);
+            AguardarProcessando(driver);
+            string valorCodigoCredenciamento = RetornaTextoElemento(driver, codigoCredenciamento);
             return valorCodigoCredenciamento;
         }
 
@@ -104,103 +104,103 @@ namespace Lampp.CAPDA.Teste.Automatizado.Credenciamento.PageObjects
         public By comboUfMantenedor = By.Id("estados-brasil-Mantenedor");
         public By botaoSalvarMantenedor = By.XPath("//div[@id='identificacao']/app-aba-identificacao/app-modal-mantenedor/div/div/div/div[2]/div[2]/div/div/button");
 
-        public string PreencherCredenciamento()
+        public string PreencherCredenciamento(WebDriver driver)
         {
-            PreencherIdentificacaoAbaInstituicao();
-            PreencherIdentificacaoAbaUnidadeAcademica();
-            PreencherIdentificacaoAbaMantenedor();
-            PreencherIdentificacaoAbaRepresentacao();
-            PreencherRegularizacao();
-            PreencherOrcamentoFaturamento();
-            PreencherForcaTrabalho();
-            PreencherAreaAtuacao();
-            PreencherPesquisador();
-            PreencherLaboratorio();
-            PreencherDocumentacao();
-            PreencherPlanoExecucao();
-            PreencherObjetivosMetas();
-            PreencherRecursosHumanos();
-            PreencherResultados();
-            PreencherOrcamento();
-            PreencherProjetoPD();
-            ClicarElementoPagina(botaoVoltar);
-            AguardarProcessando();
-            SubmeterCredenciamento();
+            PreencherIdentificacaoAbaInstituicao(driver);
+            PreencherIdentificacaoAbaUnidadeAcademica(driver);
+            PreencherIdentificacaoAbaMantenedor(driver);
+            PreencherIdentificacaoAbaRepresentacao(driver);
+            PreencherRegularizacao(driver);
+            PreencherOrcamentoFaturamento(driver);
+            PreencherForcaTrabalho(driver);
+            PreencherAreaAtuacao(driver);
+            PreencherPesquisador(driver);
+            PreencherLaboratorio(driver);
+            PreencherDocumentacao(driver);
+            PreencherPlanoExecucao(driver);
+            PreencherObjetivosMetas(driver);
+            PreencherRecursosHumanos(driver);
+            PreencherResultados(driver);
+            PreencherOrcamento(driver);
+            PreencherProjetoPD(driver);
+            ClicarElementoPagina(driver, botaoVoltar);
+            AguardarProcessando(driver);
+            SubmeterCredenciamento(driver);
             string valorCodigoCredenciamento = RetornarCodigoCredenciamento();
             return valorCodigoCredenciamento;
         }
 
-        public void PreencherIdentificacaoAbaInstituicao()
+        public void PreencherIdentificacaoAbaInstituicao(WebDriver driver)
         {
-            AguardarProcessando();
-            ClicarElementoPagina(optionPrivado);
-            ClicarElementoPagina(optionPesquisa);
-            ClicarElementoPagina(botaoSalvar);
-            AguardarProcessando();
-            AguardarProcessando();
+            AguardarProcessando(driver);
+            ClicarElementoPagina(driver, optionPrivado);
+            ClicarElementoPagina(driver, optionPesquisa);
+            ClicarElementoPagina(driver, botaoSalvar);
+            AguardarProcessando(driver);
+            AguardarProcessando(driver);
             //Thread.Sleep(2000);
-            ClicarElementoPagina(botaoFechar);
+            ClicarElementoPagina(driver, botaoFechar);
         }
 
-        public void PreencherIdentificacaoAbaUnidadeAcademica()
+        public void PreencherIdentificacaoAbaUnidadeAcademica(WebDriver driver)
         {
-            AguardarProcessando();
-            ClicarElementoPagina(abaUnidadeAcademica);
-            AguardarProcessando();
-            ClicarElementoPagina(botaoNovo);
-            PreencherCampo(campoUnidadeAcademica, "Unidade Teste Automatizado");
-            SelecionarItemCombo(comboTipoUnidadeAcademica, "Departamento");
-            PreencherCampo(campoEmail, "teste@teste.com");
-            PreencherCampo(campoSite, "www.teste.com");
-            PreencherCampo(campoTelefone, "92986150323");
-            PreencherCampo(campoEndereco, "Rua Teste 3");
-            PreencherCampo(campoCep, "68030260");
-            PreencherCampo(campoBairro, "Centro");
-            PreencherCampo(campoCidade, "Manaus");
-            SelecionarItemCombo(comboUF, "AM");
-            ClicarElementoPagina(botaoSalvar);
-            AguardarProcessando();
-            ClicarElementoPagina(botaoFechar);
+            AguardarProcessando(driver);
+            ClicarElementoPagina(driver, abaUnidadeAcademica);
+            AguardarProcessando(driver);
+            ClicarElementoPagina(driver, botaoNovo);
+            PreencherCampo(driver, campoUnidadeAcademica, "Unidade Teste Automatizado");
+            SelecionarItemCombo(driver,comboTipoUnidadeAcademica, "Departamento");
+            PreencherCampo(driver, campoEmail, "teste@teste.com");
+            PreencherCampo(driver, campoSite, "www.teste.com");
+            PreencherCampo(driver, campoTelefone, "92986150323");
+            PreencherCampo(driver, campoEndereco, "Rua Teste 3");
+            PreencherCampo(driver, campoCep, "68030260");
+            PreencherCampo(driver, campoBairro, "Centro");
+            PreencherCampo(driver, campoCidade, "Manaus");
+            SelecionarItemCombo(driver, comboUF, "AM");
+            ClicarElementoPagina(driver, botaoSalvar);
+            AguardarProcessando(driver);
+            ClicarElementoPagina(driver, botaoFechar);
         }
 
-        public void PreencherIdentificacaoAbaMantenedor()
+        public void PreencherIdentificacaoAbaMantenedor(WebDriver driver)
         {
-            AguardarProcessando();
-            ClicarElementoPagina(abaUnidadeMantenedor);
-            AguardarProcessando();
-            ClicarElementoPagina(botaoNovo);
+            AguardarProcessando(driver);
+            ClicarElementoPagina(driver, abaUnidadeMantenedor);
+            AguardarProcessando(driver);
+            ClicarElementoPagina(driver, botaoNovo);
             string a = geradorCNPJCPF.cnpj(true);
-            PreencherCampo(campoCnpjMantenedor, a);
-            PreencherCampo(campoNomeMantenedor, geradorNome.GerarNome());
-            PreencherCampo(campoTelefoneMantenedor, "92986150323");
-            PreencherCampo(campoEmailMantenedor, "teste@teste.com");
-            PreencherCampo(campoSiteMantenedor, "www.teste.com");
-            PreencherCampo(campoEnderecoMantenedor, "Rua Teste 3");
-            PreencherCampo(campoCepMantenedor, "61030260");
-            PreencherCampo(campoBairroMantenedor, "Centro");
-            PreencherCampo(campoCidadeMantenedor, "Manaus");
-            SelecionarItemCombo(comboUfMantenedor, "AM");
-            AguardarProcessando();
+            PreencherCampo(driver, campoCnpjMantenedor, a);
+            PreencherCampo(driver, campoNomeMantenedor, geradorNome.GerarNome());
+            PreencherCampo(driver, campoTelefoneMantenedor, "92986150323");
+            PreencherCampo(driver, campoEmailMantenedor, "teste@teste.com");
+            PreencherCampo(driver, campoSiteMantenedor, "www.teste.com");
+            PreencherCampo(driver, campoEnderecoMantenedor, "Rua Teste 3");
+            PreencherCampo(driver, campoCepMantenedor, "61030260");
+            PreencherCampo(driver, campoBairroMantenedor, "Centro");
+            PreencherCampo(driver, campoCidadeMantenedor, "Manaus");
+            SelecionarItemCombo(driver, comboUfMantenedor, "AM");
+            AguardarProcessando(driver);
             driver.SwitchTo().ActiveElement();
-            ClicarElementoPagina(botaoSalvarMantenedor);
-            //ClicarElementoPagina(botaoSalvarMantenedor);            
-            AguardarProcessando();
+            ClicarElementoPagina(driver, botaoSalvarMantenedor);
+            //ClicarElementoPagina(driver, botaoSalvarMantenedor);            
+            AguardarProcessando(driver);
             bool validouRetorno = VerificarMensagemRetorno(mensagemRetorno);
             while (!validouRetorno)
             {
-                AguardarProcessando();
-                ClicarElementoPagina(botaoFechar);
+                AguardarProcessando(driver);
+                ClicarElementoPagina(driver, botaoFechar);
                 a = geradorCNPJCPF.cnpj(true);
-                PreencherCampo(campoCnpjMantenedor, a);
-                AguardarProcessando();
-                //ClicarElementoPagina(botaoSalvarMantenedor);
+                PreencherCampo(driver, campoCnpjMantenedor, a);
+                AguardarProcessando(driver);
+                //ClicarElementoPagina(driver, botaoSalvarMantenedor);
                 //driver.SwitchTo().ActiveElement();
-                ClicarElementoPagina(botaoSalvarMantenedor);
-                AguardarProcessando();
+                ClicarElementoPagina(driver, botaoSalvarMantenedor);
+                AguardarProcessando(driver);
                 validouRetorno = VerificarMensagemRetorno(mensagemRetorno);
             }
-            AguardarProcessando();
-            ClicarElementoPagina(botaoFechar);
+            AguardarProcessando(driver);
+            ClicarElementoPagina(driver, botaoFechar);
         }
 
         #endregion
@@ -219,38 +219,38 @@ namespace Lampp.CAPDA.Teste.Automatizado.Credenciamento.PageObjects
         public By campoEmissorRepresentacao = By.Id("emissor");
         public By botaoSalvarRepresentacao = By.CssSelector("div.pull-right > button.btn.btn-sm.btn-primary");
 
-        public void PreencherIdentificacaoAbaRepresentacao()
+        public void PreencherIdentificacaoAbaRepresentacao(WebDriver driver)
         {
-            AguardarProcessando();
-            ClicarElementoPagina(abaRepresentacao);
-            AguardarProcessando();
-            ClicarElementoPagina(botaoNovo);
-            AguardarProcessando();
-            SelecionarItemCombo(comboTipoRepresentacao, "Dirigente da Instituição");
+            AguardarProcessando(driver);
+            ClicarElementoPagina(driver, abaRepresentacao);
+            AguardarProcessando(driver);
+            ClicarElementoPagina(driver, botaoNovo);
+            AguardarProcessando(driver);
+            SelecionarItemCombo(driver, comboTipoRepresentacao, "Dirigente da Instituição");
             string a = geradorCNPJCPF.cpf(true);
-            PreencherCampo(campoCpfRepresentacao, a);
-            PreencherCampo(campoNomeRepresentacao, geradorNome.GerarNome());
-            PreencherCampo(campoTelefoneRepresentacao, "92986150323");
-            PreencherCampo(campoFaxRepresentacao, "9236150323");
-            PreencherCampo(campoEmailRepresentacao, "teste@teste.com");
-            PreencherCampo(campoCargoRepresentacao, "Teste");
-            PreencherCampo(campoIdentidadeRepresentacao, "2363040411");
-            PreencherCampo(campoEmissorRepresentacao, "Teste");
-            ClicarElementoPagina(botaoSalvarRepresentacao);
-            AguardarProcessando();
+            PreencherCampo(driver, campoCpfRepresentacao, a);
+            PreencherCampo(driver, campoNomeRepresentacao, geradorNome.GerarNome());
+            PreencherCampo(driver, campoTelefoneRepresentacao, "92986150323");
+            PreencherCampo(driver, campoFaxRepresentacao, "9236150323");
+            PreencherCampo(driver, campoEmailRepresentacao, "teste@teste.com");
+            PreencherCampo(driver, campoCargoRepresentacao, "Teste");
+            PreencherCampo(driver, campoIdentidadeRepresentacao, "2363040411");
+            PreencherCampo(driver, campoEmissorRepresentacao, "Teste");
+            ClicarElementoPagina(driver, botaoSalvarRepresentacao);
+            AguardarProcessando(driver);
             bool validouRetorno = VerificarMensagemRetorno(mensagemRetorno);
             while (!validouRetorno)
             {
-                AguardarProcessando();
-                ClicarElementoPagina(botaoFechar);
+                AguardarProcessando(driver);
+                ClicarElementoPagina(driver, botaoFechar);
                 a = geradorCNPJCPF.cpf(true);
-                PreencherCampo(campoCpfRepresentacao, a);
-                AguardarProcessando();
-                ClicarElementoPagina(botaoSalvarRepresentacao);
-                AguardarProcessando();
+                PreencherCampo(driver, campoCpfRepresentacao, a);
+                AguardarProcessando(driver);
+                ClicarElementoPagina(driver, botaoSalvarRepresentacao);
+                AguardarProcessando(driver);
                 validouRetorno = VerificarMensagemRetorno(mensagemRetorno);
             }
-            ClicarElementoPagina(botaoFechar);
+            ClicarElementoPagina(driver, botaoFechar);
         }
 
         #endregion
@@ -262,21 +262,21 @@ namespace Lampp.CAPDA.Teste.Automatizado.Credenciamento.PageObjects
         public By botaoEscolherArquivoRegularizacao = By.Id("arquivo");
         public By botaoSalvarRegularizacao = By.XPath("//div[@id='regularizacao']/app-aba-regulamentarizacao/div/div[3]/div/div/button");
 
-        public void PreencherRegularizacao()
+        public void PreencherRegularizacao(WebDriver driver)
         {
-            AguardarProcessando();
-            ClicarElementoPagina(abaRegularizacao);
-            AguardarProcessando();
-            PreencherCampo(botaoEscolherArquivoRegularizacao, Constantes.CaminhoPDF);
-            AguardarProcessando();
+            AguardarProcessando(driver);
+            ClicarElementoPagina(driver, abaRegularizacao);
+            AguardarProcessando(driver);
+            PreencherCampo(driver, botaoEscolherArquivoRegularizacao, Constantes.CaminhoPDF);
+            AguardarProcessando(driver);
             Thread.Sleep(2000);
-            ClicarElementoPagina(botaoFechar);
-            AguardarProcessando();
-            PreencherCampo(textAreaRegularizacao, "Teste Teste Teste Teste");
-            //ClicarElementoPagina(botaoSalvarRegularizacao);
-            ClicarElementoPagina(botaoSalvar);
-            AguardarProcessando();
-            ClicarElementoPagina(botaoFechar);
+            ClicarElementoPagina(driver, botaoFechar);
+            AguardarProcessando(driver);
+            PreencherCampo(driver, textAreaRegularizacao, "Teste Teste Teste Teste");
+            //ClicarElementoPagina(driver, botaoSalvarRegularizacao);
+            ClicarElementoPagina(driver, botaoSalvar);
+            AguardarProcessando(driver);
+            ClicarElementoPagina(driver, botaoFechar);
         }
 
         #endregion
@@ -296,16 +296,16 @@ namespace Lampp.CAPDA.Teste.Automatizado.Credenciamento.PageObjects
         public By campoOutrasAtividadesAnoSeguinte = By.Id("outras-atividades-ano-seguinte");
         public By botaoSalvarOrcamentoFaturamento = By.XPath("//div[@id='atividade-pd']/app-aba-atividade-pd/div[2]/div[3]/div/div/button");
 
-        public void PreencherOrcamentoFaturamento()
+        public void PreencherOrcamentoFaturamento(WebDriver driver)
         {
             Random random = new Random();
             int randomNumber;
             string numero;
-            AguardarProcessando();
-            ClicarElementoPagina(abaAtividadePeD);
-            AguardarProcessando();
-            ClicarElementoPagina(abaOrcamentoFaturamento);
-            AguardarProcessando();
+            AguardarProcessando(driver);
+            ClicarElementoPagina(driver, abaAtividadePeD);
+            AguardarProcessando(driver);
+            ClicarElementoPagina(driver, abaOrcamentoFaturamento);
+            AguardarProcessando(driver);
             if (Constantes.TesteSistemalocal)
             {
                 Thread.Sleep(6000);
@@ -316,40 +316,40 @@ namespace Lampp.CAPDA.Teste.Automatizado.Credenciamento.PageObjects
             }
             randomNumber = random.Next(1, 10);
             numero = randomNumber.ToString();
-            PreencherCampoSemLimpar(campoPesquisaDesenvolvimentoAnoAnterior, numero);
+            PreencherCampoSemLimpar(driver,campoPesquisaDesenvolvimentoAnoAnterior, numero);
             Thread.Sleep(300);
 
             randomNumber = random.Next(1, 10);
             numero = randomNumber.ToString();
-            PreencherCampoSemLimpar(campoPesquisaDesenvolvimentoAnoAtual, numero);
+            PreencherCampoSemLimpar(driver, campoPesquisaDesenvolvimentoAnoAtual, numero);
             Thread.Sleep(300);
 
             randomNumber = random.Next(1, 10);
             numero = randomNumber.ToString();
-            PreencherCampoSemLimpar(campoPesquisaDesenvolvimentoAnoSeguinte, numero);
+            PreencherCampoSemLimpar(driver, campoPesquisaDesenvolvimentoAnoSeguinte, numero);
             Thread.Sleep(300);
 
             randomNumber = random.Next(1, 10);
             numero = randomNumber.ToString();
-            PreencherCampoSemLimpar(campoOutrasAtividadesAnoAnterior, numero);
+            PreencherCampoSemLimpar(driver, campoOutrasAtividadesAnoAnterior, numero);
             Thread.Sleep(300);
 
             randomNumber = random.Next(1, 10);
             numero = randomNumber.ToString();
-            PreencherCampoSemLimpar(campoOutrasAtividadesAnoAtual, numero);
+            PreencherCampoSemLimpar(driver, campoOutrasAtividadesAnoAtual, numero);
             Thread.Sleep(300);
 
             randomNumber = random.Next(1, 10);
             numero = randomNumber.ToString();
-            PreencherCampoSemLimpar(campoOutrasAtividadesAnoSeguinte, numero);
+            PreencherCampoSemLimpar(driver, campoOutrasAtividadesAnoSeguinte, numero);
             //InserirTeclaTab(campoContratadosOutrosAtividadePD);
             Thread.Sleep(300);
 
-            ////ClicarElementoPagina(botaoSalvarOrcamentoFaturamento);
-            ClicarElementoPagina(botaoSalvar);
-            AguardarProcessando();
-            AguardarProcessando();
-            ClicarElementoPagina(botaoFechar);
+            ////ClicarElementoPagina(driver, botaoSalvarOrcamentoFaturamento);
+            ClicarElementoPagina(driver, botaoSalvar);
+            AguardarProcessando(driver);
+            AguardarProcessando(driver);
+            ClicarElementoPagina(driver, botaoFechar);
         }
 
         //Força de Trabalho
@@ -369,12 +369,12 @@ namespace Lampp.CAPDA.Teste.Automatizado.Credenciamento.PageObjects
 
         public By botaoSalvarForcaTrabalho = By.XPath("//div[@id='atividade-pd']/app-aba-atividade-pd/div[2]/div[4]/div/div/button");
 
-        public void PreencherForcaTrabalho()
+        public void PreencherForcaTrabalho(WebDriver driver)
         {
             Random random = new Random();
             int randomNumber;
             string numero;
-            AguardarProcessando();
+            AguardarProcessando(driver);
             if (Constantes.TesteSistemalocal)
             {
                 Thread.Sleep(5000);
@@ -385,74 +385,74 @@ namespace Lampp.CAPDA.Teste.Automatizado.Credenciamento.PageObjects
             }
             randomNumber = random.Next(1, 10);
             numero = randomNumber.ToString();
-            PreencherCampo(campoQuadroEfetivoSuperiorAtividadePD, numero);
+            PreencherCampo(driver, campoQuadroEfetivoSuperiorAtividadePD, numero);
 
             randomNumber = random.Next(1, 10);
             numero = randomNumber.ToString();
-            PreencherCampo(campoQuadroEfetivoOutrosAtividadePD, numero);
+            PreencherCampo(driver, campoQuadroEfetivoOutrosAtividadePD, numero);
 
             randomNumber = random.Next(1, 10);
             numero = randomNumber.ToString();
-            PreencherCampo(campoContratadosSuperiorAtividadePD, numero);
+            PreencherCampo(driver, campoContratadosSuperiorAtividadePD, numero);
 
             randomNumber = random.Next(1, 10);
             numero = randomNumber.ToString();
-            PreencherCampo(campoContratadosOutrosAtividadePD, numero);
+            PreencherCampo(driver, campoContratadosOutrosAtividadePD, numero);
 
             randomNumber = random.Next(1, 10);
             numero = randomNumber.ToString();
-            PreencherCampo(campoQuadroEfetivoNivelSuperiorEnsino, numero);
+            PreencherCampo(driver, campoQuadroEfetivoNivelSuperiorEnsino, numero);
 
             randomNumber = random.Next(1, 10);
             numero = randomNumber.ToString();
-            PreencherCampo(campoQuadroEfetivoOutrosEnsino, numero);
+            PreencherCampo(driver, campoQuadroEfetivoOutrosEnsino, numero);
 
             randomNumber = random.Next(1, 10);
             numero = randomNumber.ToString();
-            PreencherCampo(campoContratadosSuperiorEnsino, numero);
+            PreencherCampo(driver, campoContratadosSuperiorEnsino, numero);
 
             randomNumber = random.Next(1, 10);
             numero = randomNumber.ToString();
-            PreencherCampo(campoEfetivoSuperiorOutros, numero);
+            PreencherCampo(driver, campoEfetivoSuperiorOutros, numero);
 
             randomNumber = random.Next(1, 10);
             numero = randomNumber.ToString();
-            PreencherCampo(campoContratadosOutrosEnsino, numero);
+            PreencherCampo(driver, campoContratadosOutrosEnsino, numero);
 
             randomNumber = random.Next(1, 10);
             numero = randomNumber.ToString();
-            PreencherCampo(campoEfetivoOutrosOutros, numero);
+            PreencherCampo(driver, campoEfetivoOutrosOutros, numero);
 
             randomNumber = random.Next(1, 10);
             numero = randomNumber.ToString();
-            PreencherCampo(campoContratadorSuperiorOutros, numero);
+            PreencherCampo(driver, campoContratadorSuperiorOutros, numero);
 
             randomNumber = random.Next(1, 10);
             numero = randomNumber.ToString();
-            PreencherCampo(campoContratadorOutrosOutros, numero);
+            PreencherCampo(driver, campoContratadorOutrosOutros, numero);
 
-            //ClicarElementoPagina(botaoSalvarForcaTrabalho);
-            ClicarElementoPagina(botaoSalvar);
+            //ClicarElementoPagina(driver, botaoSalvarForcaTrabalho);
+            ClicarElementoPagina(driver, botaoSalvar);
 
-            AguardarProcessando();
+            AguardarProcessando(driver);
             Thread.Sleep(1000);
             //Aparecem 2 mensagens, uma de confirmacao que salvou e outra Nenhum registro encontrado. Tenta clicar nas duas uma por vez.
             if (IsElementDisplayed(driver, botaoFechar) || IsElementDisplayed(driver, botaoFecharMensagemConfirmacaoNenhumRegistroEncontrado))
             {
-                AguardarProcessando();
-                AguardarProcessando();
+                AguardarProcessando(driver);
+                AguardarProcessando(driver);
                 if (IsElementDisplayed(driver, botaoFecharMensagemConfirmacaoNenhumRegistroEncontrado))
                 {
-                    ClicarElementoPagina(botaoFecharMensagemConfirmacaoNenhumRegistroEncontrado);
+                    ClicarElementoPagina(driver, botaoFecharMensagemConfirmacaoNenhumRegistroEncontrado);
                 }
 
-                AguardarProcessando();
+                AguardarProcessando(driver);
 
                 if (IsElementDisplayed(driver, botaoFechar))
                 {
-                    ClicarElementoPagina(botaoFechar);
+                    ClicarElementoPagina(driver, botaoFechar);
                 }
-                AguardarProcessando();
+                AguardarProcessando(driver);
             }
         }
 
@@ -462,18 +462,18 @@ namespace Lampp.CAPDA.Teste.Automatizado.Credenciamento.PageObjects
         public By comboAreaPrincipal = By.Id("drop-list");
         public By comboAreaAtuacao = By.Id("combo-area-atuacao");
         public By botaoSalvarAreaAtuacao = By.XPath("(//button[@type='button'])[2]");
-        public void PreencherAreaAtuacao()
+        public void PreencherAreaAtuacao(WebDriver driver)
         {
-            AguardarProcessando();
-            ClicarElementoPagina(botaoNovoAreaAtuacao);
-            SelecionarItemCombo(comboAreaPrincipal, "Engenharias");
-            AguardarProcessando();
-            SelecionarItemCombo(comboAreaAtuacao, "Estruturas");
-            AguardarProcessando();
-            //ClicarElementoPagina(botaoSalvarAreaAtuacao);
-            ClicarElementoPagina(botaoSalvar);
-            AguardarProcessando();
-            ClicarElementoPagina(botaoFechar);
+            AguardarProcessando(driver);
+            ClicarElementoPagina(driver, botaoNovoAreaAtuacao);
+            SelecionarItemCombo(driver, comboAreaPrincipal, "Engenharias");
+            AguardarProcessando(driver);
+            SelecionarItemCombo(driver, comboAreaAtuacao, "Estruturas");
+            AguardarProcessando(driver);
+            //ClicarElementoPagina(driver, botaoSalvarAreaAtuacao);
+            ClicarElementoPagina(driver, botaoSalvar);
+            AguardarProcessando(driver);
+            ClicarElementoPagina(driver, botaoFechar);
         }
 
         #endregion
@@ -490,25 +490,25 @@ namespace Lampp.CAPDA.Teste.Automatizado.Credenciamento.PageObjects
         public By campoVinculoInstitucionalPesquisador = By.Id("vinculoInstitucional");
         public By anexarArquivoPesquisador = By.Id("arquivo");
 
-        public void PreencherPesquisador()
+        public void PreencherPesquisador(WebDriver driver)
         {
-            AguardarProcessando();
-            ClicarElementoPagina(abaPesquisadores);
-            AguardarProcessando();
-            ClicarElementoPagina(botaoNovo);
-            AguardarProcessando();
-            SelecionarItemCombo(comboTipoPesquisador, "Pesquisador");
-            SelecionarItemCombo(comboUnidadeAcademica, "Unidade Teste Automatizado");
-            PreencherCampo(campoNomePesquisador, geradorNome.GerarNome());
-            PreencherCampo(campoFormacaoAcademicaPesquisador, "Formacao em Pesquisa");
-            SelecionarItemCombo(comboTitulacaoPesquisador, "Mestrado");
-            PreencherCampo(campoLinhaPesquisaPesquisador, "Pesquisa Tecnológica");
-            PreencherCampo(campoVinculoInstitucionalPesquisador, "Pesquisador Chefe");
-            PreencherCampo(anexarArquivoPesquisador, Constantes.CaminhoPDF);
-            AguardarProcessando();
-            ClicarElementoPagina(botaoSalvar);
-            AguardarProcessando();
-            ClicarElementoPagina(botaoFechar);
+            AguardarProcessando(driver);
+            ClicarElementoPagina(driver, abaPesquisadores);
+            AguardarProcessando(driver);
+            ClicarElementoPagina(driver, botaoNovo);
+            AguardarProcessando(driver);
+            SelecionarItemCombo(driver, comboTipoPesquisador, "Pesquisador");
+            SelecionarItemCombo(driver, comboUnidadeAcademica, "Unidade Teste Automatizado");
+            PreencherCampo(driver, campoNomePesquisador, geradorNome.GerarNome());
+            PreencherCampo(driver, campoFormacaoAcademicaPesquisador, "Formacao em Pesquisa");
+            SelecionarItemCombo(driver, comboTitulacaoPesquisador, "Mestrado");
+            PreencherCampo(driver, campoLinhaPesquisaPesquisador, "Pesquisa Tecnológica");
+            PreencherCampo(driver, campoVinculoInstitucionalPesquisador, "Pesquisador Chefe");
+            PreencherCampo(driver, anexarArquivoPesquisador, Constantes.CaminhoPDF);
+            AguardarProcessando(driver);
+            ClicarElementoPagina(driver, botaoSalvar);
+            AguardarProcessando(driver);
+            ClicarElementoPagina(driver, botaoFechar);
         }
 
         #endregion
@@ -525,23 +525,23 @@ namespace Lampp.CAPDA.Teste.Automatizado.Credenciamento.PageObjects
         public By campoRelacaoEquipamentosLaboratorio = By.Id("relacao");
         public By anexarArquivoLaboratorio = By.Id("arquivo");
 
-        public void PreencherLaboratorio()
+        public void PreencherLaboratorio(WebDriver driver)
         {
-            AguardarProcessando();
-            ClicarElementoPagina(abaLaboratorio);
-            AguardarProcessando();
-            ClicarElementoPagina(botaoNovo);
-            AguardarProcessando();
-            SelecionarItemCombo(comboTipoLaboratorio, "Montado");
-            PreencherCampo(campoResponsavelLaboratorio, geradorNome.GerarNome());
-            SelecionarItemCombo(comboLocalLaboratorio, "Instituição");
-            PreencherCampo(campoObjetivoLaboratorio, "Teste Teste");
-            PreencherCampo(campoAtividadesLaboratorio, "Teste Teste");
-            PreencherCampo(campoAreaFisicaLaboratorio, "Teste Teste");
-            PreencherCampo(campoRelacaoEquipamentosLaboratorio, "Teste Teste");
-            ClicarElementoPagina(botaoSalvar);
-            AguardarProcessando();
-            ClicarElementoPagina(botaoFechar);
+            AguardarProcessando(driver);
+            ClicarElementoPagina(driver, abaLaboratorio);
+            AguardarProcessando(driver);
+            ClicarElementoPagina(driver, botaoNovo);
+            AguardarProcessando(driver);
+            SelecionarItemCombo(driver, comboTipoLaboratorio, "Montado");
+            PreencherCampo(driver, campoResponsavelLaboratorio, geradorNome.GerarNome());
+            SelecionarItemCombo(driver, comboLocalLaboratorio, "Instituição");
+            PreencherCampo(driver, campoObjetivoLaboratorio, "Teste Teste");
+            PreencherCampo(driver, campoAtividadesLaboratorio, "Teste Teste");
+            PreencherCampo(driver, campoAreaFisicaLaboratorio, "Teste Teste");
+            PreencherCampo(driver, campoRelacaoEquipamentosLaboratorio, "Teste Teste");
+            ClicarElementoPagina(driver, botaoSalvar);
+            AguardarProcessando(driver);
+            ClicarElementoPagina(driver, botaoFechar);
         }
 
         #endregion
@@ -553,20 +553,20 @@ namespace Lampp.CAPDA.Teste.Automatizado.Credenciamento.PageObjects
         public By campoDiscriminacao = By.Id("discriminacao");
         public By anexarArquivoDocumentacao = By.Id("arquivo");
 
-        public void PreencherDocumentacao()
+        public void PreencherDocumentacao(WebDriver driver)
         {
-            AguardarProcessando();
-            ClicarElementoPagina(abaDocumentacao);
-            AguardarProcessando();
-            ClicarElementoPagina(botaoNovo);
-            AguardarProcessando();
-            SelecionarItemCombo(comboTipoDcoumento, "Outros");
-            PreencherCampo(campoDiscriminacao, "Teste");
-            PreencherCampo(anexarArquivoDocumentacao, Constantes.CaminhoPDF);
-            AguardarProcessando();
-            ClicarElementoPagina(botaoSalvar);
-            AguardarProcessando();
-            ClicarElementoPagina(botaoFechar);
+            AguardarProcessando(driver);
+            ClicarElementoPagina(driver, abaDocumentacao);
+            AguardarProcessando(driver);
+            ClicarElementoPagina(driver, botaoNovo);
+            AguardarProcessando(driver);
+            SelecionarItemCombo(driver, comboTipoDcoumento, "Outros");
+            PreencherCampo(driver, campoDiscriminacao, "Teste");
+            PreencherCampo(driver, anexarArquivoDocumentacao, Constantes.CaminhoPDF);
+            AguardarProcessando(driver);
+            ClicarElementoPagina(driver, botaoSalvar);
+            AguardarProcessando(driver);
+            ClicarElementoPagina(driver, botaoFechar);
         }
 
         #endregion
@@ -585,26 +585,26 @@ namespace Lampp.CAPDA.Teste.Automatizado.Credenciamento.PageObjects
         private By campoPrazoExecucaoPlano = By.Id("prazo-de-execucao");
         private By anexarArquivoPlano = By.Id("arquivo");
 
-        private void PreencherPlanoExecucao()
+        private void PreencherPlanoExecucao(WebDriver driver)
         {
-            AguardarProcessando();
-            ClicarElementoPagina(abaAnexo);
+            AguardarProcessando(driver);
+            ClicarElementoPagina(driver, abaAnexo);
             //Tem 3 processando aqui por algum motivo
-            AguardarProcessando();
-            AguardarProcessando();
-            AguardarProcessando();
-            ClicarElementoPagina(abaDadosPlano);
-            AguardarProcessando();
-            PreencherCampo(campoTituloPlano, "Teste Teste Teste");
-            PreencherCampo(campoCoordenadorPlano, "Teste Teste Teste");
-            PreencherCampo(campoExecutorPlano, "Teste Teste Teste");
-            ClicarElementoPagina(checkboxPesquisaPlano);
-            PreencherCampo(campoPrazoExecucaoPlano, "Teste Teste Teste");
-            PreencherCampo(anexarArquivoPlano, Constantes.CaminhoPDF);
-            AguardarProcessando();
-            ClicarElementoPagina(botaoSalvar);
-            AguardarProcessando();
-            ClicarElementoPagina(botaoFechar);
+            AguardarProcessando(driver);
+            AguardarProcessando(driver);
+            AguardarProcessando(driver);
+            ClicarElementoPagina(driver, abaDadosPlano);
+            AguardarProcessando(driver);
+            PreencherCampo(driver, campoTituloPlano, "Teste Teste Teste");
+            PreencherCampo(driver, campoCoordenadorPlano, "Teste Teste Teste");
+            PreencherCampo(driver, campoExecutorPlano, "Teste Teste Teste");
+            ClicarElementoPagina(driver, checkboxPesquisaPlano);
+            PreencherCampo(driver, campoPrazoExecucaoPlano, "Teste Teste Teste");
+            PreencherCampo(driver, anexarArquivoPlano, Constantes.CaminhoPDF);
+            AguardarProcessando(driver);
+            ClicarElementoPagina(driver, botaoSalvar);
+            AguardarProcessando(driver);
+            ClicarElementoPagina(driver, botaoFechar);
         }
 
         //Aba 8.1.2
@@ -612,15 +612,15 @@ namespace Lampp.CAPDA.Teste.Automatizado.Credenciamento.PageObjects
         private By abaObjetivosMetas = By.LinkText("8.1.2 Objetivos e Metas");
         private By campoObjetivosMetas = By.Id("objetivos-e-metas-text");
 
-        private void PreencherObjetivosMetas()
+        private void PreencherObjetivosMetas(WebDriver driver)
         {
-            AguardarProcessando();
-            ClicarElementoPagina(abaObjetivosMetas);
-            AguardarProcessando();
-            PreencherCampo(campoObjetivosMetas, "Teste Teste Teste");
-            ClicarElementoPagina(botaoSalvar);
-            AguardarProcessando();
-            ClicarElementoPagina(botaoFechar);
+            AguardarProcessando(driver);
+            ClicarElementoPagina(driver, abaObjetivosMetas);
+            AguardarProcessando(driver);
+            PreencherCampo(driver, campoObjetivosMetas, "Teste Teste Teste");
+            ClicarElementoPagina(driver, botaoSalvar);
+            AguardarProcessando(driver);
+            ClicarElementoPagina(driver, botaoFechar);
         }
 
 
@@ -629,15 +629,15 @@ namespace Lampp.CAPDA.Teste.Automatizado.Credenciamento.PageObjects
         private By abaRecursosHumanos = By.LinkText("8.1.3 Recursos Humanos");
         private By campoRecursosHumanos = By.Id("rh-text");
 
-        private void PreencherRecursosHumanos()
+        private void PreencherRecursosHumanos(WebDriver driver)
         {
-            AguardarProcessando();
-            ClicarElementoPagina(abaRecursosHumanos);
-            AguardarProcessando();
-            PreencherCampo(campoRecursosHumanos, "Teste Teste Teste");
-            ClicarElementoPagina(botaoSalvar);
-            AguardarProcessando();
-            ClicarElementoPagina(botaoFechar);
+            AguardarProcessando(driver);
+            ClicarElementoPagina(driver, abaRecursosHumanos);
+            AguardarProcessando(driver);
+            PreencherCampo(driver, campoRecursosHumanos, "Teste Teste Teste");
+            ClicarElementoPagina(driver, botaoSalvar);
+            AguardarProcessando(driver);
+            ClicarElementoPagina(driver, botaoFechar);
         }
 
         //Aba 8.1.4
@@ -645,15 +645,15 @@ namespace Lampp.CAPDA.Teste.Automatizado.Credenciamento.PageObjects
         private By abaResultados = By.LinkText("8.1.4 Resultados");
         private By campoResultados = By.Id("resultados-serem-alcancados");
 
-        private void PreencherResultados()
+        private void PreencherResultados(WebDriver driver)
         {
-            AguardarProcessando();
-            ClicarElementoPagina(abaResultados);
-            AguardarProcessando();
-            PreencherCampo(campoResultados, "Teste Teste Teste");
-            ClicarElementoPagina(botaoSalvar);
-            AguardarProcessando();
-            ClicarElementoPagina(botaoFechar);
+            AguardarProcessando(driver);
+            ClicarElementoPagina(driver, abaResultados);
+            AguardarProcessando(driver);
+            PreencherCampo(driver, campoResultados, "Teste Teste Teste");
+            ClicarElementoPagina(driver, botaoSalvar);
+            AguardarProcessando(driver);
+            ClicarElementoPagina(driver, botaoFechar);
         }
 
         #endregion
@@ -763,370 +763,370 @@ namespace Lampp.CAPDA.Teste.Automatizado.Credenciamento.PageObjects
         private By campo10_6 = By.Id("10-6");
         private By campo10_7 = By.Id("10-7");
 
-        private void PreencherOrcamento()
+        private void PreencherOrcamento(WebDriver driver)
         {
             Random random = new Random();
             int randomNumber;
             string numero;
 
-            AguardarProcessando();
-            ClicarElementoPagina(abaOrcamento);
-            AguardarProcessando();
+            AguardarProcessando(driver);
+            ClicarElementoPagina(driver, abaOrcamento);
+            AguardarProcessando(driver);
             randomNumber = random.Next(1, 10);
             numero = randomNumber.ToString();
-            PreencherCampo(campo0_0, numero);
+            PreencherCampo(driver, campo0_0, numero);
 
             randomNumber = random.Next(1, 10);
             numero = randomNumber.ToString();
-            PreencherCampo(campo0_1, numero);
+            PreencherCampo(driver, campo0_1, numero);
 
             randomNumber = random.Next(1, 10);
             numero = randomNumber.ToString();
-            PreencherCampo(campo0_2, numero);
+            PreencherCampo(driver, campo0_2, numero);
 
             randomNumber = random.Next(1, 10);
             numero = randomNumber.ToString();
-            PreencherCampo(campo0_3, numero);
+            PreencherCampo(driver, campo0_3, numero);
 
             randomNumber = random.Next(1, 10);
             numero = randomNumber.ToString();
-            PreencherCampo(campo0_4, numero);
+            PreencherCampo(driver, campo0_4, numero);
 
             randomNumber = random.Next(1, 10);
             numero = randomNumber.ToString();
-            PreencherCampo(campo0_5, numero);
+            PreencherCampo(driver, campo0_5, numero);
 
             randomNumber = random.Next(1, 10);
             numero = randomNumber.ToString();
-            PreencherCampo(campo0_6, numero);
+            PreencherCampo(driver, campo0_6, numero);
 
             randomNumber = random.Next(1, 10);
             numero = randomNumber.ToString();
-            PreencherCampo(campo0_7, numero);
+            PreencherCampo(driver, campo0_7, numero);
 
             randomNumber = random.Next(1, 10);
             numero = randomNumber.ToString();
-            PreencherCampo(campo1_0, numero);
+            PreencherCampo(driver, campo1_0, numero);
 
             randomNumber = random.Next(1, 10);
             numero = randomNumber.ToString();
-            PreencherCampo(campo1_1, numero);
+            PreencherCampo(driver, campo1_1, numero);
 
             randomNumber = random.Next(1, 10);
             numero = randomNumber.ToString();
-            PreencherCampo(campo1_2, numero);
+            PreencherCampo(driver, campo1_2, numero);
 
             randomNumber = random.Next(1, 10);
             numero = randomNumber.ToString();
-            PreencherCampo(campo1_3, numero);
+            PreencherCampo(driver, campo1_3, numero);
 
             randomNumber = random.Next(1, 10);
             numero = randomNumber.ToString();
-            PreencherCampo(campo1_4, numero);
+            PreencherCampo(driver, campo1_4, numero);
 
             randomNumber = random.Next(1, 10);
             numero = randomNumber.ToString();
-            PreencherCampo(campo1_5, numero);
+            PreencherCampo(driver, campo1_5, numero);
 
             randomNumber = random.Next(1, 10);
             numero = randomNumber.ToString();
-            PreencherCampo(campo1_6, numero);
+            PreencherCampo(driver, campo1_6, numero);
 
             randomNumber = random.Next(1, 10);
             numero = randomNumber.ToString();
-            PreencherCampo(campo1_7, numero);
+            PreencherCampo(driver, campo1_7, numero);
 
             randomNumber = random.Next(1, 10);
             numero = randomNumber.ToString();
-            PreencherCampo(campo2_0, numero);
+            PreencherCampo(driver, campo2_0, numero);
 
             randomNumber = random.Next(1, 10);
             numero = randomNumber.ToString();
-            PreencherCampo(campo2_1, numero);
+            PreencherCampo(driver, campo2_1, numero);
 
             randomNumber = random.Next(1, 10);
             numero = randomNumber.ToString();
-            PreencherCampo(campo2_2, numero);
+            PreencherCampo(driver, campo2_2, numero);
 
             randomNumber = random.Next(1, 10);
             numero = randomNumber.ToString();
-            PreencherCampo(campo2_3, numero);
+            PreencherCampo(driver, campo2_3, numero);
 
             randomNumber = random.Next(1, 10);
             numero = randomNumber.ToString();
-            PreencherCampo(campo2_4, numero);
+            PreencherCampo(driver, campo2_4, numero);
 
             randomNumber = random.Next(1, 10);
             numero = randomNumber.ToString();
-            PreencherCampo(campo2_5, numero);
+            PreencherCampo(driver, campo2_5, numero);
 
             randomNumber = random.Next(1, 10);
             numero = randomNumber.ToString();
-            PreencherCampo(campo2_6, numero);
+            PreencherCampo(driver, campo2_6, numero);
 
             randomNumber = random.Next(1, 10);
             numero = randomNumber.ToString();
-            PreencherCampo(campo2_7, numero);
+            PreencherCampo(driver, campo2_7, numero);
 
             randomNumber = random.Next(1, 10);
             numero = randomNumber.ToString();
-            PreencherCampo(campo3_0, numero);
+            PreencherCampo(driver, campo3_0, numero);
 
             randomNumber = random.Next(1, 10);
             numero = randomNumber.ToString();
-            PreencherCampo(campo3_1, numero);
+            PreencherCampo(driver, campo3_1, numero);
 
             randomNumber = random.Next(1, 10);
             numero = randomNumber.ToString();
-            PreencherCampo(campo3_2, numero);
+            PreencherCampo(driver, campo3_2, numero);
 
             randomNumber = random.Next(1, 10);
             numero = randomNumber.ToString();
-            PreencherCampo(campo3_3, numero);
+            PreencherCampo(driver, campo3_3, numero);
 
             randomNumber = random.Next(1, 10);
             numero = randomNumber.ToString();
-            PreencherCampo(campo3_4, numero);
+            PreencherCampo(driver, campo3_4, numero);
 
             randomNumber = random.Next(1, 10);
             numero = randomNumber.ToString();
-            PreencherCampo(campo3_5, numero);
+            PreencherCampo(driver, campo3_5, numero);
 
             randomNumber = random.Next(1, 10);
             numero = randomNumber.ToString();
-            PreencherCampo(campo3_6, numero);
+            PreencherCampo(driver, campo3_6, numero);
 
             randomNumber = random.Next(1, 10);
             numero = randomNumber.ToString();
-            PreencherCampo(campo3_7, numero);
+            PreencherCampo(driver, campo3_7, numero);
 
             randomNumber = random.Next(1, 10);
             numero = randomNumber.ToString();
-            PreencherCampo(campo4_0, numero);
+            PreencherCampo(driver, campo4_0, numero);
 
             randomNumber = random.Next(1, 10);
             numero = randomNumber.ToString();
-            PreencherCampo(campo4_1, numero);
+            PreencherCampo(driver, campo4_1, numero);
 
             randomNumber = random.Next(1, 10);
             numero = randomNumber.ToString();
-            PreencherCampo(campo4_2, numero);
+            PreencherCampo(driver, campo4_2, numero);
 
             randomNumber = random.Next(1, 10);
             numero = randomNumber.ToString();
-            PreencherCampo(campo4_3, numero);
+            PreencherCampo(driver, campo4_3, numero);
 
             randomNumber = random.Next(1, 10);
             numero = randomNumber.ToString();
-            PreencherCampo(campo4_4, numero);
+            PreencherCampo(driver, campo4_4, numero);
 
             randomNumber = random.Next(1, 10);
             numero = randomNumber.ToString();
-            PreencherCampo(campo4_5, numero);
+            PreencherCampo(driver, campo4_5, numero);
 
             randomNumber = random.Next(1, 10);
             numero = randomNumber.ToString();
-            PreencherCampo(campo4_6, numero);
+            PreencherCampo(driver, campo4_6, numero);
 
             randomNumber = random.Next(1, 10);
             numero = randomNumber.ToString();
-            PreencherCampo(campo4_7, numero);
+            PreencherCampo(driver, campo4_7, numero);
 
             randomNumber = random.Next(1, 10);
             numero = randomNumber.ToString();
-            PreencherCampo(campo5_0, numero);
+            PreencherCampo(driver, campo5_0, numero);
 
             randomNumber = random.Next(1, 10);
             numero = randomNumber.ToString();
-            PreencherCampo(campo5_1, numero);
+            PreencherCampo(driver, campo5_1, numero);
 
             randomNumber = random.Next(1, 10);
             numero = randomNumber.ToString();
-            PreencherCampo(campo5_2, numero);
+            PreencherCampo(driver, campo5_2, numero);
 
             randomNumber = random.Next(1, 10);
             numero = randomNumber.ToString();
-            PreencherCampo(campo5_3, numero);
+            PreencherCampo(driver, campo5_3, numero);
 
             randomNumber = random.Next(1, 10);
             numero = randomNumber.ToString();
-            PreencherCampo(campo5_4, numero);
+            PreencherCampo(driver, campo5_4, numero);
 
             randomNumber = random.Next(1, 10);
             numero = randomNumber.ToString();
-            PreencherCampo(campo5_5, numero);
+            PreencherCampo(driver, campo5_5, numero);
 
             randomNumber = random.Next(1, 10);
             numero = randomNumber.ToString();
-            PreencherCampo(campo5_6, numero);
+            PreencherCampo(driver, campo5_6, numero);
 
             randomNumber = random.Next(1, 10);
             numero = randomNumber.ToString();
-            PreencherCampo(campo5_7, numero);
+            PreencherCampo(driver, campo5_7, numero);
 
             randomNumber = random.Next(1, 10);
             numero = randomNumber.ToString();
-            PreencherCampo(campo6_0, numero);
+            PreencherCampo(driver, campo6_0, numero);
 
             randomNumber = random.Next(1, 10);
             numero = randomNumber.ToString();
-            PreencherCampo(campo6_1, numero);
+            PreencherCampo(driver, campo6_1, numero);
 
             randomNumber = random.Next(1, 10);
             numero = randomNumber.ToString();
-            PreencherCampo(campo6_2, numero);
+            PreencherCampo(driver, campo6_2, numero);
 
             randomNumber = random.Next(1, 10);
             numero = randomNumber.ToString();
-            PreencherCampo(campo6_3, numero);
+            PreencherCampo(driver, campo6_3, numero);
 
             randomNumber = random.Next(1, 10);
             numero = randomNumber.ToString();
-            PreencherCampo(campo6_4, numero);
+            PreencherCampo(driver, campo6_4, numero);
 
             randomNumber = random.Next(1, 10);
             numero = randomNumber.ToString();
-            PreencherCampo(campo6_5, numero);
+            PreencherCampo(driver, campo6_5, numero);
 
             randomNumber = random.Next(1, 10);
             numero = randomNumber.ToString();
-            PreencherCampo(campo6_6, numero);
+            PreencherCampo(driver, campo6_6, numero);
 
             randomNumber = random.Next(1, 10);
             numero = randomNumber.ToString();
-            PreencherCampo(campo6_7, numero);
+            PreencherCampo(driver, campo6_7, numero);
 
             randomNumber = random.Next(1, 10);
             numero = randomNumber.ToString();
-            PreencherCampo(campo7_0, numero);
+            PreencherCampo(driver, campo7_0, numero);
 
             randomNumber = random.Next(1, 10);
             numero = randomNumber.ToString();
-            PreencherCampo(campo7_1, numero);
+            PreencherCampo(driver, campo7_1, numero);
 
             randomNumber = random.Next(1, 10);
             numero = randomNumber.ToString();
-            PreencherCampo(campo7_2, numero);
+            PreencherCampo(driver, campo7_2, numero);
 
             randomNumber = random.Next(1, 10);
             numero = randomNumber.ToString();
-            PreencherCampo(campo7_3, numero);
+            PreencherCampo(driver, campo7_3, numero);
 
             randomNumber = random.Next(1, 10);
             numero = randomNumber.ToString();
-            PreencherCampo(campo7_4, numero);
+            PreencherCampo(driver, campo7_4, numero);
 
             randomNumber = random.Next(1, 10);
             numero = randomNumber.ToString();
-            PreencherCampo(campo7_5, numero);
+            PreencherCampo(driver, campo7_5, numero);
 
             randomNumber = random.Next(1, 10);
             numero = randomNumber.ToString();
-            PreencherCampo(campo7_6, numero);
+            PreencherCampo(driver, campo7_6, numero);
 
             randomNumber = random.Next(1, 10);
             numero = randomNumber.ToString();
-            PreencherCampo(campo7_7, numero);
+            PreencherCampo(driver, campo7_7, numero);
 
             randomNumber = random.Next(1, 10);
             numero = randomNumber.ToString();
-            PreencherCampo(campo8_0, numero);
+            PreencherCampo(driver, campo8_0, numero);
 
             randomNumber = random.Next(1, 10);
             numero = randomNumber.ToString();
-            PreencherCampo(campo8_1, numero);
+            PreencherCampo(driver, campo8_1, numero);
 
             randomNumber = random.Next(1, 10);
             numero = randomNumber.ToString();
-            PreencherCampo(campo8_2, numero);
+            PreencherCampo(driver, campo8_2, numero);
 
             randomNumber = random.Next(1, 10);
             numero = randomNumber.ToString();
-            PreencherCampo(campo8_3, numero);
+            PreencherCampo(driver, campo8_3, numero);
 
             randomNumber = random.Next(1, 10);
             numero = randomNumber.ToString();
-            PreencherCampo(campo8_4, numero);
+            PreencherCampo(driver, campo8_4, numero);
 
             randomNumber = random.Next(1, 10);
             numero = randomNumber.ToString();
-            PreencherCampo(campo8_5, numero);
+            PreencherCampo(driver, campo8_5, numero);
 
             randomNumber = random.Next(1, 10);
             numero = randomNumber.ToString();
-            PreencherCampo(campo8_6, numero);
+            PreencherCampo(driver, campo8_6, numero);
 
             randomNumber = random.Next(1, 10);
             numero = randomNumber.ToString();
-            PreencherCampo(campo8_7, numero);
+            PreencherCampo(driver, campo8_7, numero);
 
             randomNumber = random.Next(1, 10);
             numero = randomNumber.ToString();
-            PreencherCampo(campo9_0, numero);
+            PreencherCampo(driver, campo9_0, numero);
 
             randomNumber = random.Next(1, 10);
             numero = randomNumber.ToString();
-            PreencherCampo(campo9_1, numero);
+            PreencherCampo(driver, campo9_1, numero);
 
             randomNumber = random.Next(1, 10);
             numero = randomNumber.ToString();
-            PreencherCampo(campo9_2, numero);
+            PreencherCampo(driver, campo9_2, numero);
 
             randomNumber = random.Next(1, 10);
             numero = randomNumber.ToString();
-            PreencherCampo(campo9_3, numero);
+            PreencherCampo(driver, campo9_3, numero);
 
             randomNumber = random.Next(1, 10);
             numero = randomNumber.ToString();
-            PreencherCampo(campo9_4, numero);
+            PreencherCampo(driver, campo9_4, numero);
 
             randomNumber = random.Next(1, 10);
             numero = randomNumber.ToString();
-            PreencherCampo(campo9_5, numero);
+            PreencherCampo(driver, campo9_5, numero);
 
             randomNumber = random.Next(1, 10);
             numero = randomNumber.ToString();
-            PreencherCampo(campo9_6, numero);
+            PreencherCampo(driver, campo9_6, numero);
 
             randomNumber = random.Next(1, 10);
             numero = randomNumber.ToString();
-            PreencherCampo(campo9_7, numero);
+            PreencherCampo(driver, campo9_7, numero);
 
             randomNumber = random.Next(1, 10);
             numero = randomNumber.ToString();
-            PreencherCampo(campo10_0, numero);
+            PreencherCampo(driver, campo10_0, numero);
 
             randomNumber = random.Next(1, 10);
             numero = randomNumber.ToString();
-            PreencherCampo(campo10_1, numero);
+            PreencherCampo(driver, campo10_1, numero);
 
             randomNumber = random.Next(1, 10);
             numero = randomNumber.ToString();
-            PreencherCampo(campo10_2, numero);
+            PreencherCampo(driver, campo10_2, numero);
 
             randomNumber = random.Next(1, 10);
             numero = randomNumber.ToString();
-            PreencherCampo(campo10_3, numero);
+            PreencherCampo(driver, campo10_3, numero);
 
             randomNumber = random.Next(1, 10);
             numero = randomNumber.ToString();
-            PreencherCampo(campo10_4, numero);
+            PreencherCampo(driver, campo10_4, numero);
 
             randomNumber = random.Next(1, 10);
             numero = randomNumber.ToString();
-            PreencherCampo(campo10_5, numero);
+            PreencherCampo(driver, campo10_5, numero);
 
             randomNumber = random.Next(1, 10);
             numero = randomNumber.ToString();
-            PreencherCampo(campo10_6, numero);
+            PreencherCampo(driver, campo10_6, numero);
 
             randomNumber = random.Next(1, 10);
             numero = randomNumber.ToString();
-            PreencherCampo(campo10_7, numero);
+            PreencherCampo(driver, campo10_7, numero);
 
-            ClicarElementoPagina(botaoSalvar);
-            AguardarProcessando();
-            ClicarElementoPagina(botaoFechar);
+            ClicarElementoPagina(driver, botaoSalvar);
+            AguardarProcessando(driver);
+            ClicarElementoPagina(driver, botaoFechar);
         }
         #endregion
 
@@ -1142,26 +1142,26 @@ namespace Lampp.CAPDA.Teste.Automatizado.Credenciamento.PageObjects
         public By checkboxPesquisa = By.XPath("//div[@id='projeto-pd']/div[2]/app-aba-projeto-pd/app-modal-anexo-pd/div/div/div/div[2]/div/div[5]/div/div/label/i");
         public By campoRelacaoEquipamentos = By.Id("prazo-de-execucao");
 
-        private void PreencherProjetoPD()
+        private void PreencherProjetoPD(WebDriver driver)
         {
-            AguardarProcessando();
-            ClicarElementoPagina(abaProjetoPD);
-            AguardarProcessando();
-            ClicarElementoPagina(botaoFechar);
-            AguardarProcessando();
-            ClicarElementoPagina(botaoNovoProjetoPD);
-            AguardarProcessando();
-            SelecionarItemCombo(comboTipoProjeto, "Projeto");
-            PreencherCampo(campoTituloProjeto, "Teste Teste");
-            PreencherCampo(campoDescricaoProjeto, "Teste Teste Teste");
-            PreencherCampo(campoEquipeCoordenadorProjeto, "Teste Teste Teste");
-            PreencherCampo(campoValorProjeto, "Teste Teste Teste");
-            //ClicarElementoPagina(checkboxPesquisa);
-            PreencherCampo(campoRelacaoEquipamentos, "Teste Teste Teste");
-            ClicarElementoPagina(botaoSalvar);
-            AguardarProcessando();
-            ClicarElementoPagina(botaoFechar);
-            AguardarProcessando();
+            AguardarProcessando(driver);
+            ClicarElementoPagina(driver, abaProjetoPD);
+            AguardarProcessando(driver);
+            ClicarElementoPagina(driver, botaoFechar);
+            AguardarProcessando(driver);
+            ClicarElementoPagina(driver, botaoNovoProjetoPD);
+            AguardarProcessando(driver);
+            SelecionarItemCombo(driver, comboTipoProjeto, "Projeto");
+            PreencherCampo(driver, campoTituloProjeto, "Teste Teste");
+            PreencherCampo(driver, campoDescricaoProjeto, "Teste Teste Teste");
+            PreencherCampo(driver, campoEquipeCoordenadorProjeto, "Teste Teste Teste");
+            PreencherCampo(driver, campoValorProjeto, "Teste Teste Teste");
+            //ClicarElementoPagina(driver, checkboxPesquisa);
+            PreencherCampo(driver, campoRelacaoEquipamentos, "Teste Teste Teste");
+            ClicarElementoPagina(driver, botaoSalvar);
+            AguardarProcessando(driver);
+            ClicarElementoPagina(driver, botaoFechar);
+            AguardarProcessando(driver);
         }
 
 

@@ -12,11 +12,6 @@ namespace Lampp.CAPDA.Teste.Automatizado.Credenciamento.PageObjects
     public class PaginaDeliberarProcesso : PaginaBase
     {
 
-        public PaginaDeliberarProcesso(RemoteWebDriver driver) : base(driver)
-        {
-
-        }
-
         #region Pagina Principal
 
         public By campoProcesso = By.Id("processo");
@@ -37,29 +32,29 @@ namespace Lampp.CAPDA.Teste.Automatizado.Credenciamento.PageObjects
      
         public string Deliberar(string codigoProcesso)
         {
-            AguardarProcessando();
-            ClicarElementoPagina(botaoLimpar);
-            PreencherCampo(campoProcesso, codigoProcesso);
-            ClicarElementoPagina(botaoBuscar);
-            AguardarProcessando();
-            string cnpj = RetornaTextoElemento(cnpjEmpresa);
-            ClicarElementoPagina(checkGrid);
-            ClicarElementoPagina(botaoEnviarCapda);
-            AguardarProcessando();
-            ClicarElementoPagina(botaoFechar);
+            AguardarProcessando(driver);
+            ClicarElementoPagina(driver, botaoLimpar);
+            PreencherCampo(driver, campoProcesso, codigoProcesso);
+            ClicarElementoPagina(driver, botaoBuscar);
+            AguardarProcessando(driver);
+            string cnpj = RetornaTextoElemento(driver, cnpjEmpresa);
+            ClicarElementoPagina(driver, checkGrid);
+            ClicarElementoPagina(driver, botaoEnviarCapda);
+            AguardarProcessando(driver);
+            ClicarElementoPagina(driver, botaoFechar);
             Thread.Sleep(2000);
-            ClicarElementoPagina(botaoDeliberar);            
-            AguardarProcessando();
-            PreencherCampo(campoDataPublicacao, "2021-01-23");
-            PreencherCampo(campoNumeroResolucao, "12345");
-            PreencherCampo(campoAvaliacaoApartir, "2021-01-23");
-            PreencherCampo(botaoArquivo, Constantes.CaminhoPDF);
-            ClicarElementoPagina(botaoSalvar);
+            ClicarElementoPagina(driver, botaoDeliberar);            
+            AguardarProcessando(driver);
+            PreencherCampo(driver, campoDataPublicacao, "2021-01-23");
+            PreencherCampo(driver, campoNumeroResolucao, "12345");
+            PreencherCampo(driver, campoAvaliacaoApartir, "2021-01-23");
+            PreencherCampo(driver, botaoArquivo, Constantes.CaminhoPDF);
+            ClicarElementoPagina(driver, botaoSalvar);
             Thread.Sleep(2000);
-            AguardarProcessando();
-            ClicarElementoPagina(botaoNenhumRegistroEncontrado);
+            AguardarProcessando(driver);
+            ClicarElementoPagina(driver, botaoNenhumRegistroEncontrado);
             Thread.Sleep(2000);
-            ClicarElementoPagina(botaoFechar);
+            ClicarElementoPagina(driver, botaoFechar);
             return cnpj;            
         }
     }

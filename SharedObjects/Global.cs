@@ -7,6 +7,9 @@ using OpenQA.Selenium.IE;
 using OpenQA.Selenium.Edge;
 using System.IO;
 using System.Diagnostics;
+using WebDriverManager;
+using WebDriverManager.DriverConfigs.Impl;
+using WebDriverManager.Helpers;
 
 namespace Lampp.CAPDA.Teste.Automatizado.SharedObjects
 {
@@ -48,7 +51,7 @@ namespace Lampp.CAPDA.Teste.Automatizado.SharedObjects
                         // está na pasta /Out/ do projeto. Deve redirecionar
                         // para a /bin/Debug/, que é onde o driver do chrome
                         // se encontra.
-                        diretorioAplicacao = Path.GetFullPath(@"..\..\..\bin\Debug");
+                        diretorioAplicacao = Path.GetFullPath(@"..\..\bin\Debug");
                     }
                 }
                 return diretorioAplicacao;
@@ -64,21 +67,9 @@ namespace Lampp.CAPDA.Teste.Automatizado.SharedObjects
         /// </summary>
         /// <remarks>Escrita por Alan Spindler em 23/11/2015</remarks>
         private Global()
-        {
-            //encerrarOutrasInstanciasDriver();
-            //TestarNoChrome();            
-            TestarNoFirefox();
-            //AguardarTeste();
+        {            
         }
 
-        public static Global obterInstancia()
-        {
-            if (instancia == null)
-            {
-                instancia = new Global();
-            }
-            return instancia;
-        }
 
         private void encerrarOutrasInstanciasDriver()
         {
@@ -151,33 +142,33 @@ namespace Lampp.CAPDA.Teste.Automatizado.SharedObjects
         /// Instancia o driver do Firefox e  maximiza a tela do navegador
         /// </summary>
         /// <remarks>Escrita por Alan Spindler em 07/03/2016</remarks>
-        private void TestarNoFirefox()
-        {            
-            Environment.SetEnvironmentVariable("PATH", (DIRETORIO_APLICACAO));
-            var options = new FirefoxOptions();
-            options.AddAdditionalCapability("acceptInsecureCerts", true, true);
-            driver = new FirefoxDriver(DIRETORIO_APLICACAO, options);
-            driver.Manage().Window.Maximize();
-            driver.Manage().Timeouts().ImplicitWait = TimeSpan.FromSeconds(30);
-        }
+        //private void TestarNoFirefox()
+        //{            
+        //    Environment.SetEnvironmentVariable("PATH", (DIRETORIO_APLICACAO));
+        //    var options = new FirefoxOptions();
+        //    options.AddAdditionalCapability("acceptInsecureCerts", true, true);
+        //    driver = new FirefoxDriver(DIRETORIO_APLICACAO, options);
+        //    driver.Manage().Window.Maximize();
+        //    driver.Manage().Timeouts().ImplicitWait = TimeSpan.FromSeconds(30);
+        //}
 
         /// <summary>
         /// Instancia o driver do Chrome e  maximiza a tela do navegador
         /// OBS.: Para funcionar a suite de teste do visual studio utilizando o drive do chrome é necessário passar o caminho do driver.
         /// </summary>
         /// <remarks>Escrita por Alan Spindler em 07/03/2016</remarks>
-        private void TestarNoChrome()
-        {
-            var options = new ChromeOptions();
-            options.AddArgument("no-sandbox");
-            options.AddExtension(Constantes.CaminhoExtensao);
-            options.Proxy = null;
-            driver = new ChromeDriver(DIRETORIO_APLICACAO, options);
-            driver.Manage().Window.Maximize();
-            driver.Manage().Timeouts().ImplicitWait = TimeSpan.FromSeconds(30);
-            //DiminuirZoomParaResolucoesPequenas();
-            //driver.Manage().Timeouts().ImplicitWait(TimeSpan.FromSeconds(50));
-        }
+        //private void TestarNoChrome()
+        //{
+        //    var options = new ChromeOptions();
+        //    options.AddArgument("no-sandbox");
+        //    options.AddExtension(Constantes.CaminhoExtensao);
+        //    options.Proxy = null;
+        //    driver = new ChromeDriver(DIRETORIO_APLICACAO, options);
+        //    driver.Manage().Window.Maximize();
+        //    driver.Manage().Timeouts().ImplicitWait = TimeSpan.FromSeconds(30);
+        //    //DiminuirZoomParaResolucoesPequenas();
+        //    //driver.Manage().Timeouts().ImplicitWait(TimeSpan.FromSeconds(50));
+        //}
 
         /// <summary>
         /// Instancia o driver do ie e  maximiza a tela do navegador
@@ -185,23 +176,23 @@ namespace Lampp.CAPDA.Teste.Automatizado.SharedObjects
         /// https://code.google.com/p/selenium/wiki/InternetExplorerDriver#Required_Configuration
         /// </summary>
         /// <remarks>Escrita por Alan Spindler em 07/03/2016</remarks>
-        private void TestarNoIE()
-        {
-            Environment.SetEnvironmentVariable("PATH", (DIRETORIO_APLICACAO));
-            driver = new InternetExplorerDriver();
-            driver.Manage().Window.Maximize();
-        }
+        //private void TestarNoIE()
+        //{
+        //    Environment.SetEnvironmentVariable("PATH", (DIRETORIO_APLICACAO));
+        //    driver = new InternetExplorerDriver();
+        //    driver.Manage().Window.Maximize();
+        //}
 
         /// <summary>
         /// Instancia o driver do Edge e  maximiza a tela do navegador
         /// </summary>
         /// <remarks>Escrita por Alan Spindler em 07/03/2016</remarks>
-        private void TestarNoEdge()
-        {
-            Environment.SetEnvironmentVariable("PATH", (DIRETORIO_APLICACAO));
-            driver = new EdgeDriver();
-            driver.Manage().Window.Maximize();
-        }
+        //private void TestarNoEdge()
+        //{
+        //    Environment.SetEnvironmentVariable("PATH", (DIRETORIO_APLICACAO));
+        //    driver = new EdgeDriver();
+        //    driver.Manage().Window.Maximize();
+        //}
 
 
 

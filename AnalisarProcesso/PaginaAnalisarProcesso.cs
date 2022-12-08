@@ -12,17 +12,13 @@ namespace Lampp.CAPDA.Teste.Automatizado.Credenciamento.PageObjects
     public class PaginaAnalisarCredenciamento : PaginaBase
     {
 
-        public PaginaAnalisarCredenciamento(RemoteWebDriver driver) : base(driver)
-        {
-
-        }
 
         #region Pagina Principal
 
         public By campoProcesso = By.Id("txtProcesso");
         public By botaoBuscar = By.Id("btnBuscar");
         public By botaoReceber = By.XPath("//span/a/i");
-        public By botaoAnalisar = By.XPath("//span/a/i");        
+        public By botaoAnalisar = By.XPath("//span/a/i");
         public By botaoLimpar = By.XPath("(//button[@type='button'])[2]");
         public By botaoParecer = By.XPath("//button");
         public By optionPeloCredenciamento = By.Name("radio[analista]");
@@ -31,27 +27,27 @@ namespace Lampp.CAPDA.Teste.Automatizado.Credenciamento.PageObjects
 
         public void Analisar(string codigoProcesso)
         {
-            AguardarProcessando();
-            ClicarElementoPagina(botaoLimpar);
-            PreencherCampo(campoProcesso, codigoProcesso);
-            ClicarElementoPagina(botaoBuscar);
-            AguardarProcessando();
-            ClicarElementoPagina(botaoReceber);
-            AguardarProcessando();
+            AguardarProcessando(driver);
+            ClicarElementoPagina(driver, botaoLimpar);
+            PreencherCampo(driver, campoProcesso, codigoProcesso);
+            ClicarElementoPagina(driver, botaoBuscar);
+            AguardarProcessando(driver);
+            ClicarElementoPagina(driver, botaoReceber);
+            AguardarProcessando(driver);
             Thread.Sleep(3000);
-            ClicarElementoPagina(botaoAnalisar);
-            AguardarProcessando();                        
-            AguardarElementoClicavel(botaoParecer);
-            AguardarProcessando();
-            ClicarElementoPagina(botaoParecer);
-            AguardarProcessando();
-            ClicarElementoPagina(optionPeloCredenciamento);
-            ClicarElementoPagina(botaoConcluirAnalise);
-            AguardarProcessando();
-            ClicarElementoPagina(botaoNaoContinuarAnalise);
-            AguardarProcessando();
+            ClicarElementoPagina(driver, botaoAnalisar);
+            AguardarProcessando(driver);
+            AguardarElementoClicavel(driver, botaoParecer);
+            AguardarProcessando(driver);
+            ClicarElementoPagina(driver, botaoParecer);
+            AguardarProcessando(driver);
+            ClicarElementoPagina(driver, optionPeloCredenciamento);
+            ClicarElementoPagina(driver, botaoConcluirAnalise);
+            AguardarProcessando(driver);
+            ClicarElementoPagina(driver, botaoNaoContinuarAnalise);
+            AguardarProcessando(driver);
             Thread.Sleep(2000);
-            AguardarProcessando();
+            AguardarProcessando(driver);
         }
 
 

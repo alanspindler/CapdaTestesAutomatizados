@@ -55,27 +55,19 @@ namespace Lampp.CAPDA.Teste.Automatizado.SharedObjects
 
         #endregion
 
-        #region Métodos públicos ----------------------------------------------------------------------------------------------------
+        #region Métodos públicos ----------------------------------------------------------------------------------------------------       
 
-        /// <summary>
-        ///  Inicializa o driver do Selenium
-        /// </summary>
-        /// <remarks>Escrita por Alan Spindler em 23/11/2015</remarks>
-        public PaginaBase(RemoteWebDriver driver)
-        {
-            this.driver = driver;
-        }
 
         /// <summary>
         /// Clica no botão logout
         /// </summary>
         /// <remarks>Escrita por Alan Spindler em 23/11/2015</remarks>
-        public void FazerLogout()
+        public void FazerLogout(WebDriver driver)
         {
-            AguardarProcessando();
-            ClicarElementoPagina(m_botaoLogout);
-            AguardarElemento(ConfirmacaoLogout);
-            
+            AguardarProcessando(driver);
+            ClicarElementoPagina(driver, m_botaoLogout);
+            AguardarElemento(driver, ConfirmacaoLogout);
+
         }
 
         //Destaca o elemento em uma cor
@@ -90,7 +82,7 @@ namespace Lampp.CAPDA.Teste.Automatizado.SharedObjects
         /// Aguarda elemento da página ser exibido  
         /// </summary>
         /// <remarks>Escrita por Alan Spindler em 23/11/2015</remarks>
-        public bool AguardarElemento(By elemento)
+        public bool AguardarElemento(WebDriver driver, By elemento)
         {
             try
             {
@@ -122,7 +114,7 @@ namespace Lampp.CAPDA.Teste.Automatizado.SharedObjects
         /// Aguarda a div "Processando" ser exibida e desaparecer antes de efetuar passos do teste
         /// </summary>
         /// <remarks>Escrita por Alan Spindler em 18/04/2016</remarks>
-        public void AguardarProcessando()
+        public void AguardarProcessando(WebDriver driver)
         {
             ////Verifica se Processando está sendo exibido
             var divSendoExibida = false;
@@ -153,21 +145,21 @@ namespace Lampp.CAPDA.Teste.Automatizado.SharedObjects
             Thread.Sleep(500);
         }
 
-        public string RetornaTextoElemento(By elemento)
+        public string RetornaTextoElemento(WebDriver driver, By elemento)
         {
             DestacarElemento(driver, elemento);
             var textoElemento = driver.FindElement(elemento).Text;
             return textoElemento;
         }
 
-        public void arrastarElementoparaElemento(By elementoMovido, By elementoDestino)
+        public void arrastarElementoparaElemento(WebDriver driver, By elementoMovido, By elementoDestino)
         {
             new Actions(driver)
             .DragAndDrop(driver.FindElement(elementoMovido), driver.FindElement(elementoDestino))
             .Perform();
         }
 
-        public void arrastarElementoparaPosicao(By elementoMovido, int x, int y)
+        public void arrastarElementoparaPosicao(WebDriver driver, By elementoMovido, int x, int y)
         {
             new Actions(driver)
             .DragAndDropToOffset(driver.FindElement(elementoMovido), x, y)
@@ -176,21 +168,21 @@ namespace Lampp.CAPDA.Teste.Automatizado.SharedObjects
 
 
         //Valida texto de elementos, como botões e afins.
-        public void ValidarTextoElemento(string texto, By element)
+        public void ValidarTextoElemento(WebDriver driver, string texto, By element)
         {
             var descricaoElemento = driver.FindElement(element).GetAttribute("textContent");
 
             Assert.AreEqual(texto.Trim().ToLower(), descricaoElemento.Trim().ToLower(), "Texto Inválido! descricao esperado: " + texto + " valor informado: " + descricaoElemento);
         }
 
-        public void ZoomIn()
+        public void ZoomIn(RemoteWebDriver driver)
         {
             new Actions(driver)
                 .SendKeys(Keys.Control).SendKeys(Keys.Add)
                 .Perform();
         }
 
-        public void ZoomOut()
+        public void ZoomOut(RemoteWebDriver driver)
         {
             IJavaScriptExecutor js = (IJavaScriptExecutor)driver;
             js.ExecuteScript("document.body.style.zoom='90%'");
@@ -211,7 +203,7 @@ namespace Lampp.CAPDA.Teste.Automatizado.SharedObjects
 
 
         //// Aguarda carregar a página totalmente
-        public void AguardarCarregarPagina()
+        public void AguardarCarregarPagina(WebDriver driver)
         {
             try
             {
@@ -228,7 +220,7 @@ namespace Lampp.CAPDA.Teste.Automatizado.SharedObjects
         /// Ex.: Utilizado para esperar o valor do atributo value de um campo
         /// </summary>
         /// <remarks>Escrita por Alan Spindler em 04/04/2016</remarks>
-        public void AguardarValorElemento(By elemento)
+        public void AguardarValorElemento(WebDriver driver, By elemento)
         {
             var waitUntil = new WebDriverWait(driver, TimeSpan.FromSeconds(15));
             waitUntil.Until(d => !driver.FindElement(elemento).GetAttribute("value").Equals(""));
@@ -238,16 +230,16 @@ namespace Lampp.CAPDA.Teste.Automatizado.SharedObjects
         /// Aguarda o texto da página ser exibido  
         /// </summary>
         /// <remarks>Escrita por Alan Spindler em 11/02/2016</remarks>
-        public void AguardarTexto(By elemento, string texto)
+        public void AguardarTexto(WebDriver driver, By elemento, string texto)
         {
-            AguardarTexto(elemento, texto, TimeSpan.FromSeconds(30));
+            AguardarTexto(driver, elemento, texto, TimeSpan.FromSeconds(30));
         }
 
         /// <summary>
         /// Aguarda o texto da página ser exibido  
         /// </summary>
         /// <remarks>Escrita por Alan Spindler em 11/02/2016</remarks>
-        public void AguardarTexto(By elemento, string texto, TimeSpan timeout)
+        public void AguardarTexto(WebDriver driver, By elemento, string texto, TimeSpan timeout)
         {
             wait = new WebDriverWait(driver, timeout);
             wait.Until(SeleniumExtras.WaitHelpers.ExpectedConditions.TextToBePresentInElementLocated(elemento, texto));
@@ -257,27 +249,27 @@ namespace Lampp.CAPDA.Teste.Automatizado.SharedObjects
         /// Recebe a descricao e o tipo do elemento a ser buscado. 
         /// Exemplo: <button type="button" id="btnIncluir"></button>
         /// Os dados são passados da seguinte maneira:
-        /// AguardarElemento("btnIncluir", PaginaBase.TipoDadoElemento.Id);
+        /// AguardarElemento(driver, "btnIncluir", PaginaBase.TipoDadoElemento.Id);
         /// </summary>
         /// <remarks>Escrita por Alan Spindler em 12/01/2016</remarks>
-        public void AguardarElemento(string texto, TipoDadoElemento tipoDado)
+        public void AguardarElemento(WebDriver driver, string texto, TipoDadoElemento tipoDado)
         {
             switch (tipoDado)
             {
                 case TipoDadoElemento.Id:
-                    AguardarElemento(By.Id(texto));
+                    AguardarElemento(driver, By.Id(texto));
 
                     break;
                 case TipoDadoElemento.Xpath:
-                    AguardarElemento(By.XPath(texto));
+                    AguardarElemento(driver, By.XPath(texto));
 
                     break;
                 case TipoDadoElemento.CssSelector:
-                    AguardarElemento(By.CssSelector(texto));
+                    AguardarElemento(driver, By.CssSelector(texto));
 
                     break;
                 case TipoDadoElemento.TagName:
-                    AguardarElemento(By.TagName(texto));
+                    AguardarElemento(driver, By.TagName(texto));
 
                     break;
                 default:
@@ -291,7 +283,7 @@ namespace Lampp.CAPDA.Teste.Automatizado.SharedObjects
         /// <remarks>Escrita por Alan Spindler em 04/03/2016</remarks>
         public void ValidarTexto(string texto, By campo, bool aguardarTexto = false)
         {
-            AguardarElemento(campo);
+            AguardarElemento(driver, campo);
             var descricaoElemento = driver.FindElement(campo).Text;
             DestacarElemento(driver, campo);
 
@@ -339,8 +331,8 @@ namespace Lampp.CAPDA.Teste.Automatizado.SharedObjects
         /// <remarks>Escrita por Alan Spindler em 04/03/2016</remarks>
         public void ValidarTexto(Regex regex, By campo)
         {
-            AguardarElemento(campo);
-            AguardarProcessando();
+            AguardarElemento(driver, campo);
+            AguardarProcessando(driver);
             var descricaoElemento = driver.FindElement(campo).Text;
             Assert.AreEqual(true, regex.IsMatch(descricaoElemento), "Texto Inválido! descricao esperado: " + regex + " valor informado: " + descricaoElemento);
         }
@@ -352,7 +344,7 @@ namespace Lampp.CAPDA.Teste.Automatizado.SharedObjects
         /// <remarks>Escrita por Alan Spindler em 23/11/2015</remarks>
         public void ValidarValorCampo(string texto, By campo)
         {
-            AguardarProcessando();
+            AguardarProcessando(driver);
             var valorElemento = driver.FindElement(campo).GetAttribute("value");
             Assert.AreEqual(texto, valorElemento, "Valor inválido! valor esperado: " + texto + " valor informado: " + valorElemento);
         }
@@ -370,7 +362,7 @@ namespace Lampp.CAPDA.Teste.Automatizado.SharedObjects
         /// <remarks>Escrita por Alan Spindler em 06/01/2016</remarks>
         public void ValidarValorCampoDiferente(string texto, By campo)
         {
-            AguardarProcessando();
+            AguardarProcessando(driver);
             var valorElemento = driver.FindElement(campo).GetAttribute("value");
             Assert.AreNotEqual(texto, valorElemento, "Valor inválido! valor esperado: " + texto + " valor informado: " + valorElemento);
         }
@@ -388,30 +380,30 @@ namespace Lampp.CAPDA.Teste.Automatizado.SharedObjects
         }
 
         //Limpa o texto de um campo
-        public void LimparCampo(By campo)
+        public void LimparCampo(WebDriver driver, By campo)
         {
-            AguardarElemento(campo);
+            AguardarElemento(driver, campo);
             driver.FindElement(campo).Clear();
-            InserirTeclaTab(campo);
-            AguardarProcessando();
+            InserirTeclaTab(driver, campo);
+            AguardarProcessando(driver);
         }
         /// <summary>
         /// Preenche campo texto. Caso esteja vazio, apaga o conteúdo atual.
         /// </summary>
         /// <remarks>Escrita por Alan Spindler em 23/11/2015</remarks>
-        public void PreencherCampo(By elemento, string TextoCampo)
+        public void PreencherCampo(WebDriver driver, By elemento, string TextoCampo)
         {
             DestacarElemento(driver, elemento);
             if (TextoCampo != "")
             {
                 driver.FindElement(elemento).Clear();
-                InserirTexto(elemento, TextoCampo);
+                InserirTexto(driver, elemento, TextoCampo);
             }
             else
             {
-                InserirTexto(elemento, Keys.Control + "a");
-                InserirTexto(elemento, Keys.Delete);
-                InserirTexto(elemento, Keys.Tab);
+                InserirTexto(driver, elemento, Keys.Control + "a");
+                InserirTexto(driver, elemento, Keys.Delete);
+                InserirTexto(driver, elemento, Keys.Tab);
             }
         }
 
@@ -419,25 +411,25 @@ namespace Lampp.CAPDA.Teste.Automatizado.SharedObjects
         /// Preenche campo texto. Caso esteja vazio, apaga o conteúdo atual.
         /// </summary>
         /// <remarks>Escrita por Alan Spindler em 23/11/2015</remarks>
-        public void PreencherCampoSemLimpar(By elemento, string TextoCampo)
+        public void PreencherCampoSemLimpar(WebDriver driver, By elemento, string TextoCampo)
         {
             DestacarElemento(driver, elemento);
-            ClicarElementoPagina(elemento);
-            InserirTexto(elemento, TextoCampo);
+            ClicarElementoPagina(driver, elemento);
+            InserirTexto(driver, elemento, TextoCampo);
         }
 
         /// <summary>
         /// Preenche campo texto. É utilizado em combos, pois estas não funcionam com clear, por exemplo
         /// </summary>
         /// <remarks>Escrita por Alan Spindler em 23/11/2015</remarks>
-        public bool PreencherCampoCombo(By elemento, string TextoCampo)
+        public bool PreencherCampoCombo(WebDriver driver, By elemento, string TextoCampo)
         {
-            if (!AguardarElemento(elemento))
+            if (!AguardarElemento(driver, elemento))
             {
                 return false;
             }
-            AguardarElemento(elemento);
-            InserirTexto(elemento, TextoCampo);
+            AguardarElemento(driver, elemento);
+            InserirTexto(driver, elemento, TextoCampo);
 
             return true;
         }
@@ -446,10 +438,10 @@ namespace Lampp.CAPDA.Teste.Automatizado.SharedObjects
         /// Valida a quantidade de linhas exibidas no grid
         /// </summary>
         /// <remarks>Escrita por Alan Spindler em 12/01/2016</remarks>
-        public void ValidarLinhasGrid(int valorEsperado)
+        public void ValidarLinhasGrid(WebDriver driver, int valorEsperado)
         {
-            AguardarProcessando();
-            var quantidadeLinhasGridRetornada = RetornarQuantidadeLinhasGrid() - 1;
+            AguardarProcessando(driver);
+            var quantidadeLinhasGridRetornada = RetornarQuantidadeLinhasGrid(driver) - 1;
             if (quantidadeLinhasGridRetornada == -1)
             {
                 quantidadeLinhasGridRetornada = 0;
@@ -462,10 +454,10 @@ namespace Lampp.CAPDA.Teste.Automatizado.SharedObjects
         /// Sobrescrita passando a tabela como parâmetro
         /// </summary>
         /// <remarks>Escrita por Alan Spindler em 25/10/2016</remarks>
-        public void ValidarLinhasGrid(By tabela, int valorEsperado)
+        public void ValidarLinhasGrid(WebDriver driver, By tabela, int valorEsperado)
         {
-            AguardarProcessando();
-            var quantidadeLinhas = ObterTotalLinhasTabela(tabela) - 2;
+            AguardarProcessando(driver);
+            var quantidadeLinhas = ObterTotalLinhasTabela(driver, tabela) - 2;
             Assert.AreEqual(valorEsperado, quantidadeLinhas, "Valor inválido! Números de linhas esperadas: " + valorEsperado + " linhas retornadas: " + quantidadeLinhas);
         }
 
@@ -473,9 +465,9 @@ namespace Lampp.CAPDA.Teste.Automatizado.SharedObjects
         /// Retorna a quantidade de linhas exibidas na tabela
         /// </summary>
         /// <remarks>Escrita por Alan Spindler em 12/01/2016</remarks>
-        public int RetornarQuantidadeLinhasGrid()
+        public int RetornarQuantidadeLinhasGrid(WebDriver driver)
         {
-            AguardarProcessando();
+            AguardarProcessando(driver);
             wait.Until(SeleniumExtras.WaitHelpers.ExpectedConditions.PresenceOfAllElementsLocatedBy(LinhasTabela));
             return driver.FindElements(LinhasTabela).Where(ele => ele.Displayed).Count();
         }
@@ -487,7 +479,7 @@ namespace Lampp.CAPDA.Teste.Automatizado.SharedObjects
         /// <remarks>Escrita por Alan Spindler em 25/10/2016</remarks>
         public int RetornarQuantidadeLinhasGrid(By tabela)
         {
-            AguardarProcessando();
+            AguardarProcessando(driver);
             wait = new WebDriverWait(driver, TimeSpan.FromSeconds(5));
             wait.Until(SeleniumExtras.WaitHelpers.ExpectedConditions.VisibilityOfAllElementsLocatedBy(tabela));
             return driver.FindElements(tabela).Count;
@@ -497,23 +489,23 @@ namespace Lampp.CAPDA.Teste.Automatizado.SharedObjects
         /// Preenche o valor de um campo da tabela
         /// </summary>
         /// <remarks>Escrita por Alan Spindler em 11/07/2016</remarks>
-        public bool PreencherCampoTabela(By elemento, string textoCampo)
+        public bool PreencherCampoTabela(WebDriver driver, By elemento, string textoCampo)
         {
             if (textoCampo != "")
             {
                 // Aguarda o elemento da página,
                 // caso não encontre o método retorna false
-                // com base na exception do AguardarElemento()
-                if (!AguardarElemento(elemento))
+                // com base na exception do AguardarElemento(driver, )
+                if (!AguardarElemento(driver, elemento))
                 {
                     return false;
                 }
                 driver.FindElement(elemento).Clear();
-                InserirTexto(elemento, textoCampo);
+                InserirTexto(driver, elemento, textoCampo);
             }
             else
             {
-                InserirTexto(elemento, Keys.Delete);
+                InserirTexto(driver, elemento, Keys.Delete);
             }
 
             return true;
@@ -525,7 +517,7 @@ namespace Lampp.CAPDA.Teste.Automatizado.SharedObjects
         /// <remarks>Escrita por Alan Spindler em 12/01/2016</remarks>
         public void BuscarEValidarResultado(string texto)
         {
-            AguardarElemento(BotaoIncluiBase);
+            AguardarElemento(driver, BotaoIncluiBase);
             BuscarDadosCadastrados(texto);
         }
 
@@ -559,9 +551,9 @@ namespace Lampp.CAPDA.Teste.Automatizado.SharedObjects
         /// Clica em algum elemento da página, pode ser botões, campos listas
         /// </summary>
         /// <remarks>Escrita por Alan Spindler em 22/01/2016</remarks>
-        public void ClicarElementoPagina(By elemento)
+        public void ClicarElementoPagina(WebDriver driver, By elemento)
         {
-            AguardarElemento(elemento);
+            AguardarElemento(driver, elemento);
             DestacarElemento(driver, elemento);
             driver.FindElement(elemento).Click();
         }
@@ -570,10 +562,10 @@ namespace Lampp.CAPDA.Teste.Automatizado.SharedObjects
         /// Clica duas vezes (DoubleClick) em algum elemento da página, pode ser botões, campos listas
         /// </summary>
         /// <remarks>Escrita por Alan Spindler em 19/10/2016</remarks>
-        public void ClicarDuploElementoPagina(By elemento)
+        public void ClicarDuploElementoPagina(WebDriver driver, By elemento)
         {
-            AguardarProcessando();
-            AguardarElemento(elemento);
+            AguardarProcessando(driver);
+            AguardarElemento(driver, elemento);
             Actions action = new Actions(driver);
             action.DoubleClick(driver.FindElement(elemento)).DoubleClick();
             action.Build().Perform();
@@ -583,9 +575,9 @@ namespace Lampp.CAPDA.Teste.Automatizado.SharedObjects
         /// Insere texto em algum campo
         /// </summary>
         /// <remarks>Escrita por Alan Spindler em 22/01/2016</remarks>
-        public void InserirTexto(By elemento, string tecla)
+        public void InserirTexto(WebDriver driver, By elemento, string tecla)
         {
-            AguardarElemento(elemento);
+            AguardarElemento(driver, elemento);
             driver.FindElement(elemento).SendKeys(tecla);
         }
 
@@ -593,9 +585,9 @@ namespace Lampp.CAPDA.Teste.Automatizado.SharedObjects
         /// Envia a tecla enter
         /// </summary>
         /// <remarks>Escrita por Alan Spindler em 29/07/2016</remarks>
-        public void InserirTeclaEnter(By elemento)
+        public void InserirTeclaEnter(WebDriver driver, By elemento)
         {
-            AguardarElemento(elemento);
+            AguardarElemento(driver, elemento);
             driver.FindElement(elemento).SendKeys(Keys.Enter);
         }
 
@@ -603,9 +595,9 @@ namespace Lampp.CAPDA.Teste.Automatizado.SharedObjects
         /// Envia a tecla tab
         /// </summary>
         /// <remarks>Escrita por Alan Spindler em 29/07/2016</remarks>
-        public void InserirTeclaTab(By elemento)
+        public void InserirTeclaTab(WebDriver driver, By elemento)
         {
-            AguardarElemento(elemento);
+            AguardarElemento(driver, elemento);
             driver.FindElement(elemento).SendKeys(Keys.Tab);
         }
 
@@ -613,9 +605,9 @@ namespace Lampp.CAPDA.Teste.Automatizado.SharedObjects
         /// Envia a tecla delete
         /// </summary>
         /// <remarks>Escrita por Alan Spindler em 29/07/2016</remarks>
-        public void InserirTeclaDelete(By elemento)
+        public void InserirTeclaDelete(WebDriver driver, By elemento)
         {
-            AguardarElemento(elemento);
+            AguardarElemento(driver, elemento);
             driver.FindElement(elemento).SendKeys(Keys.Delete);
         }
 
@@ -623,9 +615,9 @@ namespace Lampp.CAPDA.Teste.Automatizado.SharedObjects
         /// Envia a tecla seta para cima
         /// </summary>
         /// <remarks>Escrita por Alan Spindler em 29/07/2016</remarks>
-        public void InserirTeclaUp(By elemento)
+        public void InserirTeclaUp(WebDriver driver, By elemento)
         {
-            AguardarElemento(elemento);
+            AguardarElemento(driver, elemento);
             driver.FindElement(elemento).SendKeys(Keys.ArrowUp);
         }
 
@@ -633,9 +625,9 @@ namespace Lampp.CAPDA.Teste.Automatizado.SharedObjects
         /// Envia a tecla seta para baixo
         /// </summary>
         /// <remarks>Escrita por Alan Spindler em 29/07/2016</remarks>
-        public void InserirTeclaDown(By elemento)
+        public void InserirTeclaDown(WebDriver driver, By elemento)
         {
-            AguardarElemento(elemento);
+            AguardarElemento(driver, elemento);
             driver.FindElement(elemento).SendKeys(Keys.ArrowDown);
         }
 
@@ -643,9 +635,9 @@ namespace Lampp.CAPDA.Teste.Automatizado.SharedObjects
         /// Envia a tecla seta para cima
         /// </summary>
         /// <remarks>Escrita por Alan Spindler em 29/07/2016</remarks>
-        public void InserirTeclaDireita(By elemento)
+        public void InserirTeclaDireita(WebDriver driver, By elemento)
         {
-            AguardarElemento(elemento);
+            AguardarElemento(driver, elemento);
             driver.FindElement(elemento).SendKeys(Keys.ArrowRight);
         }
 
@@ -653,9 +645,9 @@ namespace Lampp.CAPDA.Teste.Automatizado.SharedObjects
         /// Clica com o botão direito
         /// </summary>
         /// <remarks>Escrita por Alan Spindler em 29/07/2016</remarks>
-        public void ClicarBotaoDireito(By elemento)
+        public void ClicarBotaoDireito(WebDriver driver, By elemento)
         {
-            AguardarElemento(elemento);
+            AguardarElemento(driver, elemento);
             var action = new Actions(driver);
             var elementToClick = driver.FindElement(elemento);
             action.ContextClick(elementToClick);
@@ -666,9 +658,9 @@ namespace Lampp.CAPDA.Teste.Automatizado.SharedObjects
         /// Envia a tecla seta para cima
         /// </summary>
         /// <remarks>Escrita por Alan Spindler em 29/07/2016</remarks>
-        public void InserirTeclaEsquerda(By elemento)
+        public void InserirTeclaEsquerda(WebDriver driver, By elemento)
         {
-            AguardarElemento(elemento);
+            AguardarElemento(driver, elemento);
             driver.FindElement(elemento).SendKeys(Keys.ArrowLeft);
         }
 
@@ -676,11 +668,11 @@ namespace Lampp.CAPDA.Teste.Automatizado.SharedObjects
         /// Atualiza a página
         /// </summary>
         /// <remarks>Escrita por Alan Spindler em 12/01/2016</remarks>
-        public void AtualizarPagina()
+        public void AtualizarPagina(WebDriver driver)
         {
             driver.Navigate().Refresh();
-            AguardarCarregarPagina();
-            AguardarProcessando();
+            AguardarCarregarPagina(driver);
+            AguardarProcessando(driver);
 
         }
 
@@ -688,9 +680,9 @@ namespace Lampp.CAPDA.Teste.Automatizado.SharedObjects
         /// Marca ou desmarca checkbox
         /// </summary>
         /// <remarks>Escrita por Alan Spindler em 24/06/2016</remarks>
-        public void MarcarCheckbox(By elementoValidar, By elementoClicar, bool informarValor)
+        public void MarcarCheckbox(WebDriver driver, By elementoValidar, By elementoClicar, bool informarValor)
         {
-            AguardarElemento(elementoValidar);
+            AguardarElemento(driver, elementoValidar);
             DestacarElemento(driver, elementoClicar);
             var checkboxMarcado = driver.FindElement(elementoValidar).GetAttribute("checked");
 
@@ -716,9 +708,9 @@ namespace Lampp.CAPDA.Teste.Automatizado.SharedObjects
         /// Seleciona o item de uma combo
         /// </summary>
         /// <remarks>Escrita por Alan Spindler em 27/06/2016</remarks>
-        public void SelecionarItemCombo(By elemento, string texto)
+        public void SelecionarItemCombo(WebDriver driver, By elemento, string texto)
         {
-            AguardarElemento(elemento);
+            AguardarElemento(driver, elemento);
             AguardarValorCombobox(elemento, texto);
             DestacarElemento(driver, elemento);
             var elementoSelecionado = driver.FindElement(elemento);
@@ -730,9 +722,9 @@ namespace Lampp.CAPDA.Teste.Automatizado.SharedObjects
         /// Verifica de o elemento está marcado
         /// </summary>
         /// <remarks>Escrita por Alan Spindler em 03/03/2016</remarks>
-        public void ValidarCheckboxouOption(By elemento, bool checkboxMarcado)
+        public void ValidarCheckboxouOption(WebDriver driver, By elemento, bool checkboxMarcado)
         {
-            AguardarElemento(elemento);
+            AguardarElemento(driver, elemento);
             var checkbox = driver.FindElement(elemento).Selected;
 
             if (checkboxMarcado)
@@ -745,7 +737,7 @@ namespace Lampp.CAPDA.Teste.Automatizado.SharedObjects
         /// Verifica de o elemento está presente
         /// </summary>
         /// <remarks>Escrita por Alan Spindler em 03/03/2016</remarks>
-        public void ValidarElementoPresente(By elemento)
+        public void ValidarElementoPresente(WebDriver driver, By elemento)
         {
             Assert.AreEqual(true, IsElementDisplayed(driver, elemento));
         }
@@ -754,14 +746,14 @@ namespace Lampp.CAPDA.Teste.Automatizado.SharedObjects
         /// Verifica de o elemento é clicável
         /// </summary>
         /// <remarks>Escrita por Alan Spindler em 03/03/2016</remarks>
-        public bool ValidarElementoClicavel(By elemento)
+        public bool ValidarElementoClicavel(WebDriver driver, By elemento)
         {
             return (isElementClickable(driver, elemento));
         }
 
-        public void AguardarElementoClicavel(By elemento)
+        public void AguardarElementoClicavel(WebDriver driver, By elemento)
         {
-            bool pronto = ValidarElementoClicavel(elemento);
+            bool pronto = ValidarElementoClicavel(driver, elemento);
             if (pronto)
             {
                 return;
@@ -771,7 +763,7 @@ namespace Lampp.CAPDA.Teste.Automatizado.SharedObjects
                 while (!pronto)
                 {
                     Thread.Sleep(200);
-                    pronto = ValidarElementoClicavel(elemento);
+                    pronto = ValidarElementoClicavel(driver, elemento);
                 }
             }
         }
@@ -780,7 +772,7 @@ namespace Lampp.CAPDA.Teste.Automatizado.SharedObjects
         /// Verifica de o elemento não é clicável
         /// </summary>
         /// <remarks>Escrita por Alan Spindler em 03/03/2016</remarks>
-        public void ValidarElementoNaoClicavel(By elemento)
+        public void ValidarElementoNaoClicavel(WebDriver driver, By elemento)
         {
             Assert.AreEqual(false, isElementClickable(driver, elemento));
         }
@@ -789,7 +781,7 @@ namespace Lampp.CAPDA.Teste.Automatizado.SharedObjects
         /// Verifica de o elemento dentro de uma tela especifica está presente
         /// </summary>
         /// <remarks>Escrita por Fernando Alex em 28/06/2016</remarks>
-        public void ValidarElementoPresente(By parent, By elemento)
+        public void ValidarElementoPresente(WebDriver driver, By parent, By elemento)
         {
             Assert.AreEqual(true, IsElementDisplayed(driver, parent, elemento));
         }
@@ -798,7 +790,7 @@ namespace Lampp.CAPDA.Teste.Automatizado.SharedObjects
         /// Verifica de o elemento não está presente
         /// </summary>
         /// <remarks>Escrita por Alan Spindler em 28/06/2016</remarks>
-        public void ValidarElementoNaoPresente(By elemento)
+        public void ValidarElementoNaoPresente(WebDriver driver, By elemento)
         {
             Assert.AreEqual(true, !IsElementDisplayed(driver, elemento));
         }
@@ -807,7 +799,7 @@ namespace Lampp.CAPDA.Teste.Automatizado.SharedObjects
         /// Verifica de o elemento dentro de uma tela especifica está presente
         /// </summary>
         /// <remarks>Escrita por Fernando Alex em 28/06/2016</remarks>
-        public void ValidarElementoNaoPresente(By parent, By elemento)
+        public void ValidarElementoNaoPresente(WebDriver driver, By parent, By elemento)
         {
             Assert.AreEqual(true, !IsElementDisplayed(driver, parent, elemento));
         }
@@ -816,7 +808,7 @@ namespace Lampp.CAPDA.Teste.Automatizado.SharedObjects
         /// Valida o texto selecionado de uma combo
         /// </summary>
         /// <remarks>Escrita por Alan Spindler em 28/06/2016</remarks>
-        public void ValidarTextoElementoSelecionadoCombo(string texto, By elemento)
+        public void ValidarTextoElementoSelecionadoCombo(WebDriver driver, string texto, By elemento)
         {
             var combobox = driver.FindElement(elemento);
             SelectElement selectedValue = new SelectElement(combobox);
@@ -828,9 +820,9 @@ namespace Lampp.CAPDA.Teste.Automatizado.SharedObjects
         /// Método para chamar a exclusão das linhas de um grid
         /// </summary>
         /// <remarks>Escrita por Alan Spindler em 09/03/2016</remarks>
-        public void ExcluirLinhasGrid()
+        public void ExcluirLinhasGrid(WebDriver driver)
         {
-            ExcluirLinhasGrid(confirmar: true);
+            ExcluirLinhasGrid(driver, confirmar: true);
         }
 
         /// <summary>
@@ -846,13 +838,13 @@ namespace Lampp.CAPDA.Teste.Automatizado.SharedObjects
         /// Exclui todas as linhas visíveis do grid de listagem da página
         /// </summary>
         /// <remarks>Escrita por Alan Spindler em 22/01/2016</remarks>
-        public void ExcluirLinhasGrid(bool confirmar)
+        public void ExcluirLinhasGrid(WebDriver driver, bool confirmar)
         {
-            AguardarProcessando();
-            AguardarElemento(BotaoExcluir);
-            ClicarElementoPagina(CheckSelecionarTudo);
+            AguardarProcessando(driver);
+            AguardarElemento(driver, BotaoExcluir);
+            ClicarElementoPagina(driver, CheckSelecionarTudo);
             Thread.Sleep(100);
-            ClicarElementoPagina(BotaoExcluir);
+            ClicarElementoPagina(driver, BotaoExcluir);
             Thread.Sleep(100);
             if (confirmar)
             {
@@ -863,9 +855,9 @@ namespace Lampp.CAPDA.Teste.Automatizado.SharedObjects
             {
                 Thread.Sleep(500);
                 driver.SwitchTo().Alert().Dismiss();
-                ClicarElementoPagina(CheckSelecionarTudo);
+                ClicarElementoPagina(driver, CheckSelecionarTudo);
             }
-            AguardarProcessando();
+            AguardarProcessando(driver);
         }
 
         /// <summary>
@@ -873,19 +865,19 @@ namespace Lampp.CAPDA.Teste.Automatizado.SharedObjects
         /// Sobrescrita passando os parâmetros tabela, botão de exclusão e checkbox selecionar todos
         /// </summary>
         /// <remarks>Escrita por Alan Spindler em 25/10/2016</remarks>
-        public void ExcluirLinhasGrid(By tabela, By botao, By checkbox, bool confirmar)
+        public void ExcluirLinhasGrid(WebDriver driver, By tabela, By botao, By checkbox, bool confirmar)
         {
-            AguardarProcessando();
-            AguardarElemento(botao);
-            if (ObterTotalLinhasTabela(tabela) > 1)
+            AguardarProcessando(driver);
+            AguardarElemento(driver, botao);
+            if (ObterTotalLinhasTabela(driver, tabela) > 1)
             {
                 if (!driver.FindElement(checkbox).Selected)
                 {
-                    ClicarElementoPagina(checkbox);
+                    ClicarElementoPagina(driver, checkbox);
                 }
-                AguardarProcessando();
-                ClicarElementoPagina(botao);
-                AguardarProcessando();
+                AguardarProcessando(driver);
+                ClicarElementoPagina(driver, botao);
+                AguardarProcessando(driver);
                 if (confirmar)
                 {
                     driver.SwitchTo().Alert().Accept();
@@ -902,22 +894,22 @@ namespace Lampp.CAPDA.Teste.Automatizado.SharedObjects
         /// as linhas e aceitar o alert (se necessário)
         /// </summary>
         /// <remarks>Escrita por Alan Spindler em 19/04/2016</remarks>
-        public void ExcluirTodosItensGrid(bool confirmar)
+        public void ExcluirTodosItensGrid(WebDriver driver, bool confirmar)
         {
-            var quantidadeLinhasGridRetornada = RetornarQuantidadeLinhasGrid() - 1;
+            var quantidadeLinhasGridRetornada = RetornarQuantidadeLinhasGrid(driver) - 1;
             while (quantidadeLinhasGridRetornada > 0)
             {
                 if (confirmar)
                 {
-                    ExcluirLinhasGrid(true);
+                    ExcluirLinhasGrid(driver, true);
                 }
                 else
                 {
-                    ExcluirLinhasGrid(false);
+                    ExcluirLinhasGrid(driver, false);
                     break;
                 }
-                AguardarProcessando();
-                quantidadeLinhasGridRetornada = RetornarQuantidadeLinhasGrid() - 1;
+                AguardarProcessando(driver);
+                quantidadeLinhasGridRetornada = RetornarQuantidadeLinhasGrid(driver) - 1;
             }
         }
 
@@ -1075,10 +1067,10 @@ namespace Lampp.CAPDA.Teste.Automatizado.SharedObjects
         /// <remarks>Escrita por Alan Spindler em 06/01/2016</remarks>
         public void ExcluirUmaLinhaGrid(bool confirmar, int indice)
         {
-            AguardarProcessando();
-            AguardarProcessando();
-            ClicarElementoPagina(CriarByCheckbox(indice));
-            ClicarElementoPagina(BotaoExcluir);
+            AguardarProcessando(driver);
+            AguardarProcessando(driver);
+            ClicarElementoPagina(driver, CriarByCheckbox(indice));
+            ClicarElementoPagina(driver, BotaoExcluir);
 
             if (confirmar)
             {
@@ -1096,7 +1088,7 @@ namespace Lampp.CAPDA.Teste.Automatizado.SharedObjects
         /// Valida campo está habilitado e gera erro caso o resultado não seja o esperado.
         /// </summary>
         /// <remarks>Escrita por Alan Spindler em 02/06/2016</remarks>
-        public void ValidarCampoHabilitado(By campo)
+        public void ValidarCampoHabilitado(WebDriver driver, By campo)
         {
             var estaHabilitado = IsElementEnabled(driver, campo);
             Assert.IsTrue(true == estaHabilitado, "Resultado incorreto");
@@ -1106,7 +1098,7 @@ namespace Lampp.CAPDA.Teste.Automatizado.SharedObjects
         /// Valida campo está habilitado e gera erro caso o resultado não seja o esperado.
         /// </summary>
         /// <remarks>Escrita por Alan Spindler em 02/06/2016</remarks>
-        public void ValidarCampoDesabilitado(By campo)
+        public void ValidarCampoDesabilitado(WebDriver driver, By campo)
         {
             var estaHabilitado = IsElementEnabled(driver, campo);
             Assert.IsTrue(false == estaHabilitado, "Resultado incorreto");
@@ -1189,7 +1181,7 @@ namespace Lampp.CAPDA.Teste.Automatizado.SharedObjects
         /// Retorna 0 quando não encontra o texto.
         /// </summary>
         /// <remarks>Escrita por Alan Spindler em 23/01/2017</remarks>
-        public int ObterColunaTabela(By tabela, string texto)
+        public int ObterColunaTabela(WebDriver driver, By tabela, string texto)
         {
             var driverTabela = driver.FindElement(tabela);
             var colunasTabela = driverTabela.FindElements(By.CssSelector("th")).Count;
@@ -1214,7 +1206,7 @@ namespace Lampp.CAPDA.Teste.Automatizado.SharedObjects
         /// Retorna 0 quando não encontra o texto.
         /// </summary>
         /// <remarks>Escrita por Alan Spindler em 11/10/2016</remarks>
-        public int ObterLinhaTabela(By tabela, string texto, int coluna)
+        public int ObterLinhaTabela(WebDriver driver, By tabela, string texto, int coluna)
         {
             var driverTabela = driver.FindElement(tabela);
             var linhasTabela = driverTabela.FindElements(By.CssSelector("tbody > tr")).Count;
@@ -1238,7 +1230,7 @@ namespace Lampp.CAPDA.Teste.Automatizado.SharedObjects
         /// Retorna 0 quando não encontra o texto.
         /// </summary>
         /// <remarks>Escrita por Alan Spindler em 13/10/2016</remarks>
-        public int ObterLinhaTabela(By tabela, string texto)
+        public int ObterLinhaTabela(WebDriver driver, By tabela, string texto)
         {
             var linha = 1;
             var linhas = driver.FindElement(tabela).FindElements(By.TagName("tr"));
@@ -1257,7 +1249,7 @@ namespace Lampp.CAPDA.Teste.Automatizado.SharedObjects
         /// Retorna o total de linhas da tabela.
         /// </summary>
         /// <remarks>Escrita por Alan Spindler em 25/10/2016</remarks>
-        public int ObterTotalLinhasTabela(By tabela)
+        public int ObterTotalLinhasTabela(WebDriver driver, By tabela)
         {
             return driver.FindElement(tabela).FindElements(By.TagName("tr")).Count;
         }
@@ -1266,11 +1258,11 @@ namespace Lampp.CAPDA.Teste.Automatizado.SharedObjects
         /// Retorna a celula da tabela
         /// </summary>
         /// <remarks>Escrita por Alan Spindler em 06/10/2016</remarks>
-        public By ObterCelula(int linha, int tipoDado)
+        public By ObterCelula(WebDriver driver, int linha, int tipoDado)
         {
             var item = "table > tbody > tr:nth-child(" + linha + ") > td:nth-child(" + tipoDado + ")";
             var celula = By.CssSelector(item);
-            ClicarElementoPagina(celula);
+            ClicarElementoPagina(driver, celula);
             return celula;
         }
 
@@ -1278,11 +1270,11 @@ namespace Lampp.CAPDA.Teste.Automatizado.SharedObjects
         /// Retorna a celula do header da tabela
         /// </summary>
         /// <remarks>Escrita por Alan Spindler em 06/10/2016</remarks>
-        public By ObterCelulaHeader(int tipoDado)
+        public By ObterCelulaHeader(WebDriver driver, int tipoDado)
         {
             var itemTabela = "table > thead > tr > th:nth-child(" + tipoDado + ")";
             var celula = By.CssSelector(itemTabela);
-            ClicarElementoPagina(celula);
+            ClicarElementoPagina(driver, celula);
             return celula;
         }
 
@@ -1290,9 +1282,9 @@ namespace Lampp.CAPDA.Teste.Automatizado.SharedObjects
         /// Valida se campo está como somente leitura
         /// </summary>
         /// <remarks>Escrita por Alan Spindler em 06/10/2016</remarks>
-        public void ValidarCampoSomenteLeitura(int linha, int tipo)
+        public void ValidarCampoSomenteLeitura(WebDriver driver, int linha, int tipo)
         {
-            var Item = ObterCelula(linha, tipo);
+            var Item = ObterCelula(driver, linha, tipo);
             bool rdonly = HasElementClassReadOnly(driver, Item);
             Assert.IsTrue(rdonly);
         }
@@ -1301,7 +1293,7 @@ namespace Lampp.CAPDA.Teste.Automatizado.SharedObjects
         /// Valida se campo está como somente leitura
         /// </summary>
         /// <remarks>Escrita por Alan Spindler em 06/10/2016</remarks>
-        public void ValidarCampoSomenteLeitura(By elemento)
+        public void ValidarCampoSomenteLeitura(WebDriver driver, By elemento)
         {
             bool rdonly = ElementHasAttributeReadOnlyOrDisabled(driver, elemento);
             Assert.IsTrue(rdonly);
@@ -1311,10 +1303,10 @@ namespace Lampp.CAPDA.Teste.Automatizado.SharedObjects
         /// Validar mensagem de campo obrigatório
         /// </summary>
         /// <remarks>Escrita por Alan Spindler em 07/10/2016</remarks>
-        public void ValidarCampoObrigatorio(By elemento)
+        public void ValidarCampoObrigatorio(WebDriver driver, By elemento)
         {
-            AguardarProcessando();
-            AguardarElemento(elemento);
+            AguardarProcessando(driver);
+            AguardarElemento(driver, elemento);
             ValidarTexto("Campo obrigatório.", elemento);
         }
 
@@ -1322,7 +1314,7 @@ namespace Lampp.CAPDA.Teste.Automatizado.SharedObjects
         /// Vai na aba do relatório, aguarda carregar e verifica se todos os textos estão contidos no corpo do relatório.
         /// </summary>
         /// <remarks>Escrita por Alan Spindler em 01/11/2016</remarks>
-        public bool ValidarTextoRelatorio(params string[] textos)
+        public bool ValidarTextoRelatorio(WebDriver driver, params string[] textos)
         {
             driver.SwitchTo().Window(driver.WindowHandles.Last());
             wait = new WebDriverWait(driver, TimeSpan.FromSeconds(60));
@@ -1345,7 +1337,7 @@ namespace Lampp.CAPDA.Teste.Automatizado.SharedObjects
         /// Se "fechar" vier com "true" então também já fecha a janela Alert
         /// </summary>
         /// <remarks>Escrita por Alan Spindler em 06/12/2016</remarks>
-        public bool ValidarAlert(bool fechar = false)
+        public bool ValidarAlert(WebDriver driver, bool fechar = false)
         {
             try
             {
@@ -1369,9 +1361,9 @@ namespace Lampp.CAPDA.Teste.Automatizado.SharedObjects
         /// Move mouse sobre elemento (Mouse Hover)
         /// </summary>
         /// <remarks>Escrita por Alan Spindler em 07/12/2016</remarks>
-        public void MouseSobre(By elemento)
+        public void MouseSobre(RemoteWebDriver driver, By elemento)
         {
-            AguardarElemento(elemento);
+            AguardarElemento(driver, elemento);
             var action = new Actions(driver);
             var elementoMouseSobre = driver.FindElement(elemento);
             action.MoveToElement(elementoMouseSobre);
@@ -1383,9 +1375,9 @@ namespace Lampp.CAPDA.Teste.Automatizado.SharedObjects
         /// "data:image/gif;base64,R0lGODlhAQABAAAAACH5BAEKAAEALAAAAAABAAEAAAICTAEAOw==" é o valor padrão (em branco)
         /// </summary>
         /// <remarks>Escrita por Alan Spindler em 23/11/2015</remarks>
-        public void ValidarValorImagem(string imagem, By elemento, bool imagemEmBranco = false)
+        public void ValidarValorImagem(WebDriver driver, string imagem, By elemento, bool imagemEmBranco = false)
         {
-            AguardarProcessando();
+            AguardarProcessando(driver);
             if (!imagemEmBranco)
             {
                 Assert.AreEqual(imagem, driver.FindElement(elemento).GetAttribute("src"));

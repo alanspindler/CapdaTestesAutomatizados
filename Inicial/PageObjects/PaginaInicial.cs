@@ -49,22 +49,13 @@ namespace Lampp.CAPDA.Teste.Automatizado.Login.PageObjects
 
         #endregion
 
-        #region Métodos públicos
-
-        /// <summary>
-        /// Construtor da página criar email
-        /// </summary>
-        /// <remarks>Escrita por Alan Spindler em 26/11/2015</remarks>
-        public PaginaInicial(RemoteWebDriver driver) : base(driver)
-        {
-            PaginaPrincipal = new PaginaPrincipal(driver);            
-        }
+        #region Métodos públicos   
 
         /// <summary>
         /// Abre a página de Login
         /// </summary>
         /// <remarks>Escrita por Alan Spindler em 23/11/2015</remarks>
-        public void AbrirPagina(string URL)
+        public void AbrirPagina(WebDriver driver, string URL)
         {
             try
             {
@@ -81,24 +72,24 @@ namespace Lampp.CAPDA.Teste.Automatizado.Login.PageObjects
         /// Faz login com dados informados, com parâmetro indicando se a página aberta é a página inicial
         /// </summary>
         /// <remarks>Escrita por Alan Spindler em 23/11/2015</remarks>
-        public void FazerLogin(string usuario, string senha)
+        public void FazerLogin(WebDriver driver, string usuario, string senha)
         {
             Thread.Sleep(300);            
-            PreencherCampo(m_campoLogin, usuario);
-            PreencherCampo(m_campoSenha, senha);
-            ClicarElementoPagina(btnEntrar);
-            AguardarElemento(btnSair);
+            PreencherCampo(driver, m_campoLogin, usuario);
+            PreencherCampo(driver,m_campoSenha, senha);
+            ClicarElementoPagina(driver, btnEntrar);
+            AguardarElemento(driver, btnSair);
         }
 
-        public void FazerLoginServidor(string usuario, string senha)
+        public void FazerLoginServidor(WebDriver driver, string usuario, string senha)
         {
             Thread.Sleep(300);
-            AguardarElemento(campoLoginServidor);
-            PreencherCampo(campoLoginServidor, usuario);
+            AguardarElemento(driver, campoLoginServidor);
+            PreencherCampo(driver, campoLoginServidor, usuario);
             DiminuirZoomParaResolucoesPequenas();
-            PreencherCampo(campoSenhaServidor, senha);            
-            ClicarElementoPagina(botaoEfetuarLoginServidor);
-            AguardarElemento(btnSair);
+            PreencherCampo(driver, campoSenhaServidor, senha);            
+            ClicarElementoPagina(driver, botaoEfetuarLoginServidor);
+            AguardarElemento(driver, btnSair);
         }
 
 
