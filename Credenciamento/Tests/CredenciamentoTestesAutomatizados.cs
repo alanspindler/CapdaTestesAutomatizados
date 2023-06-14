@@ -33,16 +33,16 @@ namespace Lampp.CAPDA.Teste.Automatizado.Credenciamento.Tests
         private string urlPaginaAnalisarLocal = "http://localhost:4200/#/analisar-credenciamento";
         private string urlPaginaDeliberarLocal = "http://localhost:4200/#/deliberar-processo";
 
-        //private string urlPaginaLoginServidorDes = "http://1:1@capda.des.suframa.gov.br/";
-        //private string urlPaginaInscricaoServidorDes = "https://capda.des.suframa.gov.br/#/inscricao";
-        //private string urlPaginaGerenciarServidorDes = "https://capda.des.suframa.gov.br/#/gerenciar-processo";
-        //private string urlPaginaAnalisarServidorDes = "https://capda.des.suframa.gov.br/#/analisar-credenciamento";
-        //private string urlPaginaDeliberarServidorDes = "https://capda.des.suframa.gov.br/#/deliberar-processo";
-        private string urlPaginaLoginServidorDes = "http://1:1@capda.hom.suframa.gov.br/";
-        private string urlPaginaInscricaoServidorDes = "https://capda.hom.suframa.gov.br/#/inscricao";
-        private string urlPaginaGerenciarServidorDes = "https://capda.hom.suframa.gov.br/#/gerenciar-processo";
-        private string urlPaginaAnalisarServidorDes = "https://capda.hom.suframa.gov.br/#/analisar-credenciamento";
-        private string urlPaginaDeliberarServidorDes = "https://capda.hom.suframa.gov.br/#/deliberar-processo";
+        private string urlPaginaLoginServidorDes = "http://1:1@capda.des.suframa.gov.br/";
+        private string urlPaginaInscricaoServidorDes = "https://capda.des.suframa.gov.br/#/inscricao";
+        private string urlPaginaGerenciarServidorDes = "https://capda.des.suframa.gov.br/#/gerenciar-processo";
+        private string urlPaginaAnalisarServidorDes = "https://capda.des.suframa.gov.br/#/analisar-credenciamento";
+        private string urlPaginaDeliberarServidorDes = "https://capda.des.suframa.gov.br/#/deliberar-processo";
+        //private string urlPaginaLoginServidorDes = "http://1:1@capda.hom.suframa.gov.br/";
+        //private string urlPaginaInscricaoServidorDes = "https://capda.hom.suframa.gov.br/#/inscricao";
+        //private string urlPaginaGerenciarServidorDes = "https://capda.hom.suframa.gov.br/#/gerenciar-processo";
+        //private string urlPaginaAnalisarServidorDes = "https://capda.hom.suframa.gov.br/#/analisar-credenciamento";
+        //private string urlPaginaDeliberarServidorDes = "https://capda.hom.suframa.gov.br/#/deliberar-processo";
         public string CNPJ;
 
 
@@ -88,6 +88,7 @@ namespace Lampp.CAPDA.Teste.Automatizado.Credenciamento.Tests
             //Inicializa instância do driver do Selenium
             var options = new ChromeOptions();
             options.AddArgument("no-sandbox");
+            options.AddArgument("--ignore-certificate-errors");
             options.AddExtension(Constantes.CaminhoExtensao);
             options.Proxy = null;
             new DriverManager().SetUpDriver(new ChromeConfig(), VersionResolveStrategy.MatchingBrowser);
